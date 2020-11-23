@@ -19,13 +19,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity
 {
     private EditText emailEditText,passwordEditText,password2EditText;
     private Button register_now_btn;
-  //  private FirebaseDatabase database;
-   // private  DatabaseReference mDatebase;
+    private FirebaseDatabase database;
+    private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private UserObj user;
     private static final String TAG="RegisterActivity";
@@ -41,6 +43,9 @@ public class RegisterActivity extends AppCompatActivity
         passwordEditText=(EditText)findViewById(R.id.password);
         register_now_btn = (Button)findViewById(R.id.login);
 
+
+        database=FirebaseDatabase.getInstance();
+        mDatabase=database.getReference("users");
         mAuth=FirebaseAuth.getInstance();
 
 
@@ -101,7 +106,8 @@ public class RegisterActivity extends AppCompatActivity
     }
     public void updateUI(FirebaseUser currentUser)
     {
-       // mDatebase.child(keyId).setValue(user);
+        String keyId=mDatabase.push().getKey();
+        mDatabase.child(keyId).setValue(user);
         Intent loginIntent=new Intent(this,MainActivity.class);
         startActivity(loginIntent);
     }
