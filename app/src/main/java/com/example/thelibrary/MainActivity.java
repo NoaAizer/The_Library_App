@@ -7,7 +7,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thelibrary.ui.login.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button button;
@@ -19,13 +18,13 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToSecondActivity();
+                    goToSecondActivity();
             }
         });
     }
 
     private void goToSecondActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
 
     }
