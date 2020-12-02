@@ -24,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity
 {
-    private EditText emailEditText,passwordEditText,password2EditText;
+    private EditText emailEditText,passwordEditText;
     private Button register_now_btn;
     private FirebaseDatabase database;
     private DatabaseReference mDatabase;
