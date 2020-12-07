@@ -6,21 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".AddBookActivity">
 
-    <EditText
-        android:id="@+id/book_Id"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="544dp"
-        android:layout_marginEnd="24dp"
-        android:hint="@string/book_Id"
-        android:inputType="textShortMessage|number|numberDecimal"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/Publishing_year"
@@ -132,7 +117,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.button);
+        button = (Button) findViewById(R.id.user);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,9 +26,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goToSecondActivity() {
-        Intent intent = new Intent(this, RegisterActivity.class);
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
-
     }
 
 

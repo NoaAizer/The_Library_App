@@ -1,14 +1,13 @@
 package com.example.thelibrary;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -58,11 +57,10 @@ public class AddBookActivity extends AppCompatActivity {
                         return;
                     }
                     book = new BookObj(bookName, author, brief, genre, language, publishing_year);
-                    book.bookId = dbRootRef.push().getKey();
-                    dbRootRef.child("books").child("bookId").setValue(book, completionListener);
+                    dbRootRef.child("books").child(dbRootRef.push().getKey()).setValue(book, completionListener);
 
-                    Intent addIntent = new Intent(AddBookActivity.this, AddBookActivity.class);
-                    startActivity(addIntent);
+//                    Intent addIntent = new Intent(AddBookActivity.this, AddBookActivity.class);
+//                    startActivity(addIntent);
 
                 }
             }

@@ -8,7 +8,7 @@ public class BookObj
     public String genre;
     public String language;
     public String publishing_year;
-    public String bookId;
+
 
 
 
@@ -45,9 +45,7 @@ public class BookObj
     public String getpublishing_year() {
         return publishing_year;
     }
-    public String getbookId() {
-        return bookId;
-    }
+
 
 
 }
