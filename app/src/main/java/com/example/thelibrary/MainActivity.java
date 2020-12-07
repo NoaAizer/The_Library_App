@@ -7,26 +7,37 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.thelibrary.activities.LoginAdminActivity;
+import com.example.thelibrary.activities.LoginUserActivity;
 
-public class MainActivity extends AppCompatActivity {
-    Button button;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    Button user_btn, admin_btn;
     Button check;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.user);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    goToSecondActivity();
-            }
-        });
+        user_btn = (Button) findViewById(R.id.user);
+        admin_btn = (Button) findViewById(R.id.admin);
+
+        user_btn.setOnClickListener(this);
+        admin_btn.setOnClickListener(this);
+    }
+    public void onClick(View v){
+        if(v==user_btn){
+            Intent intent = new Intent(MainActivity.this, LoginUserActivity.class);
+            startActivity(intent);
+        }
+        if(v==admin_btn){
+            Intent intent = new Intent(MainActivity.this, LoginAdminActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void goToSecondActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, LoginUserActivity.class);
         startActivity(intent);
     }
 

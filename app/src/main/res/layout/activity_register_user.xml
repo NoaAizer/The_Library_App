@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="RegisterActivity">
+    tools:context=".activities.RegisterUserActivity">
 
     <TextView
         android:id="@+id/txt_MClientTitle2"
@@ -110,7 +110,7 @@
         android:layout_marginTop="324dp"
         android:layout_marginEnd="24dp"
         android:gravity="right"
-        android:hint="סיסמא"
+        android:hint="סיסמה"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"

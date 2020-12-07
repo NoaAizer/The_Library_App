@@ -1,6 +1,8 @@
-package com.example.thelibrary;
+package com.example.thelibrary.fireBase.model.dataObj;
 
-public class BookObj
+import java.io.Serializable;
+
+public class BookObj implements Serializable
 {
     public String name;
     public String author;

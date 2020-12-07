@@ -1,4 +1,4 @@
-package com.example.thelibrary;
+package com.example.thelibrary.fireBase.model.dataObj;
 
 public class UserObj
 {
@@ -8,14 +8,14 @@ public class UserObj
     private String password;
     private String address;
     private String phone;
-   // private String gender;
-    private int isAdmin;
+
+
 
     public UserObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public UserObj( String firstName,String lastName,String email,String password,String address, String phone, int isAdmin)
+    public UserObj( String firstName,String lastName,String email,String password,String address, String phone)
     {
         this.firstName=firstName;
         this.lastName=lastName;
@@ -24,7 +24,6 @@ public class UserObj
         this.address = address;
         this.phone=phone;
     //    this.gender = gender;
-        this.isAdmin = isAdmin;
     }
 
     public String getFirstName() {
@@ -61,22 +60,6 @@ public class UserObj
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-//    public String getGender() {
-//        return gender;
-//    }
-//
-//    public void setGender(String gender) {
-//        this.gender = gender;
-//    }
-
-    public int getIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setIsAdmin(int isAdmin) {
-        this.isAdmin = isAdmin;
     }
 
     public String getEmail() {

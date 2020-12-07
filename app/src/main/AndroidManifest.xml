@@ -10,14 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TheLibrary">
         <activity
-            android:name=".RegisterActivity"
-            android:label="@string/title_activity_register"
+            android:name=".activities.MenuUserActivity"
+            android:label="@string/title_activity_menu_user"
             android:theme="@style/Theme.TheLibrary.NoActionBar"></activity>
-        <activity android:name=".AddBookActivity" />
+        <activity
+            android:name=".activities.LoginAdminActivity"
+            android:label="@string/title_activity_login_admin"
+            android:theme="@style/Theme.TheLibrary.NoActionBar" />
+        <activity
+            android:name=".activities.RegisterUserActivity"
+            android:label="@string/title_activity_register"
+            android:theme="@style/Theme.TheLibrary.NoActionBar" />
+        <activity android:name=".activities.AddBookActivity" />
         <activity
             android:name=".ui.login.LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity android:name=".LoginActivity" />
+        <activity android:name=".activities.LoginUserActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

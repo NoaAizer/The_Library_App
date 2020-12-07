@@ -1,41 +1,33 @@
-package com.example.thelibrary;
+package com.example.thelibrary.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.thelibrary.R;
+import com.example.thelibrary.fireBase.model.FireBaseDBUser;
+import com.example.thelibrary.fireBase.model.mAuthUser;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterUserActivity extends AppCompatActivity {
 
     private EditText firstNameEditText,lastNameEditText, addressEditText, phoneEditText, emailEditText,passwordEditText;
     private Button register;
-    private FirebaseDatabase database;
-    private DatabaseReference mDatabase;
-    private FirebaseAuth mAuth;
-    private UserObj user;
+    FireBaseDBUser fireBaseUser = new FireBaseDBUser();
+    mAuthUser auth = new mAuthUser();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_user);
 
         firstNameEditText=(EditText)findViewById(R.id.firstName);
         lastNameEditText=(EditText)findViewById(R.id.lastName);
@@ -44,11 +36,6 @@ public class RegisterActivity extends AppCompatActivity {
         emailEditText=(EditText)findViewById(R.id.emailReg);
         passwordEditText=(EditText)findViewById(R.id.passReg);
         register = (Button)findViewById(R.id.reg);
-
-
-        database=FirebaseDatabase.getInstance();
-        mDatabase=database.getReference("users");
-        mAuth=FirebaseAuth.getInstance();
 
 
         register.setOnClickListener(new View.OnClickListener()
@@ -71,7 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (address.isEmpty()) {
                     addressEditText.setError("Address is required");
                 }
-                if (phone == null||!Patterns.PHONE.matcher(phone).matches()) {
+                if (phone == null||!Patterns.PHONE.matcher(phone).matches() ||phone.length() < 9 || phone.length()> 13) {
                     Toast.makeText(getApplicationContext(),"Invalid phone",Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -89,46 +76,13 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Password length must be at least 6",Toast.LENGTH_LONG).show();
                     return;
                 }
-                    user =new UserObj(fName,lName,email,password,address,phone,0);
-                    registerUser(email,password);
-
+                auth.registerUserToDB(email,password,RegisterUserActivity.this);
+                fireBaseUser.addUserToDB (fName,lName,email,password,address,phone);
+                Intent loginIntent=new Intent(RegisterUserActivity.this, LoginUserActivity.class);
+                startActivity(loginIntent);
             }
         });
 
     }//onCreate
-
-    private void registerUser(String email, String password)
-    {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
-                {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task)
-                    {
-                        if (task.isSuccessful())
-                        {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("RegisterActivity", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else
-                        {
-                            // If registration is failed, display a message to the user.
-                            Log.w("RegisterActivity", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-    public void updateUI(FirebaseUser currentUser)
-    {
-        String keyId=mDatabase.push().getKey();
-        mDatabase.child(keyId).setValue(user);
-        Intent loginIntent=new Intent(RegisterActivity.this,LoginActivity.class);
-        startActivity(loginIntent);
-    }
-
-
 
 }
