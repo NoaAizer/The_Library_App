@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MyOrderActivity">
+
+    <TextView
+        android:id="@+id/myorder"
+        android:layout_width="307dp"
+        android:layout_height="41dp"
+        android:text="ההזמנה שלי"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="42dp" />
+
+    <RadioButton
+        android:id="@+id/TA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="איסוף עצמי"
+        tools:layout_editor_absoluteX="276dp"
+        tools:layout_editor_absoluteY="481dp" />
+
+    <RadioButton
+        android:id="@+id/deliver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="משלוח"
+        tools:layout_editor_absoluteX="278dp"
+        tools:layout_editor_absoluteY="536dp" />
+
+    <TextView
+        android:id="@+id/noteForDeliver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ההזמנה תשלח לכתובת המעודכנת בפרטים האישיים"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="594dp" />
+
+    <Button
+        android:id="@+id/finish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="אשר הזמנה"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="637dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

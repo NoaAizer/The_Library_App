@@ -12,7 +12,7 @@
         <activity
             android:name=".activities.MenuUserActivity"
             android:label="@string/title_activity_menu_user"
-            android:theme="@style/Theme.TheLibrary.NoActionBar"></activity>
+            android:theme="@style/Theme.TheLibrary.NoActionBar" />
         <activity
             android:name=".activities.LoginAdminActivity"
             android:label="@string/title_activity_login_admin"
