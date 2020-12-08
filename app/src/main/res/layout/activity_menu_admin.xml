@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MenuAdminActivity">
+
+    <TextView
+        android:id="@+id/helloAdmin"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:gravity="right|center_vertical"
+        android:text="שלום,"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.134" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.3"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <Button
+        android:id="@+id/clientsList"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="60dp"
+        android:text="רשימת מנויים"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/booksList" />
+
+    <Button
+        android:id="@+id/loansList"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="164dp"
+        android:layout_marginEnd="56dp"
+        android:text="רשימת הזמנות"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/booksList"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="60dp"
+        android:text="רשימת הספרים"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deliveres" />
+
+    <Button
+        android:id="@+id/deliveres"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="56dp"
+        android:text="רשימת משלוחים"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loansList" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

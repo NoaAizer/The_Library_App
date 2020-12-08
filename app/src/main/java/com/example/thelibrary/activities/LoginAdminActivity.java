@@ -48,7 +48,7 @@ public class LoginAdminActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Incorrect Password", Toast.LENGTH_LONG).show();
                             return;
                         }
-                        Intent loginIntent=new Intent(LoginAdminActivity.this, AddBookActivity.class);
+                        Intent loginIntent=new Intent(LoginAdminActivity.this, MenuAdminActivity.class);
                         startActivity(loginIntent);
 
                     }
