@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="23dp"
         android:gravity="right|center_vertical"
-        android:text="שלום,"
+        android:text="שלום "
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

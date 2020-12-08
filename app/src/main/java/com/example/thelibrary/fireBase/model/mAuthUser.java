@@ -22,7 +22,7 @@ public class mAuthUser {
     public mAuthUser() {
         this.mAuth = FirebaseAuth.getInstance();
     }
-    public void registerUserToDB(String email, String password,AppCompatActivity activity){
+    public void registerUserToDB(String firstName,String lastName,String email,String password,String address, String phone, String subscription, AppCompatActivity activity){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>()
                 {
@@ -34,6 +34,10 @@ public class mAuthUser {
                             // Sign in success
                             Log.d(""+activity, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            FireBaseDBUser u = new FireBaseDBUser();
+                            u.addUserToDB(firstName,lastName,email,password, address, phone,subscription, user.getUid());
+//                            Toast.makeText(activity, ""+user.getUid(),
+//                                    Toast.LENGTH_SHORT).show();
 
 
                         } else
