@@ -10,42 +10,64 @@
         android:id="@+id/myorder"
         android:layout_width="307dp"
         android:layout_height="41dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
         android:text="ההזמנה שלי"
         android:textSize="24sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="42dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioButton
         android:id="@+id/TA"
+        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="124dp"
+        android:layout_marginBottom="8dp"
         android:text="איסוף עצמי"
-        tools:layout_editor_absoluteX="276dp"
-        tools:layout_editor_absoluteY="481dp" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        app:layout_constraintBottom_toTopOf="@+id/deliver"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <RadioButton
         android:id="@+id/deliver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="משלוח"
-        tools:layout_editor_absoluteX="278dp"
-        tools:layout_editor_absoluteY="536dp" />
+        android:layout_marginStart="124dp"
+        android:layout_marginBottom="8dp"
+        android:text="משלוח- בתוספת 20 ש'ח"
+        app:layout_constraintBottom_toTopOf="@+id/noteForDeliver"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/noteForDeliver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ההזמנה תשלח לכתובת המעודכנת בפרטים האישיים"
-        tools:layout_editor_absoluteX="73dp"
-        tools:layout_editor_absoluteY="594dp" />
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="128dp"
+        android:text="*ההזמנה תשלח לכתובת המעודכנת בפרטים האישיים"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="36dp"
         android:text="אשר הזמנה"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="637dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ListView
+        android:id="@+id/listBooks"
+        android:layout_width="154dp"
+        android:layout_height="338dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myorder" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
