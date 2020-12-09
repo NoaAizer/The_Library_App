@@ -28,6 +28,7 @@ public class UserObj implements Serializable
         this.address = address;
         this.phone=phone;
         this.subscription = sub;
+        this.shoppingListId="";
     }
 
     public String getFirstName() {

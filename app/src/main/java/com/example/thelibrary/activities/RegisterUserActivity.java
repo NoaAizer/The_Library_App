@@ -1,6 +1,5 @@
 package com.example.thelibrary.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -88,8 +87,6 @@ public class RegisterUserActivity extends AppCompatActivity {
                     return;
                 }
                 auth.registerUserToDB(fName,lName,email,password,address,phone,subscription, RegisterUserActivity.this);
-                Intent loginIntent=new Intent(RegisterUserActivity.this, LoginUserActivity.class);
-                startActivity(loginIntent);
             }
         });
 
