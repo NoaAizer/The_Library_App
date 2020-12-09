@@ -12,6 +12,7 @@ public class UserObj implements Serializable
     private String phone;
     private String subscription;
     private String shoppingListId;
+    private int amountOfBooksRemains;
 
 
 
@@ -29,6 +30,9 @@ public class UserObj implements Serializable
         this.phone=phone;
         this.subscription = sub;
         this.shoppingListId="";
+        if(sub.equals("בסיסי")) this.amountOfBooksRemains =2;
+        else if (sub.equals("מורחב")) this.amountOfBooksRemains =5;
+        else if (sub.equals("משפחתי")) this.amountOfBooksRemains =10;
     }
 
     public String getFirstName() {
@@ -85,5 +89,7 @@ public class UserObj implements Serializable
 
     public void setShoppingListId(String shoppingListId) {this.shoppingListId = shoppingListId;}
 
+    public int getAmountOfBooksRemains() { return amountOfBooksRemains; }
 
+    public void setAmountOfBooksRemains(int amountOfBooksRemains) { this.amountOfBooksRemains = amountOfBooksRemains; }
 }

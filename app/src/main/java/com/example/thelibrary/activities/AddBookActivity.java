@@ -1,5 +1,6 @@
 package com.example.thelibrary.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -51,8 +52,8 @@ public class AddBookActivity extends AppCompatActivity {
                         return;
                     }
                     fbb.addBookToDB(bookName, author, brief, genre, language, publishing_year,AddBookActivity.this);
-//                    Intent addIntent = new Intent(AddBookActivity.this, AddBookActivity.class);
-//                    startActivity(addIntent);
+                    Intent addIntent = new Intent(AddBookActivity.this, MenuAdminActivity.class);
+                    startActivity(addIntent);
 
                 }
             }

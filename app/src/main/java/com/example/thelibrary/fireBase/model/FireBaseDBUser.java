@@ -10,7 +10,7 @@ public class FireBaseDBUser extends FireBaseModel {
     public void writeNewUser(String firstName,String lastName,String email,String password,String address, String phone,String subscription, String id){
         UserObj user = new UserObj(firstName,lastName,email,password,address,phone,subscription);
       String shopListId= new  FireBaseDBShoppingList().addShoppingListToDB(id);
-        user.setShoppingListId(shopListId);
+      user.setShoppingListId(shopListId);
               myRef.child("users").child(id).setValue(user);
 
     }

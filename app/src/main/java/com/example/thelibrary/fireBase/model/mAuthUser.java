@@ -23,6 +23,7 @@ public class mAuthUser {
     public mAuthUser() {
         this.mAuth = FirebaseAuth.getInstance();
     }
+
     public void registerUserToDB(String firstName,String lastName,String email,String password,String address, String phone, String subscription, AppCompatActivity activity){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(activity, new OnSuccessListener<AuthResult>(){

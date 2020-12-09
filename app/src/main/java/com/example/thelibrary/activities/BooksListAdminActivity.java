@@ -23,7 +23,6 @@ public class BooksListAdminActivity extends AppCompatActivity {
         ListView list = (ListView) findViewById(R.id.listView); ///פה צריך ליצור רשימה של כל הספרים ואז להוסיף לadapter סתם עשיתי דוגמא של 1,2,3
         adapter.add("one");
         adapter.add("two");
-
         adapter.add("three");
 
         list.setAdapter(adapter);

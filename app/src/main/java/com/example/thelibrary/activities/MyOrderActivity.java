@@ -16,7 +16,6 @@ import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
-import com.example.thelibrary.fireBase.model.dataObj.UserObj;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +33,8 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     FireBaseDBOrder fbOr = new FireBaseDBOrder();
     FireBaseDBShoppingList fbSl = new FireBaseDBShoppingList();
     String userID, shopID;
-    UserObj user;
+    int amountOfBooksRemains=0, booklistSize=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +55,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 shopID= dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
+                amountOfBooksRemains= dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Integer.class);
                 ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
 
                 ArrayAdapter adapter = new ArrayAdapter(MyOrderActivity.this, android.R.layout.simple_list_item_multiple_choice);
@@ -65,10 +66,11 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     adapter.add(book.getName());
                     adapter.add(book.getauthor());
                     // להוסיף שורה אם קיים במלאי או לא
-                    if(book.getCount() == 0)
-                    {
-                        adapter.add("הספר לא במלאי");
-                    }
+//                    if(book.getCount() == 0)
+//                    {
+//                        adapter.add("הספר לא במלאי");
+//                    }
+
                 }
                 list.setAdapter(adapter);
             }
@@ -85,7 +87,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
             if(TA.isChecked() || deliver.isChecked()) {
                 Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה", Toast.LENGTH_LONG).show();
 
-                String[] listOfBooks = new String[10];
+                String[] listOfBooks = new String[amountOfBooksRemains];
 
 //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                UserObj user=  new FireBaseDBUser().getUserObjFromDBByID(userID);
@@ -96,17 +98,19 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
-                        if(bookList.size() > 10)
+                        if(bookList.size() > amountOfBooksRemains) // ######### לבדוק שהוא לא ממשיך בהזמנה כל עוד הכמות לא נכונה ##########
                         {
                             Toast.makeText(getApplicationContext(), "המנוי שלך מוגבל ל-10 ספרים. בבקשה תוריד כמה מהרשימה", Toast.LENGTH_LONG).show();
                             return;
                         }
-                        for (int i=0; i<bookList.size(); i++) {
-                            listOfBooks[i] = bookList.get(i);
-                            BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue();
-                            book.setCount();
-                            // לבדוק האם מעדכן גם בFB או שצריך לקרוא לפונ' ב- FireBaseDBBook שתעדכן
-                        }
+//                        for (int i=0; i<bookList.size(); i++) {
+//                            listOfBooks[i] = bookList.get(i);
+//                            BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue();
+//                            book.setCount();
+//                            // לבדוק האם מעדכן גם בFB או שצריך לקרוא לפונ' ב- FireBaseDBBook שתעדכן
+//                        }
+                        booklistSize=bookList.size();
+
 
                     }
 
@@ -130,6 +134,9 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 fbOr.addOrderToDB(listOfBooks, userID, collect, endOfOrder);
                 // מחיקת הספרים
                 fbSl.clearShopListDB(shopID);
+                //updates amount of books to user
+                myRef.child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains-booklistSize);
+
             }
             else
             {

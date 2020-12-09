@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.thelibrary.PaymentActivity;
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
@@ -76,8 +75,7 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
         }
         if(v==searchBook_btn){
-            Intent intent = new Intent(MenuUserActivity.this, PaymentActivity.class);
-//            startActivity(intent);
+
         }
         if(v==labInf_btn){
 
