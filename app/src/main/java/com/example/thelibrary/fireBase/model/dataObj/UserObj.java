@@ -11,6 +11,7 @@ public class UserObj implements Serializable
     private String address;
     private String phone;
     private String subscription;
+    private String shoppingListId;
 
 
 
@@ -78,6 +79,10 @@ public class UserObj implements Serializable
     }
 
     public void setSubscription(String sub) { this.subscription=sub;}
+
+    public String getShoppingID(){return shoppingListId;}
+
+    public void setShoppingListId(String shoppingListId) {this.shoppingListId = shoppingListId;}
 
 
 }

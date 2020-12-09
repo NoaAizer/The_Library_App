@@ -14,7 +14,6 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class mAuthUser {
     FirebaseAuth mAuth;
@@ -33,9 +32,13 @@ public class mAuthUser {
                         {
                             // Sign in success
                             Log.d(""+activity, "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
                             FireBaseDBUser u = new FireBaseDBUser();
-                            u.addUserToDB(firstName,lastName,email,password, address, phone,subscription, user.getUid());
+                            FireBaseDBShoppingList sl = new FireBaseDBShoppingList();
+                            String userID=  mAuth.getCurrentUser().getUid();
+                            u.addUserToDB(firstName,lastName,email,password, address, phone,subscription,userID);
+                            sl.addShoppingListToDB(userID);
+                            u.getUserFromDB(userID).child("shoppingListId").setValue(sl.getShoppingListFromDB(userID).getKey());//set shoppingID in userObj;
+
 //                            Toast.makeText(activity, ""+user.getUid(),
 //                                    Toast.LENGTH_SHORT).show();
 
@@ -52,7 +55,6 @@ public class mAuthUser {
 
     }
     public void validationUser(String email, String password, AppCompatActivity activity){
-        FireBaseDBUser fu = new FireBaseDBUser();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -65,8 +67,7 @@ public class mAuthUser {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("LoginActivity", "signInWithEmail:failure", task.getException());
-                            Toast.makeText(activity, "Authentication failed.", Toast.LENGTH_SHORT).show();
-
+                            Toast.makeText(activity.getApplicationContext(), "Email or password incorrect.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

@@ -1,4 +1,4 @@
-package com.example.thelibrary;
+package com.example.thelibrary.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thelibrary.activities.MenuUserActivity;
+import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;

@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.thelibrary.R;
-import com.example.thelibrary.UserDetailsActivity;
 import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -65,18 +64,25 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
         if(v==loan_btn){
 
         }
+
         if(v==myDetails_btn){
             Intent intent = new Intent(MenuUserActivity.this, UserDetailsActivity.class);
             startActivity(intent);
 
         }
         if(v==myBooks_btn){
-
+            Intent intent = new Intent(MenuUserActivity.this, ListOfBorrowedBooks.class);
+            startActivity(intent);
         }
         if(v==searchBook_btn){
 
         }
         if(v==labInf_btn){
+
+        }
+        if(v==editBooks_btn){
+            Intent intent = new Intent(MenuUserActivity.this, MyOrderActivity.class);
+            startActivity(intent);
 
         }
     }

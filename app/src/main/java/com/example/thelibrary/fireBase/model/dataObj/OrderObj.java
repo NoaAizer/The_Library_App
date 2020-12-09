@@ -7,6 +7,7 @@ public class OrderObj {
     private String collect; // TA or deliver
     private String endOfOrder;
     private boolean complete;
+    private String shoopingId;
 
     public OrderObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)

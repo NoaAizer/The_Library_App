@@ -45,11 +45,10 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
             String password = passwordEditText.getText().toString();
             if (TextUtils.isEmpty(email)) {
                 emailEditText.setError("Email is required");
-                return;
+
             }
             if (TextUtils.isEmpty(password)) {
                 passwordEditText.setError("Password is required");
-                return;
             } else {
                 auth.validationUser(email, password,LoginUserActivity.this);
             }

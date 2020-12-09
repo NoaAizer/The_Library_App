@@ -33,7 +33,8 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
     }
     public void onClick(View v) {
         if(v==loansList_btn){
-
+            Intent intent = new Intent(MenuAdminActivity.this, TreatmentOrders.class);
+            startActivity(intent);
         }
         if(v==booksList_btn){
             Intent intent = new Intent(MenuAdminActivity.this, BooksListAdminActivity.class);

@@ -13,10 +13,11 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
-import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
+import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
+import com.example.thelibrary.fireBase.model.dataObj.UserObj;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -34,6 +35,8 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     private RadioButton TA, deliver;
     FireBaseDBOrder fbOr = new FireBaseDBOrder();
     FireBaseDBShoppingList fbSl = new FireBaseDBShoppingList();
+    String userID, shopID;
+    UserObj user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +49,10 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
         save_order.setOnClickListener(this);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String shopID = user.getShoopingID();
+
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        user=  new FireBaseDBUser().getUserObjFromDBByID(userID);
+        shopID = user.getShoppingID();
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
@@ -86,8 +91,9 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
                 String[] listOfBooks = new String[10];
 
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                String shopID = user.getShoopingID();
+//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//                UserObj user=  new FireBaseDBUser().getUserObjFromDBByID(userID);
+//                String shopID = user.getShoppingID();
 
                 DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                 myRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -113,7 +119,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 });
 
-                String userID = user.getUid();
+               // String userID = user.getUid();
 
                 String collect;
                 if (TA.isChecked()) {

@@ -1,4 +1,4 @@
-package com.example.thelibrary;
+package com.example.thelibrary.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thelibrary.activities.LoginAdminActivity;
-import com.example.thelibrary.activities.LoginUserActivity;
+import com.example.thelibrary.R;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {

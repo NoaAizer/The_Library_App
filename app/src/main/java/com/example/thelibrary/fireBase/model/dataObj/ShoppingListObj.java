@@ -2,16 +2,16 @@ package com.example.thelibrary.fireBase.model.dataObj;
 
 import java.util.ArrayList;
 
-public class shoppingListObj {
+public class ShoppingListObj {
 
     private ArrayList<String> bookList;
     private String UserID;
 
-    public shoppingListObj() {
+    public ShoppingListObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public shoppingListObj(String userID)
+    public ShoppingListObj(String userID)
     {
         this.bookList = new ArrayList<String>();
         this.UserID = userID;
