@@ -5,10 +5,10 @@ import com.example.thelibrary.fireBase.model.dataObj.OrderObj;
 import com.google.firebase.database.DatabaseReference;
 
 public class FireBaseDBOrder extends FireBaseModel {
-    public void addOrderToDB(BookObj[] list, String userID, String collect, String endOfOrder){
+    public void addOrderToDB(String[] list, String userID, String collect, String endOfOrder){
         writeNewOrder(list, userID, collect, endOfOrder);
     }
-    public void writeNewOrder(BookObj[] list, String userID, String collect, String endOfOrder){
+    public void writeNewOrder(String[] list, String userID, String collect, String endOfOrder){
         OrderObj order = new OrderObj(list, userID, collect, endOfOrder);
         myRef=myRef.child("orders");
         String keyId= myRef.push().getKey();

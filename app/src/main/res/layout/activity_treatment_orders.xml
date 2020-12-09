@@ -20,9 +20,9 @@
 
     <ScrollView
         android:id="@+id/orders"
-        android:layout_width="366dp"
-        android:layout_height="633dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="338dp"
+        android:layout_height="501dp"
+        android:layout_marginBottom="140dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.488"
@@ -32,14 +32,28 @@
             android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ToggleButton
-                android:id="@+id/toggleButton2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="ToggleButton" />
-        </LinearLayout>
+            android:clickable="true"
+            android:orientation="vertical"/>
     </ScrollView>
+
+    <Button
+        android:id="@+id/listTA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="36dp"
+        android:text="רשימת איסוף עצמי"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/listDeliver" />
+
+    <Button
+        android:id="@+id/listDeliver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="36dp"
+        android:text="רשימת משלוחים"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

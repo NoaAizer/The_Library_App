@@ -12,8 +12,6 @@ public class BookObj implements Serializable
     public String publishing_year;
 
 
-
-
     public BookObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }

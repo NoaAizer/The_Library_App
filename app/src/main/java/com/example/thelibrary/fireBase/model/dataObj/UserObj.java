@@ -1,6 +1,8 @@
 package com.example.thelibrary.fireBase.model.dataObj;
 
-public class UserObj
+import java.io.Serializable;
+
+public class UserObj implements Serializable
 {
     private String firstName;
     private String lastName;
@@ -8,6 +10,7 @@ public class UserObj
     private String password;
     private String address;
     private String phone;
+    private String subscription;
 
 
 
@@ -15,7 +18,7 @@ public class UserObj
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public UserObj( String firstName,String lastName,String email,String password,String address, String phone)
+    public UserObj( String firstName,String lastName,String email,String password,String address, String phone, String sub)
     {
         this.firstName=firstName;
         this.lastName=lastName;
@@ -23,7 +26,7 @@ public class UserObj
         this.password=password;
         this.address = address;
         this.phone=phone;
-    //    this.gender = gender;
+        this.subscription = sub;
     }
 
     public String getFirstName() {
@@ -69,4 +72,12 @@ public class UserObj
     public String getPassword() {
         return password;
     }
+
+    public String getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(String sub) { this.subscription=sub;}
+
+
 }

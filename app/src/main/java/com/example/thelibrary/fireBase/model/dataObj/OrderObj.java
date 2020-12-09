@@ -2,7 +2,7 @@ package com.example.thelibrary.fireBase.model.dataObj;
 
 public class OrderObj {
 
-    private BookObj[] listOfBooks;
+    private String[] listOfBooks;
     private String userID;
     private String collect; // TA or deliver
     private String endOfOrder;
@@ -12,25 +12,18 @@ public class OrderObj {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public OrderObj(BookObj[] list, String userID, String collect, String endOfOrder)
+    public OrderObj(String[] list, String userID, String collect, String endOfOrder)
     {
-        this.listOfBooks = null;
+        this.listOfBooks = list;
         this.userID = userID;
         this.collect = collect;
         this.endOfOrder = endOfOrder;
         this.complete = false;
     }
 
-    public BookObj[] getListOfBooks()
+    public String[] getListOfBooks()
     {
         return listOfBooks;
-    }
-    public void addBookToList(BookObj b)
-    {
-        // if numOfBooks < lengthOfList
-        // error
-        // else
-        // add the book to the list
     }
     public String getUserID()
     {

@@ -18,34 +18,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioButton
-        android:id="@+id/TA"
-        style="@style/Widget.AppCompat.CompoundButton.RadioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginBottom="8dp"
-        android:text="איסוף עצמי"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintBottom_toTopOf="@+id/deliver"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <RadioButton
-        android:id="@+id/deliver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="124dp"
-        android:layout_marginBottom="8dp"
-        android:text="משלוח- בתוספת 20 ש'ח"
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="212dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/noteForDeliver"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <RadioButton
+            android:id="@+id/listTA"
+            style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="איסוף עצמי"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintBottom_toTopOf="@+id/deliver"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup" />
+
+        <RadioButton
+            android:id="@+id/deliver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="משלוח- בתוספת 20 ש'ח"
+            app:layout_constraintBottom_toTopOf="@+id/noteForDeliver"
+            app:layout_constraintStart_toStartOf="@+id/radioGroup" />
+
+    </RadioGroup>
 
     <TextView
         android:id="@+id/noteForDeliver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="112dp"
         android:text="*ההזמנה תשלח לכתובת המעודכנת בפרטים האישיים"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
