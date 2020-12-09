@@ -35,8 +35,9 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     private RadioButton TA, deliver;
     FireBaseDBOrder fbOr = new FireBaseDBOrder();
     FireBaseDBShoppingList fbSl = new FireBaseDBShoppingList();
-    String userID, shopID;
+    String userID, shopID, subscription;
     UserObj user;
+    int numOfBooks = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         user=  new FireBaseDBUser().getUserObjFromDBByID(userID);
         shopID = user.getShoppingID();
+        subscription = user.getSubscription();
 
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
@@ -69,10 +71,10 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     adapter.add(book.getName());
                     adapter.add(book.getauthor());
                     // להוסיף שורה אם קיים במלאי או לא
-                    if(book.getCount() == 0)
-                    {
-                        adapter.add("הספר לא במלאי");
-                    }
+//                    if(book.getCount() == 0)
+//                    {
+//                        adapter.add("הספר לא במלאי");
+//                    }
                 }
                 list.setAdapter(adapter);
             }
@@ -89,7 +91,17 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
             if(TA.isChecked() || deliver.isChecked()) {
                 Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה", Toast.LENGTH_LONG).show();
 
-                String[] listOfBooks = new String[10];
+                if (subscription == "בסיסי"){
+                    numOfBooks = 2;
+                }
+                else if (subscription == "מורחב")
+                {
+                    numOfBooks = 5;
+                }
+                else if(subscription == "משפחתי"){
+                    numOfBooks = 10;
+                }
+                String[] listOfBooks = new String[numOfBooks];
 
 //                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //                UserObj user=  new FireBaseDBUser().getUserObjFromDBByID(userID);
@@ -100,17 +112,17 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
-                        if(bookList.size() > 10)
+                        if(bookList.size() > numOfBooks)
                         {
-                            Toast.makeText(getApplicationContext(), "המנוי שלך מוגבל ל-10 ספרים. בבקשה תוריד כמה מהרשימה", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "עברת את מכסת הספרים של סוג המנוי שלך. בבקשה תוריד כמה מהרשימה", Toast.LENGTH_LONG).show();
                             return;
                         }
-                        for (int i=0; i<bookList.size(); i++) {
-                            listOfBooks[i] = bookList.get(i);
-                            BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue();
-                            book.setCount();
-                            // לבדוק האם מעדכן גם בFB או שצריך לקרוא לפונ' ב- FireBaseDBBook שתעדכן
-                        }
+//                        for (int i=0; i<bookList.size(); i++) {
+//                            listOfBooks[i] = bookList.get(i);
+//                            BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue();
+//                            book.setCount();
+//                            // לבדוק האם מעדכן גם בFB או שצריך לקרוא לפונ' ב- FireBaseDBBook שתעדכן
+//                        }
 
                     }
 
