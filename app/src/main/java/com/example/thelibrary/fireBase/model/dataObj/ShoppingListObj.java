@@ -6,6 +6,7 @@ public class ShoppingListObj {
 
     private ArrayList<String> bookList;
     private String UserID;
+    private String timer;
 
     public ShoppingListObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -15,6 +16,7 @@ public class ShoppingListObj {
     {
         this.bookList = new ArrayList<String>();
         this.UserID = userID;
+        this.timer = "";
     }
 
     public String getUserID()

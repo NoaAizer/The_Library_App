@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
+import com.example.thelibrary.fireBase.model.dataObj.OrderObj;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
     private Button OrderComplete, UserDetails;
     private String[] listOfBook;
     String orderID;
+    String collectStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,8 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
         order.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                collectStr = dataSnapshot.child("collect").getValue(String.class);
+
                 UserId.append(dataSnapshot.child("UserId").getValue(String.class));
                 collect.append(dataSnapshot.child("collect").getValue(String.class));
                 endOfOrder.append(dataSnapshot.child("endOfOrder").getValue(String.class));
@@ -82,6 +86,13 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה", Toast.LENGTH_LONG).show();
             DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders");
             order.child(orderID).child("complete").setValue(true);
+            if(collectStr.equals("איסוף עצמי"))
+            {
+                order.child(orderID).child("statusDeliver").setValue("ההזמנה הושלמה, ניתן לאסוף בשעות הפתיחה");
+            }
+            else {
+                order.child(orderID).child("statusDeliver").setValue("ההזמנה ממתינה למשלוח");
+            }
         }
     }
 }

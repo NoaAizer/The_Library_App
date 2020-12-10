@@ -26,6 +26,7 @@ public class deliveryListActivity extends AppCompatActivity {
 
             ScrollView list = (ScrollView) findViewById(R.id.orders);
             String orderID;
+            String status;
 
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
@@ -35,6 +36,11 @@ public class deliveryListActivity extends AppCompatActivity {
                         orderID = orderSnapshot.getKey();
                         tv.setText(orderID);
                         ll.addView(tv);
+
+                        TextView tv2 = new TextView(deliveryListActivity.this);
+                        status = orderSnapshot.child("statusDeliver").getValue(String.class);
+                        tv2.setText(status);
+                        ll.addView(tv2);
                     }
                 }
             }

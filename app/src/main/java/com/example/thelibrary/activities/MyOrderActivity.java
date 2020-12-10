@@ -58,6 +58,11 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 amountOfBooksRemains= dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Integer.class);
                 ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
 
+                if (bookList.isEmpty() || bookList == null){
+                    Toast.makeText(getApplicationContext(), "אין ספרים ברשימה", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 ArrayAdapter adapter = new ArrayAdapter(MyOrderActivity.this, android.R.layout.simple_list_item_multiple_choice);
                 ListView list = (ListView) findViewById(R.id.listBooks);
 
@@ -134,7 +139,6 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 fbSl.clearShopListDB(shopID);
                 //updates amount of books to user
                 myRef.child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains-booklistSize);
-
             }
             else
             {
@@ -143,5 +147,4 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
-
 }

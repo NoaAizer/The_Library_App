@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheLibrary">
-        <activity android:name=".activities.deliveryListActivity"></activity>
+        <activity android:name=".activities.inventoryListActivity"></activity>
+        <activity android:name=".activities.deliveryListActivity" />
         <activity android:name=".activities.TAListActivity" />
         <activity android:name=".activities.OrderPageActivity" />
         <activity android:name=".activities.TreatmentOrdersActivity" />

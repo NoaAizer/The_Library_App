@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
@@ -39,6 +40,7 @@ public class ListOfBorrowedBooksActivity extends AppCompatActivity {
             BookObj[] listOfBooks;
             String orderID;
             String endOfOrder;
+            String statusDeliver;
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -46,6 +48,13 @@ public class ListOfBorrowedBooksActivity extends AppCompatActivity {
                     listOfBooks = userSnapshot.child("listOfBooks").getValue(BookObj[].class);
                     orderID = userSnapshot.getKey();
                     endOfOrder = userSnapshot.child("endOfOrder").getValue(String.class);
+                    statusDeliver = userSnapshot.child("statusDeliver").getValue(String.class);
+
+                    if(listOfBooks.length == 0)
+                    {
+                        Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
+                        return;
+                    }
 
                     LinearLayout ll = (LinearLayout) findViewById(R.id.linear);
                     TextView tv = new TextView(ListOfBorrowedBooksActivity.this);
@@ -66,6 +75,10 @@ public class ListOfBorrowedBooksActivity extends AppCompatActivity {
                     TextView tv4 = new TextView(ListOfBorrowedBooksActivity.this);
                     tv4.setText(endOfOrder);
                     ll.addView(tv4);
+
+                    TextView tv5 = new TextView(ListOfBorrowedBooksActivity.this);
+                    tv5.setText(statusDeliver);
+                    ll.addView(tv5);
                 }
             }
 

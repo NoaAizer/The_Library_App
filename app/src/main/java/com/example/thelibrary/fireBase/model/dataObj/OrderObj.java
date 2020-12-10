@@ -7,8 +7,11 @@ public class OrderObj {
     private String collect; // TA or deliver
     private String endOfOrder;
     private boolean complete;
-    private String shoopingId;
     private boolean arrivedToUser;
+    private String statusDeliver;
+//    enum statusDeliver {TREAT, COMPLETE, COLLECT, SHIPPED, ARRIVED}
+    // TA- TREAT, COMPLETE- ניתן לאיסוף, COLLECT-נאסף
+    // deliver- TREAT, COMPLETE, SHIPPED- יצא מהספריה, ARRIVED
 
     public OrderObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -22,6 +25,8 @@ public class OrderObj {
         this.endOfOrder = endOfOrder;
         this.complete = false;
         this.arrivedToUser = false;
+        this.statusDeliver = "בטיפול";
+
     }
 
     public String[] getListOfBooks()
