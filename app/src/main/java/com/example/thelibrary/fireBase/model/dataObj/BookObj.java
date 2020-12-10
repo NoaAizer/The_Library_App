@@ -10,13 +10,15 @@ public class BookObj implements Serializable
     public String genre;
     public String language;
     public String publishing_year;
+    public int amount;
+    public String id;
 
 
     public BookObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public BookObj(String name, String author, String brief,String genre,String language,String publishing_year)
+    public BookObj(String name, String author, String brief,String genre,String language,String publishing_year, int amount)
     {
         this.name = name;
         this.author = author;
@@ -24,8 +26,7 @@ public class BookObj implements Serializable
         this.genre=genre;
         this.language=language;
         this.publishing_year=publishing_year;
-
-
+        this.amount=amount;
     }
     public String getName() {
         return name;
@@ -47,5 +48,18 @@ public class BookObj implements Serializable
     }
 
 
+    public int getAmount() {
+        return amount;
+    }
+    public void setAmount(int amount) {
+        this.amount=amount;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
 }

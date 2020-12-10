@@ -1,8 +1,11 @@
 package com.example.thelibrary.fireBase.model.dataObj;
 
-public class OrderObj {
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    private String[] listOfBooks;
+public class OrderObj implements Serializable {
+
+    private ArrayList<String> listOfBooks;
     private String userID;
     private String collect; // TA or deliver
     private String endOfOrder;
@@ -17,7 +20,7 @@ public class OrderObj {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public OrderObj(String[] list, String userID, String collect, String endOfOrder)
+    public OrderObj(ArrayList<String> list, String userID, String collect, String endOfOrder)
     {
         this.listOfBooks = list;
         this.userID = userID;
@@ -29,7 +32,7 @@ public class OrderObj {
 
     }
 
-    public String[] getListOfBooks()
+    public ArrayList<String> getListOfBooks()
     {
         return listOfBooks;
     }

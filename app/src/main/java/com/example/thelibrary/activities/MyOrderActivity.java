@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class MyOrderActivity extends AppCompatActivity implements View.OnClickListener {
@@ -57,6 +58,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 shopID= dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
                 amountOfBooksRemains= dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Integer.class);
                 ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
+                if(bookList==null) bookList=new ArrayList<>();
 
                 if (bookList.isEmpty() || bookList == null){
                     Toast.makeText(getApplicationContext(), "אין ספרים ברשימה", Toast.LENGTH_LONG).show();
@@ -67,7 +69,8 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 ListView list = (ListView) findViewById(R.id.listBooks);
 
                 for (int i=0; i<bookList.size(); i++) {
-                    BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue();
+
+                    BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue(BookObj.class);
                     adapter.add(book.getName());
                     adapter.add(book.getauthor());
                     // להוסיף שורה אם קיים במלאי או לא
@@ -103,6 +106,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
+                        if(bookList==null) bookList=new ArrayList<>();
                         if(bookList.size() >= amountOfBooksRemains) // ######### לבדוק שהוא לא ממשיך בהזמנה כל עוד הכמות לא נכונה ##########
                         {
                             Toast.makeText(getApplicationContext(), "כמות הספרים גדולה מכמות הספרים שאת/ה יכול/ה לקחת", Toast.LENGTH_LONG).show();
@@ -134,7 +138,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
                 LocalDate today = LocalDate.now();
                 String endOfOrder = today.plusDays(30).toString();
-                fbOr.addOrderToDB(listOfBooks, userID, collect, endOfOrder);
+                fbOr.addOrderToDB( new ArrayList<String>(Arrays.asList(listOfBooks)), userID, collect, endOfOrder);
                 // מחיקת הספרים
                 fbSl.clearShopListDB(shopID);
                 //updates amount of books to user

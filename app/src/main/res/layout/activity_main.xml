@@ -80,7 +80,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-<!--        app:srcCompat="@drawable/logolab" />-->
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logolab" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

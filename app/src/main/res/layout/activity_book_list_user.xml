@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.BooksListUserActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/lvHeader"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="23dp"
+        android:gravity="right|center_vertical"
+        android:text="תוצאות החיפוש"
+        android:textSize="24sp"
+        android:textStyle="bold"
+/>
+
+    <ListView
+        android:id="@+id/lvBookU"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:divider="#0000CC"
+        android:dividerHeight="0.1dp"></ListView>
+
+
+</LinearLayout>

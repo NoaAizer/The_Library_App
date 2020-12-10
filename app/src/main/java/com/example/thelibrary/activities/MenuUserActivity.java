@@ -75,6 +75,8 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
         }
         if(v==searchBook_btn){
+            Intent intent = new Intent(MenuUserActivity.this, BooksListUserActivity.class);
+            startActivity(intent);
 
         }
         if(v==labInf_btn){

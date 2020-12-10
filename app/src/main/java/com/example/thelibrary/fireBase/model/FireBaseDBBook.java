@@ -9,14 +9,16 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 public class FireBaseDBBook extends FireBaseModel {
-    public void addBookToDB(String bookName, String author, String brief, String genre, String language, String publishing_year, AppCompatActivity activity){
+    public void addBookToDB(String bookName, String author, String brief, String genre, String language, String publishing_year, int amount, AppCompatActivity activity){
 
-        writeNewBook(bookName, author, brief, genre, language, publishing_year, activity);
+        writeNewBook(bookName, author, brief, genre, language, publishing_year, amount, activity);
     }
-    public void writeNewBook(String bookName,String author,String brief,String genre,String language, String publishing_year, AppCompatActivity activity){
-        BookObj book = new BookObj(bookName, author, brief, genre, language, publishing_year);
+
+    public void writeNewBook(String bookName,String author,String brief,String genre,String language, String publishing_year, int amount,AppCompatActivity activity){
+        BookObj book = new BookObj(bookName, author, brief, genre, language, publishing_year,amount);
         myRef=myRef.child("books");
         String keyId= myRef.push().getKey();
+        book.setId(keyId);
         myRef.child(keyId).setValue(book, new DatabaseReference.CompletionListener(){
 
         @Override
@@ -30,6 +32,15 @@ public class FireBaseDBBook extends FireBaseModel {
     });
     }
     public DatabaseReference getBookFromDB(String bookID){
-        return myRef.getRef().child("book").child(bookID);
+        return myRef.child("books").child(bookID);
     }
+
+    public DatabaseReference getBookListRef(){
+        return myRef.child("books");
+    }
+
+    public void setAmount(String bookID, int amount){
+        myRef.child("books").child(bookID).child("amount").setValue(amount);
+    }
+
 }

@@ -42,6 +42,8 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
 
         }
         if(v==deliveres_btn){
+            Intent intent = new Intent(MenuAdminActivity.this, AddBookActivity.class);
+            startActivity(intent);
 
         }
         if(v==clientsList_btn){

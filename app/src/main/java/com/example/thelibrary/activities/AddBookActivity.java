@@ -16,7 +16,7 @@ import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 
 public class AddBookActivity extends AppCompatActivity {
 
-        private EditText authorEditText, briefEditText, genreEditText, languageEditText, publishing_yearEditText, nameEditText;
+        private EditText authorEditText, briefEditText, genreEditText, languageEditText, publishing_yearEditText, nameEditText, amountEditText;
         private Button add_btn;
         private BookObj book;
         FireBaseDBBook fbb = new FireBaseDBBook();
@@ -32,6 +32,7 @@ public class AddBookActivity extends AppCompatActivity {
         genreEditText = (EditText) findViewById(R.id.Genre);
         languageEditText = (EditText) findViewById(R.id.Language);
         publishing_yearEditText = (EditText) findViewById(R.id.Publishing_year);
+        amountEditText = (EditText) findViewById(R.id.amount);
 
         add_btn = (Button) findViewById(R.id.add);
         add_btn.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +45,7 @@ public class AddBookActivity extends AppCompatActivity {
                     String genre = genreEditText.getText().toString().trim();
                     String language = languageEditText.getText().toString().trim();
                     String publishing_year = publishing_yearEditText.getText().toString().trim();
+                    int amount = Integer.parseInt(amountEditText.getText().toString().trim());
 
                     if (TextUtils.isEmpty(bookName) || TextUtils.isEmpty(author) ||
                             TextUtils.isEmpty(brief)||TextUtils.isEmpty(genre)||
@@ -51,7 +53,7 @@ public class AddBookActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "One of the fields is missing", Toast.LENGTH_LONG).show();
                         return;
                     }
-                    fbb.addBookToDB(bookName, author, brief, genre, language, publishing_year,AddBookActivity.this);
+                    fbb.addBookToDB(bookName, author, brief, genre, language, publishing_year, amount,AddBookActivity.this);
                     Intent addIntent = new Intent(AddBookActivity.this, MenuAdminActivity.class);
                     startActivity(addIntent);
 
