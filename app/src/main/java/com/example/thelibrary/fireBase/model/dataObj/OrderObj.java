@@ -8,6 +8,7 @@ public class OrderObj {
     private String endOfOrder;
     private boolean complete;
     private String shoopingId;
+    private boolean arrivedToUser;
 
     public OrderObj() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
@@ -20,6 +21,7 @@ public class OrderObj {
         this.collect = collect;
         this.endOfOrder = endOfOrder;
         this.complete = false;
+        this.arrivedToUser = false;
     }
 
     public String[] getListOfBooks()
@@ -46,5 +48,14 @@ public class OrderObj {
     public void setComplete(boolean com)
     {
         this.complete = com;
+    }
+
+    public boolean getarrivedToUser()
+    {
+        return arrivedToUser;
+    }
+    public void setarrivedToUser(boolean arrived)
+    {
+        this.arrivedToUser = arrived;
     }
 }

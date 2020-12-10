@@ -85,7 +85,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == save_order) {
             if(TA.isChecked() || deliver.isChecked()) {
-                Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
 
                 String[] listOfBooks = new String[amountOfBooksRemains];
 
@@ -98,9 +98,9 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
-                        if(bookList.size() > amountOfBooksRemains) // ######### לבדוק שהוא לא ממשיך בהזמנה כל עוד הכמות לא נכונה ##########
+                        if(bookList.size() >= amountOfBooksRemains) // ######### לבדוק שהוא לא ממשיך בהזמנה כל עוד הכמות לא נכונה ##########
                         {
-                            Toast.makeText(getApplicationContext(), "המנוי שלך מוגבל ל-10 ספרים. בבקשה תוריד כמה מהרשימה", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "כמות הספרים גדולה מכמות הספרים שאת/ה יכול/ה לקחת", Toast.LENGTH_LONG).show();
                             return;
                         }
 //                        for (int i=0; i<bookList.size(); i++) {
@@ -110,8 +110,6 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 //                            // לבדוק האם מעדכן גם בFB או שצריך לקרוא לפונ' ב- FireBaseDBBook שתעדכן
 //                        }
                         booklistSize=bookList.size();
-
-
                     }
 
                     @Override

@@ -9,9 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheLibrary">
-        <activity android:name=".activities.TreatmentOrders" />
+        <activity android:name=".activities.deliveryListActivity"></activity>
+        <activity android:name=".activities.TAListActivity" />
+        <activity android:name=".activities.OrderPageActivity" />
+        <activity android:name=".activities.TreatmentOrdersActivity" />
         <activity android:name=".activities.MyOrderActivity" />
-        <activity android:name=".activities.ListOfBorrowedBooks" />
+        <activity android:name=".activities.ListOfBorrowedBooksActivity" />
         <activity android:name=".activities.UserDetailsActivity" />
         <activity android:name=".activities.BooksListAdminActivity" />
         <activity

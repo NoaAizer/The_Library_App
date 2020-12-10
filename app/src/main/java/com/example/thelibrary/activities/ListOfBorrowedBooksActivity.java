@@ -18,7 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ListOfBorrowedBooks extends AppCompatActivity {
+public class ListOfBorrowedBooksActivity extends AppCompatActivity {
 
     FireBaseDBOrder fbOr = new FireBaseDBOrder();
 
@@ -48,22 +48,22 @@ public class ListOfBorrowedBooks extends AppCompatActivity {
                     endOfOrder = userSnapshot.child("endOfOrder").getValue(String.class);
 
                     LinearLayout ll = (LinearLayout) findViewById(R.id.linear);
-                    TextView tv = new TextView(ListOfBorrowedBooks.this);
+                    TextView tv = new TextView(ListOfBorrowedBooksActivity.this);
                     tv.setText(orderID);
                     ll.addView(tv);
 
                     for(int i=0; i<listOfBooks.length; i++)
                     {
-                        TextView tv2 = new TextView(ListOfBorrowedBooks.this);
+                        TextView tv2 = new TextView(ListOfBorrowedBooksActivity.this);
                         tv2.setText(listOfBooks[i].getName());
                         ll.addView(tv2);
 
-                        TextView tv3 = new TextView(ListOfBorrowedBooks.this);
+                        TextView tv3 = new TextView(ListOfBorrowedBooksActivity.this);
                         tv3.setText(listOfBooks[i].getauthor());
                         ll.addView(tv3);
                     }
 
-                    TextView tv4 = new TextView(ListOfBorrowedBooks.this);
+                    TextView tv4 = new TextView(ListOfBorrowedBooksActivity.this);
                     tv4.setText(endOfOrder);
                     ll.addView(tv4);
                 }
