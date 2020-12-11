@@ -75,6 +75,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loansList" />
 
+    <Button
+        android:id="@+id/adding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="290dp"
+        android:layout_marginBottom="78dp"
+        android:text="+"
+        app:layout_constraintBottom_toTopOf="@+id/loansList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

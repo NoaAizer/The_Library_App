@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.thelibrary.R;
 
 public class MenuAdminActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loansList_btn,booksList_btn,deliveres_btn, clientsList_btn;
+    private Button loansList_btn,booksList_btn,deliveres_btn, clientsList_btn, add_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +23,14 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         booksList_btn = (Button)findViewById(R.id.booksList);
         deliveres_btn = (Button)findViewById(R.id.deliveres);
         clientsList_btn = (Button)findViewById(R.id.clientsList);
+        add_btn = (Button)findViewById(R.id.adding);
 
 
         loansList_btn.setOnClickListener(this);
         booksList_btn.setOnClickListener(this);
         deliveres_btn.setOnClickListener(this);
         clientsList_btn.setOnClickListener(this);
+        add_btn.setOnClickListener(this);
 
     }
     public void onClick(View v) {
@@ -42,12 +44,17 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
 
         }
         if(v==deliveres_btn){
-            Intent intent = new Intent(MenuAdminActivity.this, AddBookActivity.class);
+            Intent intent = new Intent(MenuAdminActivity.this, deliveryListActivity.class);
             startActivity(intent);
 
         }
         if(v==clientsList_btn){
 
+        }
+
+        if(v==add_btn){
+            Intent intent = new Intent(MenuAdminActivity.this, AddBookActivity.class);
+            startActivity(intent);
         }
     }
 
