@@ -12,8 +12,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addBookToOrder"
-        android:layout_width="74dp"
-        android:layout_height="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
         android:clickable="true"
         app:srcCompat="@android:drawable/ic_input_add" />

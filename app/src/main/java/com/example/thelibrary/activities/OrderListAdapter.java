@@ -69,8 +69,8 @@ public class OrderListAdapter extends ArrayAdapter<String> implements CompoundBu
             public void onDataChange(DataSnapshot dataSnapshot) {
 //                bookName[0] = ;
 //                authorName[0] = ;
-                finalHolder.txtTitle1.setText("  " + dataSnapshot.child("name").getValue(String.class));
-                finalHolder.txtTitle2.setText("  " + dataSnapshot.child("author").getValue(String.class));
+                finalHolder.txtTitle1.append( dataSnapshot.child("name").getValue(String.class));
+                finalHolder.txtTitle2.append("  " + dataSnapshot.child("author").getValue(String.class));
                 // holder.chkSelect.setChecked(true);
                 finalHolder.chkSelect.setTag(position);
                 finalHolder.chkSelect.setChecked(mCheckStates.get(position, false));

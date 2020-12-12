@@ -29,13 +29,14 @@ import java.util.ArrayList;
 public class MyOrderActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private Button save_order;
     private RadioButton TA, deliver;
-    ListView orderListView;
+
 
 
     ArrayList<String> orderList,notChecked, bookList=new ArrayList<>();
     int amountOfBooksRemains;
     String userID, shopID,type = "";
     OrderListAdapter orderAdapter;
+    ListView orderListView;
 
 
     @Override
@@ -49,10 +50,9 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
         TA = findViewById(R.id.listTA);
         deliver = findViewById(R.id.deliver);
 
-        save_order.setOnClickListener(this);
-
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        save_order.setOnClickListener(this);
         TA.setOnCheckedChangeListener(this);
         deliver.setOnCheckedChangeListener(this);
 
