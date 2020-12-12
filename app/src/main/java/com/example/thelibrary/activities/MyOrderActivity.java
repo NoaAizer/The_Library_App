@@ -3,8 +3,8 @@ package com.example.thelibrary.activities;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
-import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,22 +24,26 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
-public class MyOrderActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyOrderActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private Button save_order;
     private RadioButton TA, deliver;
-    FireBaseDBOrder fbOr = new FireBaseDBOrder();
-    FireBaseDBShoppingList fbSl = new FireBaseDBShoppingList();
-    String userID, shopID;
-    int amountOfBooksRemains=0, booklistSize=0;
+    ListView orderListView;
+
+
+    ArrayList<String> orderList,notChecked, bookList=new ArrayList<>();
+    int amountOfBooksRemains;
+    String userID, shopID,type = "";
+    OrderListAdapter orderAdapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order);
+
+        orderListView = (ListView) findViewById(R.id.listBooks);
 
         save_order = findViewById(R.id.finish);
         TA = findViewById(R.id.listTA);
@@ -50,105 +53,102 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        TA.setOnCheckedChangeListener(this);
+        deliver.setOnCheckedChangeListener(this);
 
+        //update the bookList by the shopping list
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                shopID= dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
-                amountOfBooksRemains= dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Integer.class);
-                ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
-                if(bookList==null) bookList=new ArrayList<>();
+                shopID = dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
+                amountOfBooksRemains = dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Long.class).intValue();
+                bookList = (ArrayList<String>) dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
 
-                if (bookList.isEmpty() || bookList == null){
+
+                if (bookList == null || bookList.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "אין ספרים ברשימה", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                ArrayAdapter adapter = new ArrayAdapter(MyOrderActivity.this, android.R.layout.simple_list_item_multiple_choice);
-                ListView list = (ListView) findViewById(R.id.listBooks);
-
-                for (int i=0; i<bookList.size(); i++) {
-
-                    BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue(BookObj.class);
-                    adapter.add(book.getName());
-                    adapter.add(book.getauthor());
-                    // להוסיף שורה אם קיים במלאי או לא
-//                    if(book.getCount() == 0)
-//                    {
-//                        adapter.add("הספר לא במלאי");
-//                    }
-
-                }
-                list.setAdapter(adapter);
+                orderAdapter = new OrderListAdapter(MyOrderActivity.this, R.layout.single_book_order_row, bookList);
+                orderListView.setAdapter(orderAdapter);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
     }
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(buttonView == TA)
+            if (isChecked) type = "איסוף עצמי";
+
+        if(buttonView == deliver){
+            if (isChecked) type = "משלוח";
+        }
+    }
+
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClick(View v) {
         if (v == save_order) {
-            if(TA.isChecked() || deliver.isChecked()) {
+            orderList = new ArrayList<>();
+            notChecked = new ArrayList<>();
+            for (int i = 0; i < orderAdapter.mCheckStates.size(); i++) {
+                if (orderAdapter.mCheckStates.get(i) == true) {
+                    orderList.add(bookList.get(i));
+                } else {
+                    notChecked.add(bookList.get(i));
+                }
+            }
+            Toast.makeText(getApplicationContext(), orderList.size() + "", Toast.LENGTH_LONG).show();
+            if (orderList.size() > amountOfBooksRemains) {
+                Toast.makeText(getApplicationContext(), "כמות הספרים גדולה מכמות הספרים שאת/ה יכול/ה לקחת", Toast.LENGTH_LONG).show();
+                return;
+            } else {
+                if (!type.equals("")) {
                 Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
 
-                String[] listOfBooks = new String[amountOfBooksRemains];
+                //update the amount in stock of the books that haven't taken after finish order
+                for (int i = 0; i < orderAdapter.mCheckStates.size(); i++) {
+                    if (notChecked.contains(bookList.get(i))) {
+                        String bookID = bookList.get(i);
+                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                int amount = dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class).intValue();//UPDATE AMOUNT
+                                myRef.child("books").child(bookID).child("amount").setValue((amount) + 1);
+                            }
 
-//                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//                UserObj user=  new FireBaseDBUser().getUserObjFromDBByID(userID);
-//                String shopID = user.getShoppingID();
-
-                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        ArrayList<String> bookList = (ArrayList<String>)dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
-                        if(bookList==null) bookList=new ArrayList<>();
-                        if(bookList.size() >= amountOfBooksRemains) // ######### לבדוק שהוא לא ממשיך בהזמנה כל עוד הכמות לא נכונה ##########
-                        {
-                            Toast.makeText(getApplicationContext(), "כמות הספרים גדולה מכמות הספרים שאת/ה יכול/ה לקחת", Toast.LENGTH_LONG).show();
-                            return;
-                        }
-//                        for (int i=0; i<bookList.size(); i++) {
-//                            listOfBooks[i] = bookList.get(i);
-//                            BookObj book = (BookObj) dataSnapshot.child("books").child(bookList.get(i)).getValue();
-//                            book.setCount();
-//                            // לבדוק האם מעדכן גם בFB או שצריך לקרוא לפונ' ב- FireBaseDBBook שתעדכן
-//                        }
-                        booklistSize=bookList.size();
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
                     }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
-
-               // String userID = user.getUid();
-
-                String collect;
-                if (TA.isChecked()) {
-                    collect = "איסוף עצמי";
-                }
-                else {
-                    collect = "משלוח";
                 }
 
-                LocalDate today = LocalDate.now();
-                String endOfOrder = today.plusDays(30).toString();
-                fbOr.addOrderToDB( new ArrayList<String>(Arrays.asList(listOfBooks)), userID, collect, endOfOrder);
-                // מחיקת הספרים
-                fbSl.clearShopListDB(shopID);
-                //updates amount of books to user
-                myRef.child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains-booklistSize);
-            }
-            else
-            {
-                Toast.makeText(getApplicationContext(), "בחר צורת משלוח", Toast.LENGTH_LONG).show();
-                return;
+                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+                    bookList = orderList;
+                    LocalDate today = LocalDate.now(); // update the order date.
+                    String endOfOrder = today.plusDays(30).toString();
+                    new FireBaseDBOrder().addOrderToDB(bookList, userID, type, endOfOrder);
+                    // Delete books from shopping list
+                    new FireBaseDBShoppingList().clearShopListDB(shopID);
+                    //updates amount of books to user
+                    myRef.child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains - bookList.size());
+                } else {
+                    Toast.makeText(getApplicationContext(), "בחר צורת משלוח", Toast.LENGTH_LONG).show();
+                    return;
+                }
             }
         }
     }
+
 }
+
+
+

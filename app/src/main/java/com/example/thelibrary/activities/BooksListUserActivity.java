@@ -45,7 +45,7 @@ public class BooksListUserActivity extends AppCompatActivity {
         // Initialize adapter and set adapter to list view
         bookAdapter bookAd = new bookAdapter(this, BooksListUserActivity.this, books);
         lvBook.setAdapter(bookAd);
-        bookAd.notifyDataSetChanged();
+        //bookAd.notifyDataSetChanged();
     }
 
 }

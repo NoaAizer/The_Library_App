@@ -10,18 +10,14 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
-    <string name="Author" />
-    <string name="author">Author</string>
-    <string name="Brief">Brief</string>
+
     <string name="BookName">Book Name</string>
     <string name="e1" />
     <string name="l1" />
     <string name="w1" />
     <string name="boo1" />
     <string name="book_Id">book_Id</string>
-    <string name="Publishing_year">Publishing_year</string>
-    <string name="Language">Language</string>
-    <string name="Genre">Genre</string>
+    <string name="שפה">Language</string>
     <string name="Client">לקוח</string>
     <string name="Worker">ספרן</string>
     <string name="regUser">משתמש חדש? להרשמה לחץ כאן</string>
