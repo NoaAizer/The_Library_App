@@ -1,10 +1,14 @@
 package com.example.thelibrary.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
 
 
 public class MyOrderActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
-    private Button save_order;
+    private Button save_order, cancel_order;
     private RadioButton TA, deliver;
 
 
@@ -47,12 +51,14 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
         orderListView = (ListView) findViewById(R.id.listBooks);
 
         save_order = findViewById(R.id.finish);
+        cancel_order = findViewById(R.id.cancelOrder);
         TA = findViewById(R.id.listTA);
         deliver = findViewById(R.id.deliver);
 
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         save_order.setOnClickListener(this);
+        cancel_order.setOnClickListener(this);
         TA.setOnCheckedChangeListener(this);
         deliver.setOnCheckedChangeListener(this);
 
@@ -104,9 +110,8 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     notChecked.add(bookList.get(i));
                 }
             }
-            Toast.makeText(getApplicationContext(), orderList.size() + "", Toast.LENGTH_LONG).show();
             if (orderList.size() > amountOfBooksRemains) {
-                Toast.makeText(getApplicationContext(), "כמות הספרים גדולה מכמות הספרים שאת/ה יכול/ה לקחת", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"כמות הספרים בהזמנה גדולה מכמות הספרים במנוי שלך, נותרו לך "+amountOfBooksRemains+" ספרים", Toast.LENGTH_LONG).show();
                 return;
             } else {
                 if (!type.equals("")) {
@@ -131,7 +136,6 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }
 
-                    DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
                     bookList = orderList;
                     LocalDate today = LocalDate.now(); // update the order date.
                     String endOfOrder = today.plusDays(30).toString();
@@ -139,12 +143,57 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     // Delete books from shopping list
                     new FireBaseDBShoppingList().clearShopListDB(shopID);
                     //updates amount of books to user
-                    myRef.child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains - bookList.size());
+                    FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains - bookList.size());
+                    Intent intent = new Intent(MyOrderActivity.this, MenuUserActivity.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "בחר צורת משלוח", Toast.LENGTH_LONG).show();
                     return;
                 }
             }
+        }
+        if (v == cancel_order){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyOrderActivity.this);
+            alertDialog.setTitle("CANCEL ORDER");
+            alertDialog.setMessage("האם ברצונך לבטל את ההזמנה ולהסיר את כל הספרים מהסל?");
+
+
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            alertDialog.setPositiveButton("בטל הזמנה",
+                    new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int which) {
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    shopID = dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
+                                    for(String bookID: bookList) {
+                                        int amount = dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class).intValue();//UPDATE AMOUNT
+                                        myRef.child("books").child(bookID).child("amount").setValue((amount) + 1);
+                                    }
+                                }
+
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+                            new FireBaseDBShoppingList().clearShopListDB(shopID);
+                            Intent intent = new Intent(MyOrderActivity.this, MenuUserActivity.class);
+                            startActivity(intent);
+                        }
+                        });
+            alertDialog.setNegativeButton("חזור להזמנה",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
+                        }
+                    });
+            alertDialog.show();
+
         }
     }
 

@@ -36,21 +36,22 @@
             android:id="@+id/singleName"
             android:text=""
             android:textSize="22sp"
-            android:layout_gravity="right"/>
+            android:layout_gravity="end"/>
+
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/singleAuthor"
-        android:text="מחבר: "
-        android:textSize="20sp"
-        android:layout_gravity="right"/>
+            android:id="@+id/singleAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="מחבר: "
+            android:textSize="20sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/singleGenre"
             android:text="ז'אנר: "
             android:textSize="20sp"
-            android:layout_gravity="right"/>
+            android:layout_gravity="end"/>
 
     </LinearLayout>
 

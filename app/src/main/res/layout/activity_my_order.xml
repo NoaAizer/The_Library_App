@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.MyOrderActivity">
 
+    <Button
+        android:id="@+id/cancelOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginBottom="28dp"
+        android:text="ביטול"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <TextView
         android:id="@+id/myorder"
         android:layout_width="307dp"
@@ -73,14 +83,11 @@
         android:id="@+id/finish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginBottom="84dp"
         android:text="אשר הזמנה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
