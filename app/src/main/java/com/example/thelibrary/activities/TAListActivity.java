@@ -1,11 +1,10 @@
 package com.example.thelibrary.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
 import com.google.firebase.database.DataSnapshot;
@@ -24,19 +23,18 @@ public class TAListActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders");
         ref.orderByChild("complete").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
 
-            ScrollView list = (ScrollView) findViewById(R.id.orders);
+            ArrayAdapter adapter = new ArrayAdapter(TAListActivity.this, android.R.layout.simple_list_item_1);
+            ListView list = (ListView) findViewById(R.id.TAorders);
             String orderID;
 
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
-                    if (orderSnapshot.child("collect").equals("איסוף עצמי") && orderSnapshot.child("arrivedToUser").equals(false)) {
-                        LinearLayout ll = (LinearLayout) findViewById(R.id.linearlayoutTA);
-                        TextView tv = new TextView(TAListActivity.this);
+                    if (orderSnapshot.child("collect").getValue().equals("איסוף עצמי") && orderSnapshot.child("arrivedToUser").getValue().equals(false)) {
                         orderID = orderSnapshot.getKey();
-                        tv.setText(orderID);
-                        ll.addView(tv);
+                        adapter.add(orderID);
                     }
                 }
+                list.setAdapter(adapter);
             }
 
             @Override

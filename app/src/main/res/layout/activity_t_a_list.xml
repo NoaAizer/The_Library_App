@@ -19,20 +19,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/TAList"
-        android:layout_width="379dp"
-        android:layout_height="653dp"
-        android:layout_marginEnd="16dp"
+    <ListView
+        android:id="@+id/TAorders"
+        android:layout_width="358dp"
+        android:layout_height="636dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TAOrderList"
-        app:layout_constraintVertical_bias="0.736">
+        app:layout_constraintVertical_bias="0.555" />
 
-        <LinearLayout
-            android:id="@+id/linearlayoutTA"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

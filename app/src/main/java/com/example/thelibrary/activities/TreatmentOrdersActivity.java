@@ -1,14 +1,14 @@
 package com.example.thelibrary.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
@@ -38,24 +38,25 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders");
         ref.orderByChild("complete").equalTo(false).addListenerForSingleValueEvent(new ValueEventListener() {
 
-            ScrollView list = (ScrollView) findViewById(R.id.orders);
+            ArrayAdapter adapter = new ArrayAdapter(TreatmentOrdersActivity.this, android.R.layout.simple_list_item_1);
+            ListView list = (ListView) findViewById(R.id.TAorders);
             String orderID;
 
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    LinearLayout ll = (LinearLayout) findViewById(R.id.linear);
-                    TextView tv = new TextView(TreatmentOrdersActivity.this);
-                    orderID = dataSnapshot.getKey();
-                    tv.setText(orderID);
-                    ll.addView(tv);
-                    ll.setOnClickListener(new ScrollView.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(TreatmentOrdersActivity.this, OrderPageActivity.class);
-                            startActivity(intent.putExtra("orderID", orderID));
-                        }
-                    });
+                for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
+                    orderID = orderSnapshot.getKey();
+                    adapter.add(orderID);
                 }
+
+                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedFromList =(String) (list.getItemAtPosition(position));
+                        Intent intent = new Intent(TreatmentOrdersActivity.this, OrderPageActivity.class);
+                        startActivity(intent.putExtra("orderID", selectedFromList));
+                    }
+                });
+                list.setAdapter(adapter);
             }
 
             @Override

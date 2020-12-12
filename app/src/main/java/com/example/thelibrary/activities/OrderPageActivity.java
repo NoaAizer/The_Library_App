@@ -1,31 +1,31 @@
 package com.example.thelibrary.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
-import com.example.thelibrary.fireBase.model.dataObj.OrderObj;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Iterator;
+
 public class OrderPageActivity extends AppCompatActivity implements View.OnClickListener{
 
     FireBaseDBOrder fbOr = new FireBaseDBOrder();
     private TextView OrderId, UserId, collect, endOfOrder;
     private Button OrderComplete, UserDetails;
-    private String[] listOfBook;
     String orderID;
     String collectStr;
 
@@ -45,10 +45,21 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
         OrderComplete.setOnClickListener(this);
         UserDetails.setOnClickListener(this);
 
-        orderID = (String) savedInstanceState.getSerializable("orderID");
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                orderID= null;
+            } else {
+                orderID= extras.getString("orderID");
+            }
+        } else {
+            orderID= (String) savedInstanceState.getSerializable("orderID");
+        }
+
         OrderId.append(orderID);
 
-        ScrollView list = (ScrollView) findViewById(R.id.detListOfBooks);
+        ArrayAdapter adapter = new ArrayAdapter(OrderPageActivity.this, android.R.layout.simple_list_item_1);
+        ListView list = (ListView) findViewById(R.id.detListOfBooks);
 
         DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders").child(orderID);
         order.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -56,18 +67,20 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
             public void onDataChange(DataSnapshot dataSnapshot) {
                 collectStr = dataSnapshot.child("collect").getValue(String.class);
 
-                UserId.append(dataSnapshot.child("UserId").getValue(String.class));
+                UserId.append(dataSnapshot.child("userID").getValue(String.class));
                 collect.append(dataSnapshot.child("collect").getValue(String.class));
                 endOfOrder.append(dataSnapshot.child("endOfOrder").getValue(String.class));
 
-                LinearLayout ll = (LinearLayout) findViewById(R.id.linear);
-                listOfBook = dataSnapshot.child("listOfBooks").getValue(String[].class);
-                TextView tv = new TextView(OrderPageActivity.this);
-                for(int i=0; i<listOfBook.length; i++)
-                {
-                    tv.setText(listOfBook[i]);
-                    ll.addView(tv);
+                Iterable<DataSnapshot> listOfBook = dataSnapshot.child("listOfBooks").getChildren();
+                Iterator<DataSnapshot> it = listOfBook.iterator();
+                while(it.hasNext()) {
+                    adapter.add(it.next().getValue(String.class));
                 }
+//                for(int i=0; i<listOfBook.iterator(); i++)
+//                {
+//                    adapter.add(listOfBook[i]);
+//                }
+                list.setAdapter(adapter);
             }
 
             @Override
@@ -79,7 +92,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (v == UserDetails) {
             Intent intent = new Intent(OrderPageActivity.this, UserDetailsActivity.class);
-            startActivity(intent);
+            startActivity(intent.putExtra("userID", UserId.toString()));
         }
         else if(v == OrderComplete)
         {
