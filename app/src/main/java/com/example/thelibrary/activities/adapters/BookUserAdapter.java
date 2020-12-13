@@ -25,12 +25,6 @@ public class BookUserAdapter extends BaseAdapter {
     ArrayList<BookObj> books;
     AppCompatActivity activity;
 
-
-    //    public bookAdapter(Context context, ArrayList<BookObj> books) {
-//        super(context, R.layout.singke_book_line, R.id.singleName ,R.id.addBookToOrder, books);
-//        this.context = context;
-//        this.books = books;
-//    }
     public BookUserAdapter(AppCompatActivity activity, Context context, ArrayList<BookObj> books) {
         super();
         this.context = context;
