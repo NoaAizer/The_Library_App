@@ -121,26 +121,26 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 return;
             } else {
                 if (!type.equals("")) {
-                Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
 
-                //update the amount in stock of the books that haven't taken after finish order
-                for (int i = 0; i < orderAdapter.mCheckStates.size(); i++) {
-                    if (notChecked.contains(bookList.get(i))) {
-                        String bookID = bookList.get(i);
-                        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                int amount = dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class).intValue();//UPDATE AMOUNT
-                                myRef.child("books").child(bookID).child("amount").setValue((amount) + 1);
-                            }
+                    //update the amount in stock of the books that haven't taken after finish order
+                    for (int i = 0; i < orderAdapter.mCheckStates.size(); i++) {
+                        if (notChecked.contains(bookList.get(i))) {
+                            String bookID = bookList.get(i);
+                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    int amount = dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class).intValue();//UPDATE AMOUNT
+                                    myRef.child("books").child(bookID).child("amount").setValue((amount) + 1);
+                                }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-                            }
-                        });
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                }
+                            });
+                        }
                     }
-                }
 
                     bookList = orderList;
                     LocalDate today = LocalDate.now(); // update the order date.
@@ -191,7 +191,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                             Intent intent = new Intent(MyOrderActivity.this, MenuUserActivity.class);
                             startActivity(intent);
                         }
-                        });
+                    });
             alertDialog.setNegativeButton("חזור להזמנה",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {

@@ -18,6 +18,7 @@ public class FireBaseDBOrder extends FireBaseModel {
     public void writeNewOrder(ArrayList<String> list, String userTZ,String userID, String collect, String endOfOrder){
         OrderObj order = new OrderObj(list,userTZ, userID, collect, endOfOrder);
         String keyId= myRef.push().getKey();
+        order.setId(keyId);
         myRef.child("orders").child(keyId).setValue(order);
     }
     public DatabaseReference getOrderFromDB(String orderID){
@@ -37,11 +38,11 @@ public class FireBaseDBOrder extends FireBaseModel {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 bookList[0] = (ArrayList<String>) dataSnapshot.child("orders").child(orderID).child("listOfBooks").getValue();
-                    bookList[0].remove(bookID);
-                    amountBook[0]= dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class);//UPDATE BOOK AMOUNT
-                    myRef.child("books").child(bookID).child("amount").setValue((amountBook[0])+1);
+                bookList[0].remove(bookID);
+                amountBook[0]= dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class);//UPDATE BOOK AMOUNT
+                myRef.child("books").child(bookID).child("amount").setValue((amountBook[0])+1);
                 amountUser[0]= dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Long.class);//UPDATE USER REMAINS BOOK AMOUNT
-                    myRef.child("users").child(userID).child("amountOfBooksRemains").setValue((amountUser[0])+1);
+                myRef.child("users").child(userID).child("amountOfBooksRemains").setValue((amountUser[0])+1);
 
                 if( bookList[0].isEmpty())
                     myRef.child("orders").child(orderID).removeValue();

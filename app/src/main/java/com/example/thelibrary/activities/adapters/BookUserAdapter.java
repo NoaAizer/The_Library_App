@@ -1,4 +1,4 @@
-package com.example.thelibrary.activities;
+package com.example.thelibrary.activities.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.MenuUserActivity;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;

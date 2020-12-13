@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="bookDetailsHeader" type="id" />
+    <item name="hedBookName" type="id" />
+    <item name="hedBookAuthor" type="id" />
+    <item name="detBookAuthor" type="id" />
+    <item name="hedBookGenre" type="id" />
+    <item name="detBookGenre" type="id" />
+    <item name="hedBookYear" type="id" />
+    <item name="detBookYear" type="id" />
+    <item name="hedBookLan" type="id" />
+    <item name="detBookLan" type="id" />
+    <item name="hedBookBrief" type="id" />
+    <item name="detBookBrief" type="id" />
+    <item name="hedBookAmount" type="id" />
+    <item name="detBookAmount" type="id" />
+</resources>
