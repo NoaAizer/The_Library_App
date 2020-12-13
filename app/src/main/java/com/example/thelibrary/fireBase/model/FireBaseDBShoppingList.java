@@ -90,8 +90,6 @@ public class FireBaseDBShoppingList extends FireBaseModel {
                 else
                     Toast.makeText(activity.getApplicationContext(), "הספר לא קיים ברשימת ההזמנות שלך", Toast.LENGTH_SHORT).show();
                 myRef.child("shoppingList").child(shopID[0]).child("bookList").setValue(bookList[0]);
-
-
             }
 
             @Override

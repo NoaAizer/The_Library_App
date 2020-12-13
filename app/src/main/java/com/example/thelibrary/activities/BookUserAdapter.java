@@ -19,7 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class bookAdapter extends BaseAdapter {
+public class BookUserAdapter extends BaseAdapter {
     Context context;
     ArrayList<BookObj> books;
     AppCompatActivity activity;
@@ -30,7 +30,7 @@ public class bookAdapter extends BaseAdapter {
 //        this.context = context;
 //        this.books = books;
 //    }
-    public bookAdapter(AppCompatActivity activity, Context context, ArrayList<BookObj> books) {
+    public BookUserAdapter(AppCompatActivity activity, Context context, ArrayList<BookObj> books) {
         super();
         this.context = context;
         this.books = books;

@@ -38,7 +38,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
     ArrayList<String> orderList,notChecked, bookList=new ArrayList<>();
     int amountOfBooksRemains;
-    String userID, shopID,type = "";
+    String userTZ, userID, shopID,type = "";
     OrderListAdapter orderAdapter;
     ListView orderListView;
 
@@ -67,6 +67,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                userTZ = dataSnapshot.child("users").child(userID).child("tz").getValue(String.class);
                 shopID = dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
                 amountOfBooksRemains = dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Long.class).intValue();
                 bookList = (ArrayList<String>) dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
@@ -110,6 +111,11 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     notChecked.add(bookList.get(i));
                 }
             }
+            if (orderList.isEmpty()){
+                Toast.makeText(getApplicationContext(),"ההזמנה ריקה, אנא בחר את הספרים שהנך רוצה לקחת או בטל את ההזמנה.", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             if (orderList.size() > amountOfBooksRemains) {
                 Toast.makeText(getApplicationContext(),"כמות הספרים בהזמנה גדולה מכמות הספרים במנוי שלך, נותרו לך "+amountOfBooksRemains+" ספרים", Toast.LENGTH_LONG).show();
                 return;
@@ -139,7 +145,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                     bookList = orderList;
                     LocalDate today = LocalDate.now(); // update the order date.
                     String endOfOrder = today.plusDays(30).toString();
-                    new FireBaseDBOrder().addOrderToDB(bookList, userID, type, endOfOrder);
+                    new FireBaseDBOrder().addOrderToDB(bookList, userTZ, userID, type, endOfOrder);
                     // Delete books from shopping list
                     new FireBaseDBShoppingList().clearShopListDB(shopID);
                     //updates amount of books to user

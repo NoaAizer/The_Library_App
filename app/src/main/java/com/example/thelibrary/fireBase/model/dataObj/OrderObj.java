@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class OrderObj implements Serializable {
 
     private ArrayList<String> listOfBooks;
-    private String userID;
+    private String userID, userTZ;
     private String collect; // TA or deliver
     private String endOfOrder;
     private boolean complete;
@@ -20,9 +20,10 @@ public class OrderObj implements Serializable {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public OrderObj(ArrayList<String> list, String userID, String collect, String endOfOrder)
+    public OrderObj(ArrayList<String> list, String userTZ,String userID, String collect, String endOfOrder)
     {
         this.listOfBooks = list;
+        this.userTZ =userTZ;
         this.userID = userID;
         this.collect = collect;
         this.endOfOrder = endOfOrder;
@@ -65,5 +66,13 @@ public class OrderObj implements Serializable {
     public void setarrivedToUser(boolean arrived)
     {
         this.arrivedToUser = arrived;
+    }
+
+    public String getUserTZ() {
+        return userTZ;
+    }
+
+    public void setUserTZ(String userTZ) {
+        this.userTZ = userTZ;
     }
 }

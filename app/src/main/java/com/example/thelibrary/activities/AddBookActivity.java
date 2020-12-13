@@ -16,13 +16,13 @@ import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 
 public class AddBookActivity extends AppCompatActivity {
 
-        private EditText authorEditText, briefEditText, genreEditText, languageEditText, publishing_yearEditText, nameEditText, amountEditText;
-        private Button add_btn;
-        private BookObj book;
-        FireBaseDBBook fbb = new FireBaseDBBook();
-        private static final String TAG = "AddBook";
-        @Override
-        protected void onCreate (Bundle savedInstanceState){
+    private EditText authorEditText, briefEditText, genreEditText, languageEditText, publishing_yearEditText, nameEditText, amountEditText;
+    private Button add_btn;
+    private BookObj book;
+    FireBaseDBBook fbb = new FireBaseDBBook();
+    private static final String TAG = "AddBook";
+    @Override
+    protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
 
@@ -53,6 +53,11 @@ public class AddBookActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "One of the fields is missing", Toast.LENGTH_LONG).show();
                         return;
                     }
+                    if(publishing_year.length()>4){
+                        Toast.makeText(getApplicationContext(), "Please correct the publishing year", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
                     fbb.addBookToDB(bookName, author, brief, genre, language, publishing_year, amount,AddBookActivity.this);
                     Intent addIntent = new Intent(AddBookActivity.this, MenuAdminActivity.class);
                     startActivity(addIntent);
@@ -63,4 +68,4 @@ public class AddBookActivity extends AppCompatActivity {
     }//onCreate
 
 
-    }
+}

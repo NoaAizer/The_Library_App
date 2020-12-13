@@ -16,7 +16,7 @@ import com.example.thelibrary.fireBase.model.mAuthUser;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
-    private EditText firstNameEditText,lastNameEditText, addressEditText, phoneEditText, emailEditText,passwordEditText;
+    private EditText tzEditText,firstNameEditText,lastNameEditText, addressEditText, phoneEditText, emailEditText,passwordEditText;
     private Button register;
     private Spinner subscriptionSpinner;
     mAuthUser auth = new mAuthUser();
@@ -27,7 +27,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
-
+        tzEditText=(EditText)findViewById(R.id.tz);
         firstNameEditText=(EditText)findViewById(R.id.firstName);
         lastNameEditText=(EditText)findViewById(R.id.lastName);
         addressEditText=(EditText)findViewById(R.id.address);
@@ -46,6 +46,7 @@ public class RegisterUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view)
             {
+                String tz= tzEditText.getText().toString().trim();
                 String fName=firstNameEditText.getText().toString().trim();
                 String lName=lastNameEditText.getText().toString().trim();
                 String address=addressEditText.getText().toString().trim();
@@ -54,6 +55,9 @@ public class RegisterUserActivity extends AppCompatActivity {
                 String password=passwordEditText.getText().toString().trim();
                 String subscription= subscriptionSpinner.getSelectedItem().toString().trim().split(":")[0];
 
+                if (tz.isEmpty()) {
+                    tzEditText.setError("Teudat Zehut is required");
+                }
                 if (fName.isEmpty()) {
                     firstNameEditText.setError("First Name is required");
                 }
@@ -86,7 +90,12 @@ public class RegisterUserActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Password length must be at least 6",Toast.LENGTH_LONG).show();
                     return;
                 }
-                auth.registerUserToDB(fName,lName,email,password,address,phone,subscription, RegisterUserActivity.this);
+                if(tz == null || tz.trim().length() != 9 )
+                {
+                    Toast.makeText(getApplicationContext(),"Invalid Teudat Zehut",Toast.LENGTH_LONG).show();
+                    return;
+                }
+                auth.registerUserToDB(tz,fName,lName,email,password,address,phone,subscription, RegisterUserActivity.this);
             }
         });
 

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class UserObj implements Serializable
 {
+    private String tz;
     private String firstName;
     private String lastName;
     private String email;
@@ -20,8 +21,9 @@ public class UserObj implements Serializable
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
-    public UserObj( String firstName,String lastName,String email,String password,String address, String phone, String sub)
+    public UserObj( String tz,String firstName,String lastName,String email,String password,String address, String phone, String sub)
     {
+        this.tz=tz;
         this.firstName=firstName;
         this.lastName=lastName;
         this.email = email;
@@ -92,4 +94,12 @@ public class UserObj implements Serializable
     public int getAmountOfBooksRemains() { return amountOfBooksRemains; }
 
     public void setAmountOfBooksRemains(int amountOfBooksRemains) { this.amountOfBooksRemains = amountOfBooksRemains; }
+
+    public String getTz() {
+        return tz;
+    }
+
+    public void setTz(String tz) {
+        this.tz = tz;
+    }
 }

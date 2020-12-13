@@ -24,7 +24,8 @@ public class mAuthUser {
         this.mAuth = FirebaseAuth.getInstance();
     }
 
-    public void registerUserToDB(String firstName,String lastName,String email,String password,String address, String phone, String subscription, AppCompatActivity activity){
+
+    public void registerUserToDB(String tz,String firstName,String lastName,String email,String password,String address, String phone, String subscription, AppCompatActivity activity){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(activity, new OnSuccessListener<AuthResult>(){
 
@@ -37,7 +38,7 @@ public class mAuthUser {
                         FireBaseDBUser u = new FireBaseDBUser();
                         FireBaseDBShoppingList sl = new FireBaseDBShoppingList();
                         String userID = mAuth.getCurrentUser().getUid();
-                        u.addUserToDB(firstName, lastName, email, password, address, phone, subscription, userID);
+                        u.addUserToDB(tz,firstName, lastName, email, password, address, phone, subscription, userID);
                         Intent loginIntent=new Intent(activity, LoginUserActivity.class);
                         activity.startActivity(loginIntent);
                     }

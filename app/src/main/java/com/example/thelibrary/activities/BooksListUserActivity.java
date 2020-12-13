@@ -22,7 +22,7 @@ public class BooksListUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_list_user);
+        setContentView(R.layout.activity_books_list_user);
 
 
         DatabaseReference booksRef = new FireBaseDBBook().getBookListRef();
@@ -43,7 +43,7 @@ public class BooksListUserActivity extends AppCompatActivity {
         lvBook = findViewById(R.id.lvBookU);
 
         // Initialize adapter and set adapter to list view
-        bookAdapter bookAd = new bookAdapter(this, BooksListUserActivity.this, books);
+        BookUserAdapter bookAd = new BookUserAdapter(this, BooksListUserActivity.this, books);
         lvBook.setAdapter(bookAd);
         //bookAd.notifyDataSetChanged();
     }

@@ -1,5 +1,6 @@
-package com.example.thelibrary.activities;
+package com.example.thelibrary;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
 import android.widget.ListView;
@@ -8,8 +9,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thelibrary.R;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.thelibrary.activities.ReturnListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,26 +18,27 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class ListOfBorrowedBooksActivity extends AppCompatActivity {
-
+public class ReturnBookActivity extends AppCompatActivity {
     ArrayList<Pair<String,String>> bookList = new ArrayList<>(); // key= orderID , value=bookID
-    String thisUserID;
-    BorrowListAdapter borrowListAdapter;
-    ListView borrowListView;
+    String thisUserTZ;
+    ReturnListAdapter returnListAdapter;
+    ListView ordersListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_of_borrowed_books);
+        setContentView(R.layout.activity_return_book);
 
-        borrowListView = (ListView) findViewById(R.id.listBB);
-        thisUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        ordersListView = (ListView) findViewById(R.id.listRB);
+        Intent intent = getIntent();
+        thisUserTZ = intent.getExtras().getString("userTZ");
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("orders");
-        myRef.orderByChild("userID").equalTo(thisUserID).addListenerForSingleValueEvent(new ValueEventListener() {
+        myRef.orderByChild("userTZ").equalTo(thisUserTZ).addListenerForSingleValueEvent(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    if(userSnapshot.child("arrivedToUser").getValue().equals(true))
                     for (DataSnapshot bookSnapshot : userSnapshot.child("listOfBooks").getChildren()) {
                         bookList.add(new Pair(userSnapshot.getKey(), bookSnapshot.getValue(String.class)));
                     }
@@ -48,8 +49,8 @@ public class ListOfBorrowedBooksActivity extends AppCompatActivity {
                     return;
                 }
 
-                borrowListAdapter = new BorrowListAdapter(ListOfBorrowedBooksActivity.this, R.layout.single_book_borrow_row, bookList);
-                borrowListView.setAdapter(borrowListAdapter);
+                returnListAdapter = new ReturnListAdapter(ReturnBookActivity.this, R.layout.single_book_return_row, bookList);
+                ordersListView.setAdapter(returnListAdapter);
 
 
             }
