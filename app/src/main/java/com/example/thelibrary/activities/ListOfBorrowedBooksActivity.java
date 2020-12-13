@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
-import com.example.thelibrary.activities.adapters.BorrowListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -51,6 +50,7 @@ public class ListOfBorrowedBooksActivity extends AppCompatActivity {
 
                 borrowListAdapter = new BorrowListAdapter(ListOfBorrowedBooksActivity.this, R.layout.single_book_borrow_row, bookList);
                 borrowListView.setAdapter(borrowListAdapter);
+
 
             }
 

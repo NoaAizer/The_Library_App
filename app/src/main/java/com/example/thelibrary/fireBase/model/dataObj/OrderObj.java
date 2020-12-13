@@ -12,7 +12,6 @@ public class OrderObj implements Serializable {
     private boolean complete;
     private boolean arrivedToUser;
     private String statusDeliver;
-    public String id;
 //    enum statusDeliver {TREAT, COMPLETE, COLLECT, SHIPPED, ARRIVED}
     // TA- TREAT, COMPLETE- ניתן לאיסוף, COLLECT-נאסף
     // deliver- TREAT, COMPLETE, SHIPPED- יצא מהספריה, ARRIVED
@@ -75,11 +74,5 @@ public class OrderObj implements Serializable {
 
     public void setUserTZ(String userTZ) {
         this.userTZ = userTZ;
-    }
-    public String getId() {
-        return id;
-    }
-    public void setId(String id) {
-        this.id = id;
     }
 }

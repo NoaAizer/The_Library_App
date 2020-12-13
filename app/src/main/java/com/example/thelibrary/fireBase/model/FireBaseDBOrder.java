@@ -18,7 +18,6 @@ public class FireBaseDBOrder extends FireBaseModel {
     public void writeNewOrder(ArrayList<String> list, String userTZ,String userID, String collect, String endOfOrder){
         OrderObj order = new OrderObj(list,userTZ, userID, collect, endOfOrder);
         String keyId= myRef.push().getKey();
-        order.setId(keyId);
         myRef.child("orders").child(keyId).setValue(order);
     }
     public DatabaseReference getOrderFromDB(String orderID){

@@ -49,29 +49,19 @@
         android:id="@+id/loansList"
         android:layout_width="253dp"
         android:layout_height="42dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="164dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת הזמנות לטיפול"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clientsList" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/booksList"
         android:layout_width="253dp"
         android:layout_height="42dp"
-        android:layout_marginTop="107dp"
-        android:layout_marginEnd="56dp"
-        android:text="רשימת הספרים"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/helloAdmin" />
-
-    <Button
-        android:id="@+id/ordersCompletes"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="56dp"
-        android:text="הזמנות שהושלמו"
+        android:text="רשימת הספרים"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loansList" />
 
@@ -83,7 +73,7 @@
         android:layout_marginEnd="56dp"
         android:text="החזרת ספרים"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ordersCompletes" />
+        app:layout_constraintTop_toBottomOf="@+id/clientsList" />
 
     <Button
         android:id="@+id/adding"
@@ -96,10 +86,10 @@
         android:text="+"
         app:layout_constraintBottom_toTopOf="@+id/loansList"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

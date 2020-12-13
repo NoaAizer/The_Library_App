@@ -1,11 +1,8 @@
 package com.example.thelibrary.activities;
 
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -38,15 +35,6 @@ public class TAListActivity extends AppCompatActivity {
                     }
                 }
                 list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Toast.makeText(getApplicationContext(), "הזמנה מספר: "+orderID+" הושלמה והגיעה ליעדה", Toast.LENGTH_SHORT).show();
-                        ref.child(orderID).child("arrivedToUser").setValue(true);
-                        adapter.notifyDataSetChanged();
-                    }
-
-                });
             }
 
             @Override

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.ReturnBookActivity;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,7 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class MenuAdminActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loansList_btn, booksList_btn, returnBook_btn, clientsList_btn, add_btn, finishOrder_btn;
+    private Button loansList_btn, booksList_btn, returnBook_btn, clientsList_btn, add_btn;
     private boolean hasOrder = false;
 
     @Override
@@ -38,7 +39,6 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         returnBook_btn = (Button) findViewById(R.id.returnBook);
         clientsList_btn = (Button) findViewById(R.id.clientsList);
         add_btn = (Button) findViewById(R.id.adding);
-        finishOrder_btn = (Button) findViewById(R.id.ordersCompletes);
 
 
         loansList_btn.setOnClickListener(this);
@@ -46,7 +46,6 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         returnBook_btn.setOnClickListener(this);
         clientsList_btn.setOnClickListener(this);
         add_btn.setOnClickListener(this);
-        finishOrder_btn.setOnClickListener(this);
 
     }
 
@@ -103,6 +102,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
 
                             }
 
+
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
 
@@ -120,22 +120,17 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
             alertDialog.show();
+
         }
 
         if (v == clientsList_btn) {
+
         }
 
         if (v == add_btn) {
             Intent intent = new Intent(MenuAdminActivity.this, AddBookActivity.class);
             startActivity(intent);
         }
-
-        if(v == finishOrder_btn){
-            Intent intent = new Intent(MenuAdminActivity.this, CompletesOrdersActivity.class);
-            startActivity(intent);
-
-        }
-
     }
 
 }

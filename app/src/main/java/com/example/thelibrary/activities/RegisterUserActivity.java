@@ -26,7 +26,7 @@ public class RegisterUserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_register_user);
         tzEditText=(EditText)findViewById(R.id.tz);
         firstNameEditText=(EditText)findViewById(R.id.firstName);
         lastNameEditText=(EditText)findViewById(R.id.lastName);
