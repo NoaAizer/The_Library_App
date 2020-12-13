@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheLibrary">
-        <activity android:name=".ReturnBookActivity"></activity>
+        <activity android:name=".activities.CompletesOrdersActivity"></activity>
+        <activity android:name=".activities.BookDetailsActivity" />
+        <activity android:name=".activities.ReturnBookActivity" />
         <activity android:name=".activities.inventoryListActivity" />
         <activity android:name=".activities.deliveryListActivity" />
         <activity android:name=".activities.TAListActivity" />

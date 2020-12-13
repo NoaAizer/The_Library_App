@@ -1,4 +1,4 @@
-package com.example.thelibrary.activities;
+package com.example.thelibrary.activities.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class OrderListAdapter extends ArrayAdapter<String> implements CompoundButton.OnCheckedChangeListener {
-    SparseBooleanArray mCheckStates;
+    public SparseBooleanArray mCheckStates;
     Context context;
     ArrayList<String> books;
     int layoutResourceId;

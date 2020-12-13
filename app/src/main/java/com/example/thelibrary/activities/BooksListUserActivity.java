@@ -6,6 +6,7 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.BookUserAdapter;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 import com.google.firebase.database.DataSnapshot;

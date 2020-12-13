@@ -1,4 +1,4 @@
-package com.example.thelibrary.activities;
+package com.example.thelibrary.activities.adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.BookDetailsActivity;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
@@ -134,7 +135,7 @@ public class BookAdminAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                Intent bookDetails = new Intent(activity, MenuUserActivity.class); //#########CHANGE TO DETAILS##########
+                Intent bookDetails = new Intent(activity, BookDetailsActivity.class);
                 bookDetails.putExtra("bookID", bookID);
                 activity.startActivity(bookDetails);
             }

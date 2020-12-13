@@ -1,4 +1,4 @@
-package com.example.thelibrary.activities;
+package com.example.thelibrary.activities.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.BookDetailsActivity;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
@@ -24,12 +25,6 @@ public class BookUserAdapter extends BaseAdapter {
     ArrayList<BookObj> books;
     AppCompatActivity activity;
 
-
-    //    public bookAdapter(Context context, ArrayList<BookObj> books) {
-//        super(context, R.layout.singke_book_line, R.id.singleName ,R.id.addBookToOrder, books);
-//        this.context = context;
-//        this.books = books;
-//    }
     public BookUserAdapter(AppCompatActivity activity, Context context, ArrayList<BookObj> books) {
         super();
         this.context = context;
@@ -101,7 +96,7 @@ public class BookUserAdapter extends BaseAdapter {
 
             @Override
             public void onClick(View v) {
-                Intent bookDetails = new Intent(activity, MenuUserActivity.class); //#########CHANGE TO DETAILS##########
+                Intent bookDetails = new Intent(activity, BookDetailsActivity.class);
                 bookDetails.putExtra("bookID", bookID);
                 activity.startActivity(bookDetails);
             }

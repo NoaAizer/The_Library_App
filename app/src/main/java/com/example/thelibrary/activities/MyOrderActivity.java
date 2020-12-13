@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.OrderListAdapter;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
 import com.google.firebase.auth.FirebaseAuth;

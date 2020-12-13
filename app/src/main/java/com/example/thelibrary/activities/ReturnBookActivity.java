@@ -1,4 +1,4 @@
-package com.example.thelibrary;
+package com.example.thelibrary.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.thelibrary.activities.ReturnListAdapter;
+import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.ReturnListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

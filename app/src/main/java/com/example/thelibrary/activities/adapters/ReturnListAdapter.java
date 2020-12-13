@@ -1,4 +1,4 @@
-package com.example.thelibrary.activities;
+package com.example.thelibrary.activities.adapters;
 
 import android.content.Context;
 import android.util.Pair;

@@ -1,6 +1,5 @@
 package com.example.thelibrary.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -56,8 +55,7 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
 
     public void onClick(View v) {
         if (v == back) {
-            Intent intent = new Intent(UserDetailsActivity.this, MenuUserActivity.class);
-            startActivity(intent);
+            finish();
         }
     }
 }
