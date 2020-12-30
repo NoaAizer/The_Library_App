@@ -40,7 +40,9 @@ public class ListOfBorrowedBooksActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                     for (DataSnapshot bookSnapshot : userSnapshot.child("listOfBooks").getChildren()) {
-                        bookList.add(new Pair(userSnapshot.getKey(), bookSnapshot.getValue(String.class)));
+                        if(userSnapshot.child("arrivedToUser").getValue().equals(true)) {
+                            bookList.add(new Pair(userSnapshot.getKey(), bookSnapshot.getValue(String.class)));
+                        }
                     }
 
                 }

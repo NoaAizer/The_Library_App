@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class MenuAdminActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loansList_btn, booksList_btn, returnBook_btn, clientsList_btn, add_btn, finishOrder_btn;
+    private Button loansList_btn, booksList_btn, returnBook_btn, clientsList_btn, add_btn, finishOrder_btn, laterList_btn;
     private boolean hasOrder = false;
 
     @Override
@@ -39,6 +39,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         clientsList_btn = (Button) findViewById(R.id.clientsList);
         add_btn = (Button) findViewById(R.id.adding);
         finishOrder_btn = (Button) findViewById(R.id.ordersCompletes);
+        laterList_btn = (Button) findViewById(R.id.laterList);
 
 
         loansList_btn.setOnClickListener(this);
@@ -47,6 +48,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         clientsList_btn.setOnClickListener(this);
         add_btn.setOnClickListener(this);
         finishOrder_btn.setOnClickListener(this);
+        laterList_btn.setOnClickListener(this);
 
     }
 
@@ -57,6 +59,11 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         }
         if (v == booksList_btn) {
             Intent intent = new Intent(MenuAdminActivity.this, BooksListAdminActivity.class);
+            startActivity(intent);
+
+        }
+        if (v == laterList_btn) {
+            Intent intent = new Intent(MenuAdminActivity.this, listOfLateActivity.class);
             startActivity(intent);
 
         }

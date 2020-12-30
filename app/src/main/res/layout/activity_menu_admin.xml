@@ -46,14 +46,24 @@
         app:layout_constraintTop_toBottomOf="@+id/booksList" />
 
     <Button
+        android:id="@+id/laterList"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="56dp"
+        android:text="רשימת מאחרים"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clientsList" />
+
+    <Button
         android:id="@+id/loansList"
         android:layout_width="253dp"
         android:layout_height="42dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת הזמנות לטיפול"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clientsList" />
+        app:layout_constraintTop_toBottomOf="@+id/laterList" />
 
     <Button
         android:id="@+id/booksList"
