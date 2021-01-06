@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.SearchResultActivity">
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="182dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:text="תוצאות חיפוש"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/resultList"
+        android:layout_width="349dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="37dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchInfo"
+        app:layout_constraintVertical_bias="0.796" />
+
+    <TextView
+        android:id="@+id/hed"
+        android:layout_width="56dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="37dp"
+        android:text="עבור: "
+        android:textColor="#040A0B"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/resultList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/searchInfo"
+        android:layout_width="270dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginBottom="34dp"
+        android:textColor="#040A0B"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/resultList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

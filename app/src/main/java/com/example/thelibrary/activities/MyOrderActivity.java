@@ -144,8 +144,8 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
                     bookList = orderList;
                     LocalDate today = LocalDate.now(); // update the order date.
-                    String endOfOrder = today.plusDays(30).toString();
-                    new FireBaseDBOrder().addOrderToDB(bookList, userTZ, userID, type, endOfOrder);
+                    LocalDate endOfOrder = today.plusDays(30);
+                    new FireBaseDBOrder().addOrderToDB(bookList, userTZ, userID, type, endOfOrder.toString());
                     // Delete books from shopping list
                     new FireBaseDBShoppingList().clearShopListDB(shopID);
                     //updates amount of books to user

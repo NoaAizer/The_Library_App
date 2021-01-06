@@ -4,6 +4,43 @@ import java.io.Serializable;
 
 public class BookObj implements Serializable
 {
+    public enum Genre {
+        HINT("ז'אנר"),
+        ENUM1("מתח"),
+        ENUM2("דרמה"),
+        ENUM3("נוער"),
+        ENUM4("קומדיה"),
+        ENUM5("ילדים"),
+        ENUM6("רומן"),
+        ENUM7("ביוגרפיה"),
+        ENUM8("עיון"),
+        ENUM9("מדע בדיוני");
+        private String friendlyName;
+
+        private Genre(String friendlyName){
+            this.friendlyName = friendlyName;
+        }
+
+        @Override public String toString(){
+            return friendlyName;
+        }
+    }
+    public enum Lang {
+        HINT("שפה"),
+        ENUM1("עברית"),
+        ENUM2("אנגלית"),
+        ENUM3("צרפתית"),
+        ENUM4("רוסית");
+        private String friendlyName;
+
+        private Lang(String friendlyName){
+            this.friendlyName = friendlyName;
+        }
+
+        @Override public String toString(){
+            return friendlyName;
+        }
+    }
     public String name;
     public String author;
     public String brief;
@@ -37,9 +74,7 @@ public class BookObj implements Serializable
     public String getbrief() {
         return brief;
     }
-    public String getgenre() {
-        return genre;
-    }
+    public String getgenre() { return genre; }
     public String getlanguage() {
         return language;
     }

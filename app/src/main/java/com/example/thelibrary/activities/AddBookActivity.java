@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +18,9 @@ import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 
 public class AddBookActivity extends AppCompatActivity {
 
-    private EditText authorEditText, briefEditText, genreEditText, languageEditText, publishing_yearEditText, nameEditText, amountEditText;
+    private EditText authorEditText, briefEditText, publishing_yearEditText, nameEditText, amountEditText;
     private Button add_btn;
-    private BookObj book;
+    private Spinner genreSpinner, languageSpinner;
     FireBaseDBBook fbb = new FireBaseDBBook();
     private static final String TAG = "AddBook";
     @Override
@@ -29,8 +31,10 @@ public class AddBookActivity extends AppCompatActivity {
         nameEditText = (EditText) findViewById(R.id.BookName);
         authorEditText = (EditText) findViewById(R.id.Author);
         briefEditText = (EditText) findViewById(R.id.Brief);
-        genreEditText = (EditText) findViewById(R.id.Genre);
-        languageEditText = (EditText) findViewById(R.id.Language);
+        genreSpinner = findViewById(R.id.Genre);
+        genreSpinner.setAdapter(new ArrayAdapter<BookObj.Genre>(this, android.R.layout.simple_spinner_item, BookObj.Genre.values()));;
+        languageSpinner = findViewById(R.id.Language);
+        languageSpinner.setAdapter(new ArrayAdapter<BookObj.Lang>(this, android.R.layout.simple_spinner_item, BookObj.Lang.values()));;
         publishing_yearEditText = (EditText) findViewById(R.id.Publishing_year);
         amountEditText = (EditText) findViewById(R.id.amount);
 
@@ -42,10 +46,21 @@ public class AddBookActivity extends AppCompatActivity {
                     String bookName = nameEditText.getText().toString().trim();
                     String author = authorEditText.getText().toString().trim();
                     String brief = briefEditText.getText().toString().trim();
-                    String genre = genreEditText.getText().toString().trim();
-                    String language = languageEditText.getText().toString().trim();
+                    String genre = genreSpinner.getSelectedItem().toString().trim();
+                    String language = languageSpinner.getSelectedItem().toString().trim();
                     String publishing_year = publishing_yearEditText.getText().toString().trim();
                     int amount = Integer.parseInt(amountEditText.getText().toString().trim());
+
+                    if (genre.equals("ז'אנר")){
+                        Toast.makeText(getApplicationContext(), "בחר ז'אנר מהרשימה", Toast.LENGTH_LONG).show();
+                        return;
+
+                    }
+                    if (language.equals("שפה")){
+                        Toast.makeText(getApplicationContext(), "בחר שפה מהרשימה", Toast.LENGTH_LONG).show();
+                        return;
+
+                    }
 
                     if (TextUtils.isEmpty(bookName) || TextUtils.isEmpty(author) ||
                             TextUtils.isEmpty(brief)||TextUtils.isEmpty(genre)||

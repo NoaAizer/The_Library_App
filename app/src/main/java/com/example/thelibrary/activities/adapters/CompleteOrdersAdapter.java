@@ -58,7 +58,7 @@ public class CompleteOrdersAdapter extends BaseAdapter {
 
 
         // Set the title and button name
-        orderDateTextView.append(order.getEndOfOrder());
+        orderDateTextView.append(order.getEndOfOrder().toString());
         orderTypeTextView.append(order.getCollect());
         orderIDTextView.append(orderID);
         userIDTextView.append(order.getUserTZ());

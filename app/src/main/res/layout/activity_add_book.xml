@@ -23,16 +23,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Spinner
         android:id="@+id/Language"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="408dp"
         android:layout_marginEnd="24dp"
         android:hint="שפה"
-        android:inputType="textShortMessage|textAutoCorrect"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -103,17 +101,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <Spinner
         android:id="@+id/Genre"
-        style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="328dp"
         android:layout_marginEnd="24dp"
-        android:hint="ז'אנר"
-        android:inputType="textShortMessage"
+        android:prompt="@string/genre"
         android:selectAllOnFocus="true"
+        android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

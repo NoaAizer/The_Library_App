@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBUser;
@@ -20,38 +19,38 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class MenuUserActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loan_btn,myDetails_btn,myBooks_btn, searchBook_btn;
+    private Button loan_btn, myDetails_btn, myBooks_btn, searchBook_btn;
     private TextView hello;
-    private ExtendedFloatingActionButton editBooks_btn ,labInf_btn;
+    private ExtendedFloatingActionButton editBooks_btn, labInf_btn;
     FireBaseDBUser fu = new FireBaseDBUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_user);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
-        loan_btn = (Button)findViewById(R.id.checkALoan);
-        myDetails_btn = (Button)findViewById(R.id.userDetails);
-        myBooks_btn = (Button)findViewById(R.id.myBooks);
-        searchBook_btn = (Button)findViewById(R.id.searchAbook);
+        loan_btn = (Button) findViewById(R.id.checkALoan);
+        myDetails_btn = (Button) findViewById(R.id.userDetails);
+        myBooks_btn = (Button) findViewById(R.id.myBooks);
+        searchBook_btn = (Button) findViewById(R.id.searchAbook);
         editBooks_btn = (ExtendedFloatingActionButton) findViewById(R.id.editBooks);
         labInf_btn = (ExtendedFloatingActionButton) findViewById(R.id.information);
-
         hello = (TextView) findViewById(R.id.hello);
-        FirebaseUser user  =FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference userRef = fu.getUserFromDB(user.getUid());
         userRef.child("firstName").addListenerForSingleValueEvent(new ValueEventListener() {
-          @Override
-          public void onDataChange(DataSnapshot dataSnapshot) {
-              String name = dataSnapshot.getValue(String.class);
-              hello.append(name + ",");
-          }
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.getValue(String.class);
+                hello.append(name + ",");
+            }
 
-          @Override
-          public void onCancelled(DatabaseError databaseError) {
-          }
-      });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
 
         loan_btn.setOnClickListener(this);
         myDetails_btn.setOnClickListener(this);
@@ -59,36 +58,38 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
         searchBook_btn.setOnClickListener(this);
         editBooks_btn.setOnClickListener(this);
         labInf_btn.setOnClickListener(this); //library information
+
     }
+
     public void onClick(View v) {
-        if(v==loan_btn){
+        if (v == loan_btn) {
 
         }
 
-        if(v==myDetails_btn){
+        if (v == myDetails_btn) {
             Intent intent = new Intent(MenuUserActivity.this, UserDetailsActivity.class);
             startActivity(intent);
 
         }
-        if(v==myBooks_btn){
+        if (v == myBooks_btn) {
             Intent intent = new Intent(MenuUserActivity.this, ListOfBorrowedBooksActivity.class);
             startActivity(intent);
         }
-        if(v==searchBook_btn){
-            Intent intent = new Intent(MenuUserActivity.this, BooksListUserActivity.class);
+        if (v == searchBook_btn) {
+            Intent intent = new Intent(MenuUserActivity.this, SearchBookActivity.class);
             startActivity(intent);
 
         }
-        if(v==labInf_btn){
+        if (v == labInf_btn) {
+            Intent intent = new Intent(MenuUserActivity.this, LocationActivity.class);
+            startActivity(intent);
 
         }
-        if(v==editBooks_btn){
+        if (v == editBooks_btn) {
             Intent intent = new Intent(MenuUserActivity.this, MyOrderActivity.class);
             startActivity(intent);
 
         }
+
     }
-
-
-
 }

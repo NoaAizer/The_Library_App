@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,12 +22,14 @@ import com.example.thelibrary.fireBase.model.mAuthUser;
 public class LoginUserActivity extends AppCompatActivity implements View.OnClickListener  {
     private EditText emailEditText, passwordEditText;
     private Button register_now_btn, login, reset_pass_btn;
+    private ProgressBar loading;
     mAuthUser auth = new mAuthUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
+        loading  = (ProgressBar) findViewById(R.id.loading);
         register_now_btn = findViewById(R.id.registUser);
         login = findViewById(R.id.login);
         reset_pass_btn = findViewById(R.id.resetPassword);
@@ -52,6 +55,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
             } else {
                 auth.validationUser(email, password,LoginUserActivity.this);
             }
+            loading.setVisibility(View.VISIBLE);
 
         }
             if (v == register_now_btn) {
