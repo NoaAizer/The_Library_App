@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +34,15 @@ public class listOfLateActivity extends AppCompatActivity {
             ListView list = (ListView) findViewById(R.id.listLate);
             String orderID, userID, fName, lName, phone;
             String endDate;
+            boolean exist = false;
 
             @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
                     for (DataSnapshot orderSnapshot : dataSnapshot.child("orders").getChildren()) {
                         if (orderSnapshot.child("arrivedToUser").getValue().equals(true)) {
+                            exist = true;
                             endDate = orderSnapshot.child("endOfOrder").getValue(String.class);
                             String today = LocalDate.now().toString();
                             SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
@@ -51,10 +55,15 @@ public class listOfLateActivity extends AppCompatActivity {
                                 fName = userSnapshot.child("firstName").getValue(String.class);
                                 lName = userSnapshot.child("lastName").getValue(String.class);
                                 phone = userSnapshot.child("phone").getValue(String.class);
-                                adapter.add(orderID + "\n" + fName + ", " + lName + ", " + phone + "\n" + endDate);
+                                adapter.add("order num: " +orderID + "\nname: " + fName + " " + lName + "\nphone: " + phone + "\nend: " + endDate);
                             }
                         }
                     }
+                    if (!exist) {
+                        Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
                     list.setAdapter(adapter);
                 }
                 catch(Exception e) {}

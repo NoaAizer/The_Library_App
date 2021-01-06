@@ -63,7 +63,8 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
 
     public void onClick(View v) {
         if (v == loan_btn) {
-
+            Intent intent = new Intent(MenuUserActivity.this, orderTrackingActivity.class);
+            startActivity(intent);
         }
 
         if (v == myDetails_btn) {

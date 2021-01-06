@@ -6,4 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".activities.orderTrackingActivity">
 
+    <TextView
+        android:id="@+id/track"
+        android:layout_width="279dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:text="מעקב אחר הזמנה"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/trackList"
+        android:layout_width="317dp"
+        android:layout_height="565dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="28dp"
+        android:divider="#0000CC"
+        android:dividerHeight="0.1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/track"></ListView>
 </androidx.constraintlayout.widget.ConstraintLayout>
