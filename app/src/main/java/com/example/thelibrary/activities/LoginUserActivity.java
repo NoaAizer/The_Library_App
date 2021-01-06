@@ -42,6 +42,12 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    protected void onPause() {
+        super.onPause();
+        loading.setVisibility(View.INVISIBLE);
+
+    }
+
     public void onClick(View v) {
         if (v == login) {
             String email = emailEditText.getText().toString();
@@ -54,8 +60,9 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
                 passwordEditText.setError("Password is required");
             } else {
                 auth.validationUser(email, password,LoginUserActivity.this);
+                loading.setVisibility(View.VISIBLE);
             }
-            loading.setVisibility(View.VISIBLE);
+
 
         }
             if (v == register_now_btn) {

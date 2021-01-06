@@ -36,10 +36,11 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
 
 
-    ArrayList<String> orderList,notChecked, bookList=new ArrayList<>();
-    int amountOfBooksRemains;
-    String userTZ, userID, shopID,type = "";
-    OrderListAdapter orderAdapter;
+    static ArrayList<String> orderList,notChecked, bookList=new ArrayList<>();
+    static int amountOfBooksRemains;
+    static String userTZ, userID, shopID,type = "";
+    static OrderListAdapter orderAdapter;
+    static LocalDate endOfOrder;
     ListView orderListView;
 
 
@@ -121,37 +122,36 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 return;
             } else {
                 if (!type.equals("")) {
-                    Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
-
-                    //update the amount in stock of the books that haven't taken after finish order
-                    for (int i = 0; i < orderAdapter.mCheckStates.size(); i++) {
-                        if (notChecked.contains(bookList.get(i))) {
-                            String bookID = bookList.get(i);
-                            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-                            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(DataSnapshot dataSnapshot) {
-                                    int amount = dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class).intValue();//UPDATE AMOUNT
-                                    myRef.child("books").child(bookID).child("amount").setValue((amount) + 1);
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                }
-                            });
-                        }
+                    endOfOrder= LocalDate.now().plusDays(30);
+                    if(type.equals("איסוף עצמי")) {
+                        finishOrder();
+                        Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
+                        Intent orIntnet = new Intent(MyOrderActivity.this, MenuUserActivity.class);
+                        startActivity(orIntnet);
                     }
+                    else if(type.equals("משלוח")) {
+                        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyOrderActivity.this);
+                        alertDialog.setTitle("השלמת הזמנה");
+                        alertDialog.setMessage("הנך מועבר לתשלום בסך ₪20 עבור המשלוח ");
+                        alertDialog.setPositiveButton("המשך",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Intent payintent = new Intent(MyOrderActivity.this, CreditCardActivity.class);
+                                        payintent.putExtra("amount",20.0);
+                                        payintent.putExtra("type", "order");
+                                        startActivity(payintent);
+                                    }
 
-                    bookList = orderList;
-                    LocalDate today = LocalDate.now(); // update the order date.
-                    LocalDate endOfOrder = today.plusDays(30);
-                    new FireBaseDBOrder().addOrderToDB(bookList, userTZ, userID, type, endOfOrder.toString());
-                    // Delete books from shopping list
-                    new FireBaseDBShoppingList().clearShopListDB(shopID);
-                    //updates amount of books to user
-                    FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains - bookList.size());
-                    Intent intent = new Intent(MyOrderActivity.this, MenuUserActivity.class);
-                    startActivity(intent);
+                                });
+                        alertDialog.setNegativeButton("ביטול",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        alertDialog.show();
+                    }
+                 //   finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "בחר צורת משלוח", Toast.LENGTH_LONG).show();
                     return;
@@ -162,8 +162,6 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyOrderActivity.this);
             alertDialog.setTitle("CANCEL ORDER");
             alertDialog.setMessage("האם ברצונך לבטל את ההזמנה ולהסיר את כל הספרים מהסל?");
-
-
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.MATCH_PARENT);
@@ -201,6 +199,36 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
             alertDialog.show();
 
         }
+    }
+
+    public static void finishOrder( ){
+        //update the amount in stock of the books that haven't taken after finish order
+        for (int i = 0; i < orderAdapter.mCheckStates.size(); i++) {
+            if (notChecked.contains(bookList.get(i))) {
+                String bookID = bookList.get(i);
+                DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        int amount = dataSnapshot.child("books").child(bookID).child("amount").getValue(Long.class).intValue();//UPDATE AMOUNT
+                        myRef.child("books").child(bookID).child("amount").setValue((amount) + 1);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+            }
+        }
+
+        bookList = orderList;
+//        LocalDate today = LocalDate.now(); // update the order date.
+//        LocalDate endOfOrder = today.plusDays(30);
+        new FireBaseDBOrder().addOrderToDB(bookList, userTZ, userID, type, endOfOrder.toString());
+        // Delete books from shopping list
+        new FireBaseDBShoppingList().clearShopListDB(shopID);
+        //updates amount of books to user
+        FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains - bookList.size());
     }
 
 }

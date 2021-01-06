@@ -1,5 +1,8 @@
 package com.example.thelibrary.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -12,15 +15,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.example.thelibrary.fireBase.model.mAuthUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class RegisterUserActivity extends AppCompatActivity {
 
     private EditText tzEditText, firstNameEditText, lastNameEditText, addressEditText, phoneEditText, emailEditText, passwordEditText;
     private Button register;
     private Spinner subscriptionSpinner;
+    ArrayList<String> tzUsers = new ArrayList<>();
     mAuthUser auth = new mAuthUser();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +48,8 @@ public class RegisterUserActivity extends AppCompatActivity {
                 {"בסיסי: 2 ספרים- 20 שח", "מורחב: 5 ספרים- 45 שח", "משפחתי: 10 ספרים- 80 שח"});
         subscriptionSpinner.setAdapter(adapterSub);
 
+        getTZlist();
+
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,49 +62,98 @@ public class RegisterUserActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
                 String subscription = subscriptionSpinner.getSelectedItem().toString().trim().split(":")[0];
-
+                Double amountToPay = Double.parseDouble(subscriptionSpinner.getSelectedItem().toString().trim().split(" ")[3]);
+                String subType= subscriptionSpinner.getSelectedItem().toString().trim().split("-")[0];
                 if (tz.isEmpty()) {
-                    tzEditText.setError("Teudat Zehut is required");
+                    tzEditText.setError("שדה חובה");
                 }
                 if (fName.isEmpty()) {
-                    firstNameEditText.setError("First Name is required");
+                    firstNameEditText.setError("שדה חובה");
                 }
                 if (lName.isEmpty()) {
-                    lastNameEditText.setError("Last Name is required");
+                    lastNameEditText.setError("שדה חובה");
                 }
                 if (address.isEmpty()) {
-                    addressEditText.setError("Address is required");
+                    addressEditText.setError("שדה חובה");
                 }
                 if (email.isEmpty()) {
-                    emailEditText.setError("Email is required");
+                    emailEditText.setError("שדה חובה");
                 }
                 if (password.isEmpty()) {
-                    passwordEditText.setError("Password is required");
+                    passwordEditText.setError("שדה חובה");
+                }
+                if (phone.isEmpty()) {
+                    phoneEditText.setError("שדה חובה");
                 }
                 if (subscription.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Subscription Type is required", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "חובה לבחור סוג מנוי", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (phone == null || !Patterns.PHONE.matcher(phone).matches() || phone.length() < 9 || phone.length() > 13) {
-                    Toast.makeText(getApplicationContext(), "Invalid phone", Toast.LENGTH_LONG).show();
+                    phoneEditText.setError("מספר נייד לא חוקי");
                     return;
                 }
                 if (email == null || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    Toast.makeText(getApplicationContext(), "Invalid email", Toast.LENGTH_LONG).show();
+                    emailEditText.setError("כתובת מייל לא חוקית");
                     return;
                 }
                 if (password == null || password.trim().length() <= 5) {
-                    Toast.makeText(getApplicationContext(), "Password length must be at least 6", Toast.LENGTH_LONG).show();
-                    return;
+                    passwordEditText.setError("סיסמה חייבת להכיל לפחוץ 6 תווים");
                 }
                 if (tz == null || tz.trim().length() != 9) {
-                    Toast.makeText(getApplicationContext(), "Invalid Teudat Zehut", Toast.LENGTH_LONG).show();
+                    tzEditText.setError("תז לא חוקית");
                     return;
                 }
-                auth.registerUserToDB(tz, fName, lName, email, password, address, phone, subscription, RegisterUserActivity.this);
+                if (tzUsers.contains(tz)) {
+                    tzEditText.setError("קיים מנוי עבור תעודת זהות זו");
+                    return;
+                }
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(RegisterUserActivity.this);
+                alertDialog.setTitle("השלמת הרשמה");
+                alertDialog.setMessage("הנך מועבר לתשלום בסך "+amountToPay+" ₪"+"\n"
+                +"עבור מנוי "+subType+"\n"
+                +"לצורך השלמת ההרשמה");
+                alertDialog.setPositiveButton("המשך",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(RegisterUserActivity.this, CreditCardActivity.class);
+                                intent.putExtra("amount",amountToPay);
+                                intent.putExtra("type","register");
+                                auth.activity= RegisterUserActivity.this;
+                                intent.putExtra("tz",tz);
+                                intent.putExtra("fName",fName);
+                                intent.putExtra("lName",lName);
+                                intent.putExtra("phone",phone);
+                                intent.putExtra("address",address);
+                                intent.putExtra("email",email);
+                                intent.putExtra("password",password);
+                                intent.putExtra("sub",subscription);
+                                startActivity(intent);
+                                }
+
+                            });
+                alertDialog.setNegativeButton("ביטול",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                alertDialog.show();
             }
         });
 
     }//onCreate
-
+ private void getTZlist(){
+     new FireBaseDBUser().getUsersListRef().addListenerForSingleValueEvent(new ValueEventListener() {
+         @Override
+         public void onDataChange(DataSnapshot dataSnapshot) {
+             for (DataSnapshot data : dataSnapshot.getChildren()) {
+                   tzUsers.add(data.child("tz").getValue(String.class));
+             }
+         }
+         @Override
+         public void onCancelled(DatabaseError databaseError) {
+         }
+     });
+ }
 }

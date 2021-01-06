@@ -3,6 +3,8 @@ package com.example.thelibrary.activities;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +25,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchResultActivity extends AppCompatActivity {
+public class SearchResultActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     ArrayList<BookObj> books = new ArrayList<>();
     private TextView searchInfo;
+    private CheckBox inStock;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -33,160 +36,56 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
 
+        inStock = (CheckBox) findViewById(R.id.inStockCheck);
+        inStock.setOnCheckedChangeListener(this);
         searchInfo = (TextView) findViewById(R.id.searchInfo);
         Map<String,String> search= new HashMap<>();
         Intent intent = getIntent();
 
-        String lan = intent.getExtras().getString("language");
-        if(intent.getExtras().getString("language")!=null) search.put("language",lan);
-        String gen = intent.getExtras().getString("genre");
-        if(gen!=null) search.put("genre",gen);
-        String auth = intent.getExtras().getString("author");
-        if(auth!=null) search.put("author",auth);
-        String name =intent.getExtras().getString("bookName");
-        if(name!=null) search.put("name",name);
+        Boolean allBooks =  intent.getExtras().getBoolean("allBooks");
+        if (!allBooks) {
+            String lan = intent.getExtras().getString("language");
+            if (intent.getExtras().getString("language") != null) search.put("language", lan);
+            String gen = intent.getExtras().getString("genre");
+            if (gen != null) search.put("genre", gen);
+            String auth = intent.getExtras().getString("author");
+            if (auth != null) search.put("author", auth);
+            String name = intent.getExtras().getString("bookName");
+            if (name != null) search.put("name", name);
 
-//
-//        String [] search = {name, auth, gen, lan};
-//        for(int i=0; i<search.length; i++)
-//        {
-//            if(search[i] != null)
-//            {
-//                if(first)
-//                {
-//                    searchInfo.append(search[i]);
-//                    first=false;
-//                }
-//                else searchInfo.append(", "+search[i]);
-//            }
-//        }
-        boolean first=true;
-        for(String category : search.values()){
-            if(first){
-                searchInfo.append(category);
-                first=false;
+            boolean first = true;
+            for (String category : search.values()) {
+                if (first) {
+                    searchInfo.append(category);
+                    first = false;
+                } else searchInfo.append(", " + category);
+
             }
-            else  searchInfo.append(", "+category);
-
         }
-
-
-
-//        if(name != null && auth == null && gen == null && lan == null)
-//            searchInfo.append(name);
-//        else if(name == null && auth != null && gen == null && lan == null)
-//            searchInfo.append(auth);
-//        else if(name == null && auth == null && gen != null && lan == null)
-//            searchInfo.append(gen);
-//        else if(name == null && auth == null && gen == null && lan != null)
-//            searchInfo.append(lan);
-//        else if(name != null && auth != null && gen == null && lan == null)
-//            searchInfo.append(name + ", " + auth);
-//        else if(name != null && auth == null && gen != null && lan == null)
-//            searchInfo.append(name + ", " + gen);
-//        else if(name != null && auth == null && gen == null && lan != null)
-//            searchInfo.append(name + ", " + lan);
-//        else if(name == null && auth != null && gen != null && lan == null)
-//            searchInfo.append(auth + ", " + gen);
-//        else if(name == null && auth != null && gen == null && lan != null)
-//            searchInfo.append(auth + ", " + lan);
-//        else if(name == null && auth == null && gen != null && lan != null)
-//            searchInfo.append(gen + ", " + lan);
-//        else if(name != null && auth != null && gen != null && lan == null)
-//            searchInfo.append(name + ", " + auth + ", " + gen);
-//        else if(name != null && auth != null && gen == null && lan != null)
-//            searchInfo.append(name + ", " + auth + ", " + lan);
-//        else if(name != null && auth == null && gen != null && lan != null)
-//            searchInfo.append(name + ", " + gen +" , " + lan);
-//        else if(name == null && auth != null && gen != null && lan != null)
-//            searchInfo.append(auth + " , " +gen + ", " + lan);
-//        else if(name != null && auth != null && gen != null && lan != null)
-//            searchInfo.append(name + " , " + auth + " , " +gen + ", " + lan);
-
-
         DatabaseReference booksRef = new FireBaseDBBook().getBookListRef();
         booksRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                if(allBooks)
+                {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        books.add(data.getValue(BookObj.class));
+                    }
+                }
+                else {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
 
-                    int counter=0;
-                    for(String category : search.keySet()){
-                       if (data.child(category).getValue().toString().contains(search.get(category))){
+                        int counter = 0;
+                        for (String category : search.keySet()) {
+                            if (data.child(category).getValue().toString().contains(search.get(category))) {
                                 counter++;
                                 if (counter == search.size())
                                     books.add(data.getValue(BookObj.class));
                             }
+                        }
+
+
                     }
-//                    if(name != null && auth == null && gen == null && lan == null) {
-//                        Toast.makeText(getApplicationContext(), data.child("name").getValue().toString(), Toast.LENGTH_LONG).show();
-//                        if (data.child("name").getValue().toString().contains(name))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth != null && gen == null && lan == null) {
-//                        if (data.child("author").getValue().toString().contains(auth))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth == null && gen != null && lan == null) {
-//                        if (data.child("genre").getValue().equals(gen))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth == null && gen == null && lan != null) {
-//                        if (data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth != null && gen == null && lan == null) {
-//                        if (data.child("name").getValue().toString().contains(name)&& data.child("author").getValue().toString().contains(auth))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth == null && gen != null && lan == null){
-//                        if (data.child("name").getValue().toString().contains(name)&& data.child("genre").getValue().equals(gen))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth == null && gen == null && lan != null){
-//                        if (data.child("name").getValue().toString().contains(name)&& data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth != null && gen != null && lan == null){
-//                        if (data.child("author").getValue().toString().contains(auth)&& data.child("genre").getValue().equals(gen))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth != null && gen == null && lan != null){
-//                        if (data.child("author").getValue().toString().contains(auth)&& data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth == null && gen != null && lan != null){
-//                        if (data.child("genre").getValue().equals(gen)&& data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth != null && gen != null && lan == null){
-//                        if (data.child("name").getValue().toString().contains(name)&& data.child("author").getValue().toString().contains(auth)&&
-//                                data.child("genre").getValue().equals(gen))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth != null && gen == null && lan != null){
-//                        if (data.child("name").getValue().toString().contains(name)&& data.child("author").getValue().toString().contains(auth)&&
-//                                data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth == null && gen != null && lan != null){
-//                        if (data.child("name").getValue().toString().contains(name)&& data.child("genre").getValue().equals(gen)&&
-//                                data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name == null && auth != null && gen != null && lan != null){
-//                        if (data.child("author").getValue().toString().contains(auth)&& data.child("genre").getValue().equals(gen)&&
-//                                data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-//                    else if(name != null && auth != null && gen != null && lan != null){
-//                        if (data.child("name").getValue().toString().contains(name)&&data.child("author").getValue().toString().contains(auth)&&
-//                                data.child("genre").getValue().equals(gen)&&
-//                                data.child("language").getValue().equals(lan))
-//                            books.add(data.getValue(BookObj.class));
-//                    }
-
-
                 }
                 if (books == null || books.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "אין ספרים להצגה", Toast.LENGTH_LONG).show();
@@ -205,5 +104,32 @@ public class SearchResultActivity extends AppCompatActivity {
         // Initialize adapter and set adapter to list view
         BookUserAdapter bookAd = new BookUserAdapter(this, SearchResultActivity.this, books);
         lvBook.setAdapter(bookAd);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        ArrayList<BookObj> filtered = new ArrayList<>();
+            if(inStock.isChecked()) {
+                for (BookObj b : books)
+                    if (b.getAmount() != 0)
+                        filtered.add(b);
+
+                ListView flvBook = findViewById(R.id.resultList);
+
+                // Initialize adapter and set adapter to list view
+                BookUserAdapter fbookAd = new BookUserAdapter(this, SearchResultActivity.this, filtered);
+                flvBook.setAdapter(fbookAd);
+            }
+        else{
+            ListView lvBook = findViewById(R.id.resultList);
+
+            // Initialize adapter and set adapter to list view
+            BookUserAdapter bookAd = new BookUserAdapter(this, SearchResultActivity.this, books);
+            lvBook.setAdapter(bookAd);
+        }
+
+
+
+
     }
 }
