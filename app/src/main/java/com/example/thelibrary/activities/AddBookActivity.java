@@ -49,8 +49,14 @@ public class AddBookActivity extends AppCompatActivity {
                     String genre = genreSpinner.getSelectedItem().toString().trim();
                     String language = languageSpinner.getSelectedItem().toString().trim();
                     String publishing_year = publishing_yearEditText.getText().toString().trim();
-                    int amount = Integer.parseInt(amountEditText.getText().toString().trim());
+                    int amount=0;
 
+                    if (amountEditText.getText().toString().trim().isEmpty()){
+                        amountEditText.setError("בחר כמות  רצויה");
+                        return;
+                    }
+                    else
+                        amount =  Integer.parseInt(amountEditText.getText().toString().trim());
                     if (genre.equals("ז'אנר")){
                         Toast.makeText(getApplicationContext(), "בחר ז'אנר מהרשימה", Toast.LENGTH_LONG).show();
                         return;
@@ -64,7 +70,7 @@ public class AddBookActivity extends AppCompatActivity {
 
                     if (TextUtils.isEmpty(bookName) || TextUtils.isEmpty(author) ||
                             TextUtils.isEmpty(brief)||TextUtils.isEmpty(genre)||
-                            TextUtils.isEmpty(language)||TextUtils.isEmpty(publishing_year)) {
+                            TextUtils.isEmpty(language)||TextUtils.isEmpty(publishing_year)||amount==0) {
                         Toast.makeText(getApplicationContext(), "One of the fields is missing", Toast.LENGTH_LONG).show();
                         return;
                     }

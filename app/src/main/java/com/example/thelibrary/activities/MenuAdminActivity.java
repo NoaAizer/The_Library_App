@@ -14,7 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
@@ -31,8 +30,8 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_admin);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         loansList_btn = (Button) findViewById(R.id.loansList);
         booksList_btn = (Button) findViewById(R.id.booksList);
         returnBook_btn = (Button) findViewById(R.id.returnBook);
