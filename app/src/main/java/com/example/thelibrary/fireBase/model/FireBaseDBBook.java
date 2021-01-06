@@ -9,13 +9,13 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 public class FireBaseDBBook extends FireBaseModel {
-    public void addBookToDB(String bookName, String author, String brief, String genre, String language, String publishing_year, int amount, AppCompatActivity activity){
+    public void addBookToDB(String bookName, String author, String brief, String genre, String language, String publishing_year, int amount,String imageURL, AppCompatActivity activity){
 
-        writeNewBook(bookName, author, brief, genre, language, publishing_year, amount, activity);
+        writeNewBook(bookName, author, brief, genre, language, publishing_year, amount,imageURL, activity);
     }
 
-    public void writeNewBook(String bookName,String author,String brief,String genre,String language, String publishing_year, int amount,AppCompatActivity activity){
-        BookObj book = new BookObj(bookName, author, brief, genre, language, publishing_year,amount);
+    public void writeNewBook(String bookName,String author,String brief,String genre,String language, String publishing_year, int amount,String imageURL,AppCompatActivity activity){
+        BookObj book = new BookObj(bookName, author, brief, genre, language, publishing_year,amount, imageURL);
         myRef=myRef.child("books");
         String keyId= myRef.push().getKey();
         book.setId(keyId);

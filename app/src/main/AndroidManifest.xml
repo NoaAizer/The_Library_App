@@ -40,9 +40,14 @@
             android:name=".activities.RegisterUserActivity"
             android:label="@string/title_activity_register"
             android:theme="@style/Theme.TheLibrary.NoActionBar" />
-        <activity android:name=".activities.AddBookActivity" />
+        <activity
+            android:name=".activities.AddBookActivity"
+            android:exported="true">
+    </activity>
+
         <activity android:name=".activities.LoginUserActivity" />
         <activity android:name=".activities.MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
