@@ -19,7 +19,6 @@ public class SearchBookActivity extends AppCompatActivity {
     private EditText authorEditText, nameEditText;
     private Button search_btn;
     private Spinner genreSpinner, languageSpinner;
-    String genre , language;
     private static final String TAG = "SearchBook";
     @Override
     protected void onCreate (Bundle savedInstanceState){
@@ -41,10 +40,10 @@ public class SearchBookActivity extends AppCompatActivity {
                     String nameOfBook = nameEditText.getText().toString().trim();
                     String nameOfAuthor = authorEditText.getText().toString().trim();
                     String language = languageSpinner.getSelectedItem().toString().trim();
+                    String genre = genreSpinner.getSelectedItem().toString().trim();
 
                     Intent searchIntent = new Intent(SearchBookActivity.this, SearchResultActivity.class);
-                    if (nameOfBook.isEmpty() && nameOfAuthor.isEmpty()&&genre.equals("ז'אנר")&&
-                            language.equals("שפה")) {
+                    if (nameOfBook.isEmpty() && nameOfAuthor.isEmpty() && genre.equals("ז'אנר") && language.equals("שפה")) {
                         Toast.makeText(getApplicationContext(), "עליך למלא שדה אחד לפחות", Toast.LENGTH_LONG).show();
                         return;
                     }

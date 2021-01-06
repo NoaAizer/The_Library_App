@@ -24,7 +24,7 @@
         android:id="@+id/hedBookName"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         android:gravity="right|center_vertical"
         android:text=""
@@ -38,136 +38,150 @@
         android:id="@+id/hedBookAuthor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="121dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="17dp"
         android:gravity="right|center_vertical"
         android:text="מחבר:  "
         android:textColor="#00838F"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bookDetailsHeader" />
-
-    <TextView
-        android:id="@+id/detBookAuthor"
-        android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="4dp"
-        android:gravity="right|center_vertical"
-        android:textColor="#040A0B"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/hedBookAuthor"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/hedBookGenre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="right|center_vertical"
-        android:text="ז'אנר:  "
-        android:textColor="#00838F"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hedBookAuthor" />
-
-    <TextView
-        android:id="@+id/detBookGenre"
-        android:layout_width="217dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="2dp"
-        android:gravity="right|center_vertical"
-        android:textColor="#040A0B"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/hedBookGenre"
-        app:layout_constraintTop_toBottomOf="@+id/hedBookAuthor" />
+        app:layout_constraintBottom_toTopOf="@+id/hedBookGenre"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/hedBookYear"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="32dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="17dp"
         android:gravity="right|center_vertical"
         android:text="שנת הוצאה:  "
         android:textColor="#00838F"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hedBookGenre" />
+        app:layout_constraintBottom_toTopOf="@+id/hedBookLan"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
-        android:id="@+id/detBookYear"
+        android:id="@+id/hedBookGenre"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="275dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="17dp"
+        android:gravity="right|center_vertical"
+        android:text="ז'אנר:  "
+        android:textColor="#00838F"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/hedBookYear"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- <TextView
+     android:id="@+id/hedBookBrief"
+     android:layout_width="wrap_content"
+     android:layout_height="30dp"
+     android:layout_marginTop="4dp"
+     android:layout_marginEnd="16dp"
+     android:gravity="right|center_vertical"
+     android:text="תקציר:  "
+     android:textColor="#00838F"
+     android:textSize="24sp"
+     android:textStyle="bold"
+     app:layout_constraintEnd_toEndOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/hedBookLan" />
+
+<TextView
+     android:id="@+id/detBookBrief"
+     android:layout_width="290dp"
+     android:layout_height="wrap_content"
+     android:layout_marginStart="104dp"
+     android:layout_marginTop="48dp"
+     android:gravity="right|center_vertical"
+     android:textColor="#040A0B"
+     android:textSize="14sp"
+     android:textStyle="bold"
+     app:layout_constraintStart_toStartOf="parent"
+     app:layout_constraintTop_toBottomOf="@+id/detBookLan" /> -->
+
+    <TextView
+        android:id="@+id/detBookGenre"
+        android:layout_width="217dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="4dp"
+        android:layout_marginBottom="17dp"
         android:gravity="right|center_vertical"
         android:textColor="#040A0B"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/hedBookYear"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/hedBookYear"
+        app:layout_constraintEnd_toStartOf="@+id/hedBookGenre" />
 
     <TextView
         android:id="@+id/hedBookLan"
         android:layout_width="wrap_content"
         android:layout_height="33dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="37dp"
         android:gravity="right|center_vertical"
         android:text="שפה:  "
         android:textColor="#00838F"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hedBookYear" />
+        app:layout_constraintBottom_toTopOf="@+id/detBookBrief"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/detBookLan"
         android:layout_width="217dp"
         android:layout_height="32dp"
-        android:layout_marginTop="6dp"
         android:layout_marginEnd="2dp"
+        android:layout_marginBottom="37dp"
         android:gravity="right|center_vertical"
         android:textColor="#040A0B"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/hedBookLan"
-        app:layout_constraintTop_toBottomOf="@+id/hedBookYear" />
+        app:layout_constraintBottom_toTopOf="@+id/detBookBrief"
+        app:layout_constraintEnd_toStartOf="@+id/hedBookLan" />
 
 
-    <TextView
-        android:id="@+id/hedBookBrief"
-        android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="right|center_vertical"
-        android:text="תקציר:  "
-        android:textColor="#00838F"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hedBookLan" />
-
-
-    <TextView
+    <Button
         android:id="@+id/detBookBrief"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="7dp"
-        android:layout_marginTop="7dp"
+        android:layout_width="113dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginBottom="108dp"
         android:gravity="right|center_vertical"
-        android:textColor="#040A0B"
+        android:text=" לקריאת התקציר"
+        android:textColor="#EFF2F3"
         android:textSize="14sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detBookLan" />
+        app:layout_constraintBottom_toTopOf="@+id/hedBookAmount"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/detBookAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
+        android:gravity="right|center_vertical"
+        android:textColor="#040A0B"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/detBookGenre"
+        app:layout_constraintEnd_toStartOf="@+id/hedBookAuthor" />
+
+    <TextView
+        android:id="@+id/detBookYear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="17dp"
+        android:gravity="right|center_vertical"
+        android:textColor="#040A0B"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/detBookLan"
+        app:layout_constraintEnd_toStartOf="@+id/hedBookYear" />
 
     <TextView
         android:id="@+id/hedBookAmount"
@@ -212,4 +226,12 @@
         app:rippleColor="#FFFFFF"
         app:srcCompat="@android:drawable/ic_menu_revert" />
 
+    <ImageView
+        android:id="@+id/bookImageDet"
+        android:layout_width="137dp"
+        android:layout_height="174dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="128dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookDetailsHeader" />
 </androidx.constraintlayout.widget.ConstraintLayout>

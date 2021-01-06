@@ -38,7 +38,7 @@ public class SearchResultActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         String lan = intent.getExtras().getString("language");
-        if(lan!=null) search.put("language",lan);
+        if(intent.getExtras().getString("language")!=null) search.put("language",lan);
         String gen = intent.getExtras().getString("genre");
         if(gen!=null) search.put("genre",gen);
         String auth = intent.getExtras().getString("author");
