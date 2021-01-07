@@ -37,7 +37,6 @@ public class listOfLateActivity extends AppCompatActivity {
             boolean exist = false;
 
             @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 try {
                     for (DataSnapshot orderSnapshot : dataSnapshot.child("orders").getChildren()) {

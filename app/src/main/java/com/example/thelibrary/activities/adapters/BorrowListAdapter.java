@@ -99,6 +99,5 @@ public class BorrowListAdapter extends BaseAdapter {
 
     static class AppInfoHolder {
         TextView nameText, authorText ,orderIDText, endOfOrderText , statusOrderText;
-
     }
 }

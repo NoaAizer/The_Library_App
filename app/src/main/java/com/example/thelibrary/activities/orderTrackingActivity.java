@@ -1,13 +1,13 @@
 package com.example.thelibrary.activities;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.orderTrackingAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,9 +19,9 @@ import java.util.ArrayList;
 
 public class orderTrackingActivity extends AppCompatActivity {
     String thisUserID;
-    String orderID, status;
-    ArrayList<String> bookList =new ArrayList<>();
-    ArrayList<String> nameOfBooks =new ArrayList<>();
+    String orderID;
+    ArrayList<String> ordersID =new ArrayList<>();
+    orderTrackingAdapter OrderTrackingAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,31 +33,25 @@ public class orderTrackingActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
-            ArrayAdapter adapter = new ArrayAdapter(orderTrackingActivity.this, android.R.layout.simple_list_item_1);
             ListView list = (ListView) findViewById(R.id.trackList);
 
             boolean exist = false;
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                    for (DataSnapshot orderSnapshot : dataSnapshot.child("orders").getChildren()) {
-                        if (orderSnapshot.child("userID").getValue().equals(thisUserID) && orderSnapshot.child("arrivedToUser").getValue().equals(false)) {
-                            exist = true;
-                            orderID = orderSnapshot.getKey();
-                            status = orderSnapshot.child("statusDeliver").getValue(String.class);
-                            bookList = (ArrayList<String>) orderSnapshot.child("listOfBooks").getValue();
-                            for(int i=0; i<bookList.size(); i++)
-                            {
-                                nameOfBooks.add(dataSnapshot.child("books").child(bookList.get(i)).child("name").getValue(String.class));
-                            }
-                            adapter.add(orderID + "\n" + status + "\n" + nameOfBooks);
-                        }
+                for (DataSnapshot orderSnapshot : dataSnapshot.child("orders").getChildren()) {
+                    if (orderSnapshot.child("userID").getValue().equals(thisUserID) && orderSnapshot.child("arrivedToUser").getValue().equals(false)) {
+                        exist = true;
+                        orderID = orderSnapshot.getKey();
+                        ordersID.add(orderID);
                     }
-                    if (!exist) {
-                        Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
-                        return;
-                    }
-                    list.setAdapter(adapter);
+                }
+                if (!exist) {
+                    Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                OrderTrackingAdapter = new orderTrackingAdapter(orderTrackingActivity.this, R.layout.single_order_tracking, ordersID);
+                list.setAdapter(OrderTrackingAdapter);
             }
 
             @Override
