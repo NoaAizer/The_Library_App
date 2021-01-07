@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,10 +29,11 @@ import com.google.firebase.storage.StorageReference;
 
 public class BookDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView name, author, genre, year, lan, amount, briefTxt;
-    private Button brief;
+    private Button brief,submit;
     private ImageView image;
     private Dialog d;
     private FloatingActionButton back;
+    private RatingBar ratingBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,16 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         amount = (TextView) findViewById(R.id.detBookAmount);
         image = (ImageView) findViewById(R.id.bookImageDet);
         brief = (Button) findViewById((R.id.detBookBrief));
+        ratingBar = findViewById((R.id.ratingBar));
+        submit = findViewById((R.id.bt_submit));
         brief.setOnClickListener(this);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String s = String.valueOf(ratingBar.getRating());
+                Toast.makeText(getApplicationContext(),s+ "Star", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         Intent intent = getIntent();
         String bookID = intent.getExtras().getString("bookID");
