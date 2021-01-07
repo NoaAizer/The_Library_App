@@ -46,6 +46,7 @@ public class orderTrackingActivity extends AppCompatActivity {
                         ordersID.add(orderID);
                     }
                 }
+                Toast.makeText(getApplicationContext(), ordersID.toString(), Toast.LENGTH_LONG).show();
                 if (!exist) {
                     Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
                     return;
@@ -53,6 +54,7 @@ public class orderTrackingActivity extends AppCompatActivity {
                 OrderTrackingAdapter = new orderTrackingAdapter(orderTrackingActivity.this, R.layout.single_order_tracking, ordersID);
                 list.setAdapter(OrderTrackingAdapter);
             }
+
 
             @Override
             public void onCancelled(DatabaseError databaseError) {

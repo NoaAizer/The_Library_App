@@ -1,6 +1,7 @@
 package com.example.thelibrary.activities;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -46,30 +47,6 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
         update.setOnClickListener(this);
         favorites = (Button) findViewById(R.id.myFavorits);
         favorites.setOnClickListener(this);
-
-//
-//        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                userObj = dataSnapshot.getValue(UserObj.class);
-////                fname.append(dataSnapshot.child("firstName").getValue(String.class));
-////                lname.append(dataSnapshot.child("lastName").getValue(String.class));
-////                address.append(dataSnapshot.child("address").getValue(String.class));
-////                phone.append(dataSnapshot.child("phone").getValue(String.class));
-////                email.append(dataSnapshot.child("email").getValue(String.class));
-////                sub.append(dataSnapshot.child("subscription").getValue(String.class));
-//                fname.append(userObj.getFirstName());
-//                lname.append(userObj.getLastName());
-//                address.append(userObj.getAddress());
-//                phone.append(userObj.getPhone());
-//                email.append(userObj.getEmail());
-//                sub.append(userObj.getSubscription());
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//            }
-//        });
     }
 
         protected void onResume(){
@@ -105,10 +82,11 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
             finish();
         }
         if( v == update){
-createUpdateDialog();
+            createUpdateDialog();
         }
         if(v == favorites){
-        // ADD FAVORITES BOOKS
+            Intent favIntent = new Intent(UserDetailsActivity.this , FavBooksActivity.class);
+            startActivity(favIntent);
         }
     }
 

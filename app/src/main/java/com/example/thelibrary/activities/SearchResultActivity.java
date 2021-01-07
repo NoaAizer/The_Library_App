@@ -13,6 +13,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.BookAdminAdapter;
 import com.example.thelibrary.activities.adapters.BookUserAdapter;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
@@ -29,6 +30,7 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
     ArrayList<BookObj> books = new ArrayList<>();
     private TextView searchInfo;
     private CheckBox inStock;
+    private String userType;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -43,6 +45,7 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
         Intent intent = getIntent();
 
         Boolean allBooks =  intent.getExtras().getBoolean("allBooks");
+         userType = intent.getExtras().getString("type");
         if (!allBooks) {
             String lan = intent.getExtras().getString("language");
             if (intent.getExtras().getString("language") != null) search.put("language", lan);
@@ -99,11 +102,7 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
             }
         });
 
-        ListView lvBook = findViewById(R.id.resultList);
-
-        // Initialize adapter and set adapter to list view
-        BookUserAdapter bookAd = new BookUserAdapter(this, SearchResultActivity.this, books);
-        lvBook.setAdapter(bookAd);
+        initializeAdapter(books);
     }
 
     @Override
@@ -113,23 +112,26 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
                 for (BookObj b : books)
                     if (b.getAmount() != 0)
                         filtered.add(b);
+                initializeAdapter(filtered);
 
-                ListView flvBook = findViewById(R.id.resultList);
-
-                // Initialize adapter and set adapter to list view
-                BookUserAdapter fbookAd = new BookUserAdapter(this, SearchResultActivity.this, filtered);
-                flvBook.setAdapter(fbookAd);
             }
         else{
-            ListView lvBook = findViewById(R.id.resultList);
+             initializeAdapter(books);
+        }
 
-            // Initialize adapter and set adapter to list view
+    }
+
+    private void initializeAdapter(ArrayList<BookObj> books){
+        ListView lvBook = findViewById(R.id.resultList);
+
+        // Initialize adapter and set adapter to list view
+        if(userType.equals("user")) {
             BookUserAdapter bookAd = new BookUserAdapter(this, SearchResultActivity.this, books);
             lvBook.setAdapter(bookAd);
         }
-
-
-
-
+        else{
+            BookAdminAdapter bookAd = new BookAdminAdapter(this, SearchResultActivity.this, books);
+            lvBook.setAdapter(bookAd);
+        }
     }
 }

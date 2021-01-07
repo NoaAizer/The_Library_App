@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/singleFavAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:text="         "
+            android:textColor="#00838F"
+            android:textSize="15dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/singleFavName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="#00838F"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/singleFavRemoveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="27dp"
+            android:text="הסר מהמועדפים"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="right"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/singleFavGenre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="ז'אנר: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/singleFavRate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="דירוג: "
+                android:textSize="15dp" />
+
+            <TextView
+                android:id="@+id/singleFavStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="במלאי?"
+                android:textSize="15dp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+

@@ -36,7 +36,7 @@ public class SearchBookActivity extends AppCompatActivity implements View.OnClic
         all_books.setOnClickListener(this);
         search_btn = (Button) findViewById(R.id.but_search);
         search_btn.setOnClickListener(this);
-         searchIntent = new Intent(SearchBookActivity.this, SearchResultActivity.class);
+
 
 
     }//onCreate
@@ -45,7 +45,9 @@ public class SearchBookActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View v) {
         if(v == all_books){
+            searchIntent = new Intent(SearchBookActivity.this, SearchResultActivity.class);
             searchIntent.putExtra("allBooks", true);
+            searchIntent.putExtra("type", getIntent().getExtras().getString("type"));
             startActivity(searchIntent);
         }
         if (v == search_btn){
@@ -67,6 +69,7 @@ public class SearchBookActivity extends AppCompatActivity implements View.OnClic
                 searchIntent.putExtra("genre", genre);
             if (!language.equals("שפה"))
                 searchIntent.putExtra("language", language);
+            searchIntent.putExtra("type", getIntent().getExtras().getString("type"));
             startActivity(searchIntent);
         }
 

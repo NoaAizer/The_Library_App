@@ -1,6 +1,7 @@
 package com.example.thelibrary.fireBase.model.dataObj;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class UserObj implements Serializable
 {
@@ -14,6 +15,8 @@ public class UserObj implements Serializable
     private String subscription;
     private String shoppingListId;
     private int amountOfBooksRemains;
+    private ArrayList<String> favorites = new ArrayList<>();
+  //  private HashMap<String,Double> rating;
 
 
 
@@ -101,5 +104,13 @@ public class UserObj implements Serializable
 
     public void setTz(String tz) {
         this.tz = tz;
+    }
+
+    public ArrayList<String> getFavorites() {
+        return favorites;
+    }
+
+    public void setFavorites(ArrayList<String> favorites) {
+        this.favorites = favorites;
     }
 }

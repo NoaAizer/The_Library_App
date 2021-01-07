@@ -3,7 +3,6 @@ package com.example.thelibrary.activities;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +12,6 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
@@ -26,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.time.LocalDate;
+import org.threeten.bp.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -40,7 +38,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     static int amountOfBooksRemains;
     static String userTZ, userID, shopID,type = "";
     static OrderListAdapter orderAdapter;
-    static LocalDate endOfOrder;
+    static LocalDateTime endOfOrder;
     ListView orderListView;
 
 
@@ -100,7 +98,6 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClick(View v) {
         if (v == save_order) {
             orderList = new ArrayList<>();
@@ -122,7 +119,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 return;
             } else {
                 if (!type.equals("")) {
-                    endOfOrder= LocalDate.now().plusDays(30);
+                    endOfOrder= LocalDateTime.now().plusDays(30);
                     if(type.equals("איסוף עצמי")) {
                         finishOrder();
                         Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();
@@ -143,10 +140,9 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                                     }
 
                                 });
-                        alertDialog.setNegativeButton("ביטול",
-                                new DialogInterface.OnClickListener() {
+                        alertDialog.setNegativeButton("ביטול", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int which) {
-                                        dialog.cancel();
+                                        dialog.dismiss();
                                     }
                                 });
                         alertDialog.show();

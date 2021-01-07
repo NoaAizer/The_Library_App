@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class orderTrackingAdapter extends BaseAdapter {
     Context context;
-    String orderID;
     int layoutResourceId;
     ArrayList<String> orders;
 
@@ -75,7 +74,7 @@ public class orderTrackingAdapter extends BaseAdapter {
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
         orderTrackingAdapter.AppInfoHolder finalHolder = holder;
 
-        orderID = getItem(position);
+        String orderID = getItem(position);
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

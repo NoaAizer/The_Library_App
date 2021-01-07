@@ -17,9 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
+import com.example.thelibrary.fireBase.model.FireBaseDBUser;
+import com.example.thelibrary.fireBase.model.dataObj.UserObj;
+import com.github.ivbaranov.mfb.MaterialFavoriteButton;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,18 +31,26 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
+
 public class BookDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView name, author, genre, year, lan, amount, briefTxt;
     private Button brief,submit;
     private ImageView image;
-    private Dialog d;
+    private MaterialFavoriteButton favoriteBookBtn;
     private FloatingActionButton back;
     private RatingBar ratingBar;
+    FireBaseDBUser fu=new FireBaseDBUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
+
+        Intent intent = getIntent();
+        String bookID = intent.getExtras().getString("bookID");
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         back = (FloatingActionButton) findViewById(R.id.backToUserMenu);
         name = (TextView) findViewById(R.id.hedBookName);
         author = (TextView) findViewById(R.id.detBookAuthor);
@@ -48,6 +60,20 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         amount = (TextView) findViewById(R.id.detBookAmount);
         image = (ImageView) findViewById(R.id.bookImageDet);
         brief = (Button) findViewById((R.id.detBookBrief));
+        favoriteBookBtn = findViewById(R.id.like);
+        fu.getUserFromDB(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserObj user = dataSnapshot.getValue(UserObj.class);
+                ArrayList<String> favorites=user.getFavorites();
+                if(favorites.contains(bookID)) {
+                    favoriteBookBtn.setFavorite(true);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         ratingBar = findViewById((R.id.ratingBar));
         submit = findViewById((R.id.bt_submit));
         brief.setOnClickListener(this);
@@ -58,21 +84,41 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(getApplicationContext(),s+ "Star", Toast.LENGTH_SHORT).show();
             }
         });
-
-        Intent intent = getIntent();
-        String bookID = intent.getExtras().getString("bookID");
+        favoriteBookBtn.setOnFavoriteChangeListener(
+                new MaterialFavoriteButton.OnFavoriteChangeListener() {
+                    @Override
+                    public void onFavoriteChanged(MaterialFavoriteButton buttonView, boolean favorite) {
+                        fu.getUserFromDB(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                UserObj user = dataSnapshot.getValue(UserObj.class);
+                                ArrayList<String> favorites=user.getFavorites();
+                                if(!favorites.contains(bookID) &&favorite) {
+                                    Toast.makeText(getApplicationContext(),"הספר נוסף למועדפים שלי", Toast.LENGTH_SHORT).show();
+                                    fu.addToFavorites(bookID);
+                                }
+                                else if(!favorite && favorites.contains(bookID) )
+                                {
+                                    new FireBaseDBUser().removeFromFavorites(bookID);
+                                    Toast.makeText(getApplicationContext(),"הספר הוסר מהמועדפים שלי", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
+                    }
+                });
 
         DatabaseReference bookRef = new FireBaseDBBook().getBookFromDB(bookID);
         bookRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // System.out.println( dataSnapshot.child("name").getValue(String.class)+"");
                 name.setText(dataSnapshot.child("name").getValue(String.class));
                 author.setText(dataSnapshot.child("author").getValue(String.class));
                 genre.setText(dataSnapshot.child("genre").getValue(String.class));
                 year.setText(dataSnapshot.child("publishing_year").getValue(String.class));
                 lan.setText(dataSnapshot.child("language").getValue(String.class));
-          //      brief.setText(dataSnapshot.child("brief").getValue(String.class));
                 amount.setText(dataSnapshot.child("amount").getValue(Long.class).toString());
                 StorageReference mImageStorage = FirebaseStorage.getInstance().getReference();
                 StorageReference ref = mImageStorage.child(dataSnapshot.child("imageURL").getValue(String.class));
@@ -125,4 +171,6 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         d.show();
 
     }
+
+
 }

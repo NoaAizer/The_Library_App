@@ -23,7 +23,6 @@ import java.util.ArrayList;
 public class BorrowListAdapter extends BaseAdapter {
     Context context;
     ArrayList<Pair<String,String>> books;
-    private String[] mKeys;
     int layoutResourceId;
 
     public BorrowListAdapter(Context context, int layoutResourceId,  ArrayList<Pair<String,String>> books) {

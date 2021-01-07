@@ -59,6 +59,7 @@ public class mAuthUser {
                                             Log.d("LoginActivity", "signInWithEmail:success");
                                             Intent loginIntent = new Intent(activity, MenuUserActivity.class);
                                             activity.startActivity(loginIntent);
+
                                         } else {
                                             // If sign in fails, display a message to the user.
                                             Log.w("LoginActivity", "signInWithEmail:failure", task.getException());

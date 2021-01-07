@@ -78,6 +78,7 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
         }
         if (v == searchBook_btn) {
             Intent intent = new Intent(MenuUserActivity.this, SearchBookActivity.class);
+            intent.putExtra("type","user");
             startActivity(intent);
 
         }
