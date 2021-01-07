@@ -19,13 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class mAuthUser {
     FirebaseAuth mAuth;
+    public static AppCompatActivity activity;
 
     public mAuthUser() {
         this.mAuth = FirebaseAuth.getInstance();
     }
 
 
-    public void registerUserToDB(String tz,String firstName,String lastName,String email,String password,String address, String phone, String subscription, AppCompatActivity activity){
+    public void registerUserToDB(String tz,String firstName,String lastName,String email,String password,String address, String phone, String subscription){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener(activity, new OnSuccessListener<AuthResult>(){
 
@@ -33,7 +34,7 @@ public class mAuthUser {
                     @Override
                     public void onSuccess(@NonNull AuthResult authResult) {
                         Log.d("" + activity, "createUserWithEmail:success");
-                        Toast.makeText(activity, "Authentication completed.",
+                        Toast.makeText(activity, "ההרשמה בוצעה בהצלחה!",
                                 Toast.LENGTH_SHORT).show();
                         FireBaseDBUser u = new FireBaseDBUser();
                         FireBaseDBShoppingList sl = new FireBaseDBShoppingList();

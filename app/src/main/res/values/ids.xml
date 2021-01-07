@@ -14,4 +14,21 @@
     <item name="detBookBrief" type="id" />
     <item name="hedBookAmount" type="id" />
     <item name="detBookAmount" type="id" />
+    <item name="edit_LName" type="id" />
+    <item name="editName" type="id" />
+    <item name="editNameHed" type="id" />
+    <item name="editLName" type="id" />
+    <item name="editlNameHed" type="id" />
+    <item name="editAdd" type="id" />
+    <item name="editAddHed" type="id" />
+    <item name="editPhone" type="id" />
+    <item name="editPhoneHed" type="id" />
+    <item name="editSub" type="id" />
+    <item name="editPass" type="id" />
+    <item name="editPassHed" type="id" />
+    <item name="editPassDet" type="id" />
+    <item name="editPassHedNew" type="id" />
+    <item name="editPassOld" type="id" />
+    <item name="editPassNew" type="id" />
+    <item name="updateBtn" type="id" />
 </resources>
