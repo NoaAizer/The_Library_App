@@ -1,7 +1,6 @@
 package com.example.thelibrary.activities;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -9,7 +8,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
@@ -32,7 +30,6 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
     private CheckBox inStock;
     private String userType;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +62,7 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
 
             }
         }
+        else searchInfo.append(" הכל");
         DatabaseReference booksRef = new FireBaseDBBook().getBookListRef();
         booksRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

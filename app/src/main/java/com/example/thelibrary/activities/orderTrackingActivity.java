@@ -46,7 +46,6 @@ public class orderTrackingActivity extends AppCompatActivity {
                         ordersID.add(orderID);
                     }
                 }
-                Toast.makeText(getApplicationContext(), ordersID.toString(), Toast.LENGTH_LONG).show();
                 if (!exist) {
                     Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
                     return;

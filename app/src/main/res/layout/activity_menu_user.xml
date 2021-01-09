@@ -16,65 +16,71 @@
         android:id="@+id/hello"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="23dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="10dp"
         android:gravity="right|center_vertical"
         android:text="שלום "
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintBottom_toTopOf="@+id/menuRatingBooks"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/menuRatingBooks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="64dp"
+        android:layout_marginBottom="10dp"
+        android:text="המומלצים "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/menuImageRating"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/menuNewBooks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="right|center_vertical"
+        android:text="החדשים "
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/menuImageNew"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/searchAbook"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="56dp"
+        android:layout_width="188dp"
+        android:layout_height="100dp"
         android:text="חיפוש ספר"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userDetails" />
+        app:layout_constraintBottom_toTopOf="@+id/checkALoan"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/userDetails"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="164dp"
-        android:layout_marginEnd="56dp"
+        android:layout_width="188dp"
+        android:layout_height="100dp"
         android:text="איזור אישי"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintBottom_toTopOf="@+id/myBooks"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/myBooks"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="56dp"
+        android:layout_width="188dp"
+        android:layout_height="100dp"
         android:text="ההשאלות שלי"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkALoan" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/checkALoan"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="68dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="56dp"
+        android:layout_width="188dp"
+        android:layout_height="100dp"
         android:text="מעקב אחר הזמנה"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchAbook" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/editBooks"
@@ -83,7 +89,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="1dp"
         android:text="עריכת הזמנה"
         android:textColor="#FFFFFF"
         app:icon="@android:drawable/checkbox_on_background"
@@ -93,15 +99,37 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/information"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+        android:layout_width="39dp"
+        android:layout_height="28dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="1dp"
         android:layout_marginEnd="16dp"
         app:icon="@android:drawable/ic_dialog_info"
         app:iconTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/menuImageNew"
+        android:layout_width="140dp"
+        android:layout_height="201dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginBottom="30dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/searchAbook"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/menuImageRating"
+        android:layout_width="140dp"
+        android:layout_height="201dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="30dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/userDetails"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

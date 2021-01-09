@@ -1,5 +1,7 @@
 package com.example.thelibrary.fireBase.model.dataObj;
 
+import org.threeten.bp.LocalDate;
+
 import java.io.Serializable;
 
 public class BookObj implements Serializable
@@ -50,6 +52,7 @@ public class BookObj implements Serializable
     public int amount;
     public String id;
     public String imageURL;
+    public String added_date;
 
 
     public BookObj() {
@@ -66,6 +69,7 @@ public class BookObj implements Serializable
         this.publishing_year=publishing_year;
         this.amount=amount;
         this.imageURL=imageURL;
+        this.added_date = LocalDate.now().toString();
     }
     public String getName() {
         return name;
@@ -105,5 +109,9 @@ public class BookObj implements Serializable
 
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
+    }
+
+    public LocalDate getAdded_date() {
+        return LocalDate.parse(added_date);
     }
 }
