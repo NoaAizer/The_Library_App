@@ -1,22 +1,25 @@
 package com.example.thelibrary.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.thelibrary.R;
-import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,22 +38,21 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
     private Button loan_btn, myDetails_btn, myBooks_btn, searchBook_btn;
     private TextView hello;
     private ImageView ratingBooksImg, newBooksImg;
-    private ExtendedFloatingActionButton editBooks_btn, labInf_btn;
-    FireBaseDBUser fu = new FireBaseDBUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_user);
-        //Toolbar toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         loan_btn = (Button) findViewById(R.id.checkALoan);
         myDetails_btn = (Button) findViewById(R.id.userDetails);
         myBooks_btn = (Button) findViewById(R.id.myBooks);
         searchBook_btn = (Button) findViewById(R.id.searchAbook);
-        editBooks_btn = (ExtendedFloatingActionButton) findViewById(R.id.editBooks);
-        labInf_btn = (ExtendedFloatingActionButton) findViewById(R.id.information);
         hello = (TextView) findViewById(R.id.hello);
         ratingBooksImg = (ImageView) findViewById(R.id.menuImageRating);
         newBooksImg = (ImageView) findViewById(R.id.menuImageNew);
@@ -72,18 +74,17 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
                 }
                 Collections.sort(newBooks, new Comparator<BookObj>() {
             public int compare(BookObj b1, BookObj b2) {
-                if (b1.getAdded_date() == null || b2.getAdded_date() == null)
+                if (b1.added_dateInDate() == null || b2.added_dateInDate() == null)
                     return 0;
-                return -b1.getAdded_date().compareTo(b2.getAdded_date());
+                return -b1.added_dateInDate().compareTo(b2.added_dateInDate());
             }
         });
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11
-                /// NEED TO BE CHANGE ACCORDING TO RATING!!!!
+
                 Collections.sort(ratingBooks, new Comparator<BookObj>() {
                     public int compare(BookObj b1, BookObj b2) {
-                        if (b1.getName() == null || b2.getName() == null)
+                        if (b1.getBookRating() == null || b2.getBookRating() == null)
                             return 0;
-                        return -b1.getName().compareTo(b2.getName());
+                        return -b1.getBookRating().compareTo(b2.getBookRating());
                     }
                 });
                 showImages(newBooks, newBooksImg);
@@ -99,10 +100,12 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
         myDetails_btn.setOnClickListener(this);
         myBooks_btn.setOnClickListener(this);
         searchBook_btn.setOnClickListener(this);
-        editBooks_btn.setOnClickListener(this);
-        labInf_btn.setOnClickListener(this); //library information
         ratingBooksImg.setOnClickListener(this);
-
+        Drawable drawable = ContextCompat.getDrawable(MenuUserActivity.this,R.drawable.icon_book);
+        drawable.setBounds(0, 0, (int)(drawable.getIntrinsicWidth()*0.2),
+                (int)(drawable.getIntrinsicHeight()*0.2));
+        ScaleDrawable sd = new ScaleDrawable(drawable, 0, 1, 1);
+        myBooks_btn.setCompoundDrawables(sd.getDrawable(), null, null, null);
     }
 
     public void onClick(View v) {
@@ -126,16 +129,7 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
             startActivity(intent);
 
         }
-        if (v == labInf_btn) {
-            Intent intent = new Intent(MenuUserActivity.this, LocationActivity.class);
-            startActivity(intent);
 
-        }
-        if (v == editBooks_btn) {
-            Intent intent = new Intent(MenuUserActivity.this, MyOrderActivity.class);
-            startActivity(intent);
-
-        }
 
     }
 
@@ -177,4 +171,33 @@ private void showImages(ArrayList <BookObj> books, ImageView imageView){
 
 
 }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuCart) {
+            Intent cart = new Intent (MenuUserActivity.this, MyOrderActivity.class);
+            startActivity(cart);
+        }
+        if (id == R.id.menuInfo) {
+            Intent info = new Intent (MenuUserActivity.this, LocationActivity.class);
+            startActivity(info);
+        }
+        if(id == R.id.menuLogOut){
+            FirebaseAuth.getInstance().signOut();
+            Intent login = new Intent (MenuUserActivity.this, LoginUserActivity.class);
+            startActivity(login);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

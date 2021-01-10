@@ -18,7 +18,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
-import com.example.thelibrary.activities.MenuUserActivity;
+import com.example.thelibrary.activities.BookDetailsAdminActivity;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.FireBaseDBShoppingList;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
@@ -74,9 +74,9 @@ public class BookAdminAdapter extends BaseAdapter {
         amountTextView = view.findViewById(R.id.singleAdminAmount);
 
         // Set the title and button name
-        authorNameTextView.append(book.getauthor());
+        authorNameTextView.append(book.getAuthor());
         bookNameTextView.append(book.getName());
-        genreTextView.append(book.getgenre());
+        genreTextView.append(book.getGenre());
         amountTextView.append(book.getAmount()+"");
 
         addBookToOrder.setOnClickListener(new View.OnClickListener() {
@@ -131,16 +131,16 @@ public class BookAdminAdapter extends BaseAdapter {
                 alertDialog.show();
             }
         });
+
         view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Intent bookDetails = new Intent(activity, MenuUserActivity.class); //#########CHANGE TO DETAILS##########
+                Intent bookDetails = new Intent(activity, BookDetailsAdminActivity.class);
                 bookDetails.putExtra("bookID", bookID);
                 activity.startActivity(bookDetails);
             }
         });
-
         return view;
     }
 

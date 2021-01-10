@@ -3,6 +3,8 @@ package com.example.thelibrary.fireBase.model.dataObj;
 import org.threeten.bp.LocalDate;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BookObj implements Serializable
 {
@@ -53,6 +55,9 @@ public class BookObj implements Serializable
     public String id;
     public String imageURL;
     public String added_date;
+    public double bookRating=0;
+    public double div=0;
+    public Map<String,Double> usersRating = new HashMap<>();
 
 
     public BookObj() {
@@ -74,21 +79,10 @@ public class BookObj implements Serializable
     public String getName() {
         return name;
     }
-    public String getauthor() {
+    public String getAuthor() {
         return author;
     }
-    public String getbrief() {
-        return brief;
-    }
-    public String getgenre() { return genre; }
-    public String getlanguage() {
-        return language;
-    }
-    public String getpublishing_year() {
-        return publishing_year;
-    }
-
-
+    public String getGenre() { return genre; }
     public int getAmount() {
         return amount;
     }
@@ -98,20 +92,31 @@ public class BookObj implements Serializable
     public String getId() {
         return id;
     }
+    public String getImageURL() {
+        return imageURL;
+    }
+    public String getBrief() { return brief; }
+    public String getLanguage() { return language; }
+    public String getAdded_date() { return added_date; }
+    public Double getBookRating(){ return bookRating;}
 
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getImageURL() {
-        return imageURL;
-    }
-
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
     }
 
-    public LocalDate getAdded_date() {
+
+    public String getPublishing_year() {
+        return publishing_year;
+    }
+
+
+
+
+    public LocalDate added_dateInDate() {
         return LocalDate.parse(added_date);
     }
+
 }

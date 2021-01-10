@@ -176,4 +176,14 @@
         android:text="אשר השלמת הזמנה"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/ChanegOrderType"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="3dp"
+        android:text="שינוי צורת משלוח"
+        app:layout_constraintBottom_toTopOf="@+id/detEndOfOrder"
+        app:layout_constraintEnd_toStartOf="@+id/hedUserID" />
 </androidx.constraintlayout.widget.ConstraintLayout>

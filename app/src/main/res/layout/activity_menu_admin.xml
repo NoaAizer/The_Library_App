@@ -69,11 +69,21 @@
         android:id="@+id/booksList"
         android:layout_width="253dp"
         android:layout_height="42dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת הספרים"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helloAdmin" />
+
+    <Button
+        android:id="@+id/labBorrowBooks"
+        android:layout_width="253dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="56dp"
+        android:text="ספרים מושאלים"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/returnBook" />
 
     <Button
         android:id="@+id/ordersCompletes"

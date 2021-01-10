@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -25,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.threeten.bp.LocalDateTime;
+
 import java.util.ArrayList;
 
 
@@ -46,6 +49,10 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_order);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         orderListView = (ListView) findViewById(R.id.listBooks);
 
@@ -225,6 +232,30 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
         new FireBaseDBShoppingList().clearShopListDB(shopID);
         //updates amount of books to user
         FirebaseDatabase.getInstance().getReference().child("users").child(userID).child("amountOfBooksRemains").setValue(amountOfBooksRemains - bookList.size());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_back_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuBack) {
+            finish();
+        }
+        if (id == R.id.menuBackToHome) {
+            Intent menu = new Intent (MyOrderActivity.this, MenuUserActivity.class);
+            startActivity(menu);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }

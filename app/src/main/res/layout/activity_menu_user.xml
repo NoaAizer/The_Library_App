@@ -17,7 +17,7 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:gravity="right|center_vertical"
         android:text="שלום "
         android:textSize="24sp"
@@ -55,6 +55,7 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:text="חיפוש ספר"
+        android:drawableLeft="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toTopOf="@+id/checkALoan"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -62,6 +63,8 @@
         android:id="@+id/userDetails"
         android:layout_width="188dp"
         android:layout_height="100dp"
+        android:drawableLeft="@drawable/bt_ic_cardholder_name_dark"
+
         android:text="איזור אישי"
         app:layout_constraintBottom_toTopOf="@+id/myBooks"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -70,6 +73,7 @@
         android:id="@+id/myBooks"
         android:layout_width="188dp"
         android:layout_height="100dp"
+        android:drawableLeft="@drawable/icon_book"
         android:text="ההשאלות שלי"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -79,36 +83,9 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:text="מעקב אחר הזמנה"
+        android:drawableLeft="@drawable/icon_orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/editBooks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="1dp"
-        android:text="עריכת הזמנה"
-        android:textColor="#FFFFFF"
-        app:icon="@android:drawable/checkbox_on_background"
-        app:iconTint="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-        android:id="@+id/information"
-        android:layout_width="39dp"
-        android:layout_height="28dp"
-        android:layout_gravity="bottom|right"
-        android:layout_margin="16dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="16dp"
-        app:icon="@android:drawable/ic_dialog_info"
-        app:iconTint="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/menuImageNew"

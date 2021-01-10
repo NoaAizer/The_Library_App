@@ -1,6 +1,9 @@
 package com.example.thelibrary.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +25,10 @@ public class deliveryListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delivery_list);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders");
         ref.orderByChild("complete").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -56,5 +63,28 @@ public class deliveryListActivity extends AppCompatActivity {
                 throw databaseError.toException();
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_back_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuBack) {
+            finish();
+        }
+        if (id == R.id.menuBackToHome) {
+            Intent home = new Intent (deliveryListActivity.this, MenuAdminActivity.class);
+            startActivity(home);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

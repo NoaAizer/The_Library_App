@@ -43,5 +43,10 @@ public class FireBaseDBBook extends FireBaseModel {
         myRef.child("books").child(bookID).child("amount").setValue(amount);
     }
 
-
+   public void setbookRating(String bookID, double bookRating){
+        myRef.child("books").child(bookID).child("bookRating").setValue(bookRating);
+    }
+    public void setdiv(String bookID, double div){
+        myRef.child("books").child(bookID).child("div").setValue(div);
+    }
 }

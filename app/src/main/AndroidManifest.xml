@@ -10,7 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheLibrary">
-        <activity android:name=".activities.FavBooksActivity"></activity>
+        <activity android:name=".activities.BookDetailsAdminActivity"></activity>
+        <activity android:name=".activities.BorrowListAdminActivity" />
+        <activity android:name=".activities.FavBooksActivity" />
         <activity android:name=".activities.CreditCardActivity" />
         <activity android:name=".activities.LocationActivity" />
         <activity android:name=".activities.SearchResultActivity" />
@@ -28,9 +30,8 @@
         <activity android:name=".activities.MyOrderActivity" />
         <activity android:name=".activities.ListOfBorrowedBooksActivity" />
         <activity android:name=".activities.UserDetailsActivity" />
-        <activity android:name=".activities.BooksListAdminActivity" />
-        <activity android:name=".activities.BooksListUserActivity" />
         <activity android:name=".activities.MenuAdminActivity" />
+        <activity android:name=".activities.RegisterUserActivity" />
         <activity android:name=".activities.listOfLateActivity" />
         <activity
             android:name=".activities.MenuUserActivity"
@@ -39,14 +40,12 @@
             android:name=".activities.LoginAdminActivity"
             android:label="@string/title_activity_login_admin" />
         <activity
-            android:name=".activities.RegisterUserActivity"
-            android:label="@string/title_activity_register"
-            android:theme="@style/Theme.TheLibrary.NoActionBar" />
-        <activity
             android:name=".activities.AddBookActivity"
             android:exported="true" />
         <activity android:name=".activities.LoginUserActivity" />
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.MainActivity"
+            android:theme="@style/Theme.TheLibrary.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

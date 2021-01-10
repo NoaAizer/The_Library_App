@@ -2,6 +2,8 @@ package com.example.thelibrary.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -28,6 +30,11 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_treatment_orders);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
         listTA = (Button)findViewById(R.id.listTA);
         listDeliver = (Button)findViewById(R.id.listDeliver);
@@ -53,6 +60,7 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         String selectedFromList =(String) (list.getItemAtPosition(position));
                         Intent intent = new Intent(TreatmentOrdersActivity.this, OrderPageActivity.class);
+                        intent.putExtra("orderID",orderID);
                         startActivity(intent.putExtra("orderID", selectedFromList));
                     }
                 });
@@ -73,5 +81,29 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
             Intent intent = new Intent(TreatmentOrdersActivity.this, deliveryListActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_back_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuBack) {
+            finish();
+        }
+        if (id == R.id.menuBackToHome) {
+            Intent home = new Intent (TreatmentOrdersActivity.this, MenuAdminActivity.class);
+            startActivity(home);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

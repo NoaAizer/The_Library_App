@@ -91,12 +91,15 @@ public class FavoriteBookAdapter extends BaseAdapter {
                DataSnapshot bookDS= dataSnapshot.child("books").child(bookID);
                 finalHolder.nameText.setText(bookDS.child("name").getValue(String.class));
                 finalHolder.authorText.setText("  " + bookDS.child("author").getValue(String.class));
-                finalHolder.genreText.setText("  " + bookDS.child("genre").getValue(String.class));
-               //???NEED TO BE CHANGE????????? finalHolder.rateText.append("  " + dataSnapshot.child("rate").getValue(String.class));
+                finalHolder.genreText.setText("ז'אנר: "+ bookDS.child("genre").getValue(String.class));
+                if(bookDS.child("bookRating").getValue(Double.class)==0)
+                    finalHolder.rateText.setText("דירוג: לא קיים ");
+                else
+               finalHolder.rateText.setText("דירוג: " + bookDS.child("bookRating").getValue(Double.class));
                if(bookDS.child("amount").getValue(Integer.class)>0)
-                finalHolder.stockText.setText(" כן" );
+                finalHolder.stockText.setText("במלאי? יש" );
                else
-                   finalHolder.stockText.setText(" לא" );
+                   finalHolder.stockText.setText("במלאי? חסר" );
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

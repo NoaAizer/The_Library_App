@@ -1,6 +1,9 @@
 package com.example.thelibrary.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +27,11 @@ public class CompletesOrdersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_completes_orders);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
 
 
         DatabaseReference ordersRef = new FireBaseDBOrder().getOrdersListFromDB();
@@ -48,6 +56,28 @@ public class CompletesOrdersActivity extends AppCompatActivity {
         lvOrder.setAdapter(ordersAd);
         //bookAd.notifyDataSetChanged();
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_back_home, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuBack) {
+            finish();
+        }
+        if (id == R.id.menuBackToHome) {
+           Intent home = new Intent (CompletesOrdersActivity.this, MenuAdminActivity.class);
+            startActivity(home);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
 }

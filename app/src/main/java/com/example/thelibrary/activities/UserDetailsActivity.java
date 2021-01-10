@@ -2,8 +2,12 @@ package com.example.thelibrary.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,11 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.example.thelibrary.fireBase.model.dataObj.UserObj;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 public class UserDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     FireBaseDBUser fu = new FireBaseDBUser();
     private TextView fname, lname, address, phone, email, sub;
-    private FloatingActionButton back;
     private Button update , favorites;
     FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference userRef = fu.getUserFromDB(user.getUid());
@@ -35,8 +38,11 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
-        back = (FloatingActionButton) findViewById(R.id.backToUserMenu);
-        back.setOnClickListener(this);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         fname = (TextView) findViewById(R.id.detFName);
         lname = (TextView) findViewById(R.id.detLName);
         address = (TextView) findViewById(R.id.detAdd);
@@ -47,6 +53,12 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
         update.setOnClickListener(this);
         favorites = (Button) findViewById(R.id.myFavorits);
         favorites.setOnClickListener(this);
+
+        Drawable drawable = ContextCompat.getDrawable(UserDetailsActivity.this,R.drawable.icon_fav_book);
+        drawable.setBounds(0, 0, (int)(drawable.getIntrinsicWidth()*0.2),
+                (int)(drawable.getIntrinsicHeight()*0.2));
+        ScaleDrawable sd = new ScaleDrawable(drawable, 0, 1, 1);
+        favorites.setCompoundDrawables(sd.getDrawable(), null, null, null);
     }
 
         protected void onResume(){
@@ -78,9 +90,6 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
 
 
     public void onClick(View v) {
-        if (v == back) {
-            finish();
-        }
         if( v == update){
             createUpdateDialog();
         }
@@ -120,7 +129,7 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
                     oldPassEdit.setError("הכנס סיסמה נוכחית");
                 }
                 if (!newPhone.isEmpty() && (!Patterns.PHONE.matcher(newPhone).matches() || newPhone.length() < 9 || newPhone.length() > 13)) {
-                    Toast.makeText(getApplicationContext(), "Invalid phone", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "מספר טלפון לא חוקי", Toast.LENGTH_LONG).show();
                     return;
                 }
                 if (!oldPass.isEmpty() && !newPass.isEmpty() && !oldPass.trim().equals(userObj.getPassword())) {
@@ -165,5 +174,29 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
         });
         d.show();
 
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_user_details, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuBack) {
+            finish();
+        }
+
+        if(id == R.id.menuCart){
+            Intent order = new Intent (UserDetailsActivity.this, MyOrderActivity.class);
+            startActivity(order);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

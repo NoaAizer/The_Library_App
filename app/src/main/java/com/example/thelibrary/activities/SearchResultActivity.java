@@ -2,6 +2,8 @@ package com.example.thelibrary.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -27,6 +29,7 @@ import java.util.Map;
 public class SearchResultActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     ArrayList<BookObj> books = new ArrayList<>();
     private TextView searchInfo;
+    private ListView lvBook;
     private CheckBox inStock;
     private String userType;
 
@@ -34,10 +37,15 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_result);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         inStock = (CheckBox) findViewById(R.id.inStockCheck);
         inStock.setOnCheckedChangeListener(this);
         searchInfo = (TextView) findViewById(R.id.searchInfo);
+        lvBook = (ListView) findViewById(R.id.resultList);
         Map<String,String> search= new HashMap<>();
         Intent intent = getIntent();
 
@@ -62,8 +70,11 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
 
             }
         }
-        else searchInfo.append(" הכל");
+        else{
+            searchInfo.append(" הכל");
+        }
         DatabaseReference booksRef = new FireBaseDBBook().getBookListRef();
+        ArrayList<BookObj> filtered = new ArrayList<>();
         booksRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -84,14 +95,13 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
                                     books.add(data.getValue(BookObj.class));
                             }
                         }
-
-
                     }
                 }
                 if (books == null || books.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "אין ספרים להצגה", Toast.LENGTH_LONG).show();
                     return;
                 }
+                initializeAdapter(books);
             }
 
 
@@ -100,7 +110,7 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
             }
         });
 
-        initializeAdapter(books);
+
     }
 
     @Override
@@ -120,8 +130,6 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
     }
 
     private void initializeAdapter(ArrayList<BookObj> books){
-        ListView lvBook = findViewById(R.id.resultList);
-
         // Initialize adapter and set adapter to list view
         if(userType.equals("user")) {
             BookUserAdapter bookAd = new BookUserAdapter(this, SearchResultActivity.this, books);
@@ -131,5 +139,52 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
             BookAdminAdapter bookAd = new BookAdminAdapter(this, SearchResultActivity.this, books);
             lvBook.setAdapter(bookAd);
         }
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        // Inflate the menu; this adds items to the action bar if it is present.
+        if(userType.equals("user")) {
+            getMenuInflater().inflate(R.menu.menu_order, menu);
+        }
+       else{
+            getMenuInflater().inflate(R.menu.menu_back_home, menu);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if(userType.equals("user")) {
+            if (id == R.id.menuBack) {
+                finish();
+            }
+            if (id == R.id.menuBackToHome) {
+                Intent menu = new Intent(SearchResultActivity.this, MenuUserActivity.class);
+                startActivity(menu);
+            }
+
+            if (id == R.id.menuCart) {
+                Intent order = new Intent(SearchResultActivity.this, MyOrderActivity.class);
+                startActivity(order);
+            }
+        }
+        else{
+            if (id == R.id.menuBack) {
+                finish();
+            }
+            if (id == R.id.menuBackToHome) {
+                Intent menu = new Intent(SearchResultActivity.this, MenuAdminActivity.class);
+                startActivity(menu);
+            }
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

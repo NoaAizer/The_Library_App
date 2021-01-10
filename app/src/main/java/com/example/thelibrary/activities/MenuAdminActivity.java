@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,15 +25,19 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 public class MenuAdminActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loansList_btn, booksList_btn, returnBook_btn, clientsList_btn, add_btn, finishOrder_btn, laterList_btn;
+    private Button loansList_btn, booksList_btn, returnBook_btn,
+            clientsList_btn, add_btn, finishOrder_btn, laterList_btn, borrows_btn;
     private boolean hasOrder = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_admin);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.drawable.logolab);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         loansList_btn = (Button) findViewById(R.id.loansList);
         booksList_btn = (Button) findViewById(R.id.booksList);
         returnBook_btn = (Button) findViewById(R.id.returnBook);
@@ -39,6 +45,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         add_btn = (Button) findViewById(R.id.adding);
         finishOrder_btn = (Button) findViewById(R.id.ordersCompletes);
         laterList_btn = (Button) findViewById(R.id.laterList);
+        borrows_btn = (Button) findViewById(R.id.labBorrowBooks);
 
 
         loansList_btn.setOnClickListener(this);
@@ -48,6 +55,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         add_btn.setOnClickListener(this);
         finishOrder_btn.setOnClickListener(this);
         laterList_btn.setOnClickListener(this);
+        borrows_btn.setOnClickListener(this);
 
     }
 
@@ -140,9 +148,33 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         if(v == finishOrder_btn){
             Intent intent = new Intent(MenuAdminActivity.this, CompletesOrdersActivity.class);
             startActivity(intent);
+        }
 
+        if(v == borrows_btn){
+            Intent intent = new Intent(MenuAdminActivity.this, BorrowListAdminActivity.class);
+            startActivity(intent);
         }
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main_admin, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.menuLogOut) {
+            finish();
+            Intent login = new Intent (MenuAdminActivity.this, LoginAdminActivity.class);
+            startActivity(login);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

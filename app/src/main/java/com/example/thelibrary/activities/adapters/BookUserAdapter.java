@@ -67,9 +67,9 @@ public class BookUserAdapter extends BaseAdapter {
         authorNameTextView = view.findViewById(R.id.singleAuthor);
 
         // Set the title and button name
-        authorNameTextView.append(book.getauthor());
+        authorNameTextView.append(book.getAuthor());
         bookNameTextView.append(book.getName());
-        genreTextView.append(book.getgenre());
+        genreTextView.append(book.getGenre());
 
         addBookToOrder.setOnClickListener(new View.OnClickListener() {
             @Override

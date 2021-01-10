@@ -193,6 +193,7 @@
         android:layout_height="0dp"
         android:layout_marginEnd="66dp"
         android:layout_marginBottom="70dp"
+        android:drawableLeft="@drawable/icon_fav_book"
         android:text="המועדפים שלי"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -207,20 +208,5 @@
         app:layout_constraintBottom_toTopOf="@+id/myFavorits"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/backToUserMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="33dp"
-        android:layout_marginTop="27dp"
-        android:clickable="true"
-        android:foregroundTint="#FFFFFF"
-        android:textColor="#FFFFFF"
-        android:tint="#FFFFFF"
-        app:backgroundTint="#00838F"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:rippleColor="#FFFFFF"
-        app:srcCompat="@android:drawable/ic_menu_revert" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
