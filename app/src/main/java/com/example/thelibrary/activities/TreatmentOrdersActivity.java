@@ -60,8 +60,8 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         String selectedFromList =(String) (list.getItemAtPosition(position));
                         Intent intent = new Intent(TreatmentOrdersActivity.this, OrderPageActivity.class);
-                        intent.putExtra("orderID",orderID);
-                        startActivity(intent.putExtra("orderID", selectedFromList));
+                        intent.putExtra("orderID",selectedFromList);
+                        startActivity(intent);
                     }
                 });
                 list.setAdapter(adapter);

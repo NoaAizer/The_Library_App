@@ -54,55 +54,9 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
         UserDetails.setOnClickListener(this);
         changeOrderTypeBtn.setOnClickListener(this);
 
-//        if (savedInstanceState == null) {
-//            Bundle extras = getIntent().getExtras();
-//            if(extras == null) {
-//                orderID= null;
-//            } else {
-//                orderID= extras.getString("orderID");
-//            }
-//        } else {
-//            orderID= (String) savedInstanceState.getSerializable("orderID");
-//        }
-        Intent intent = getIntent();
-        OrderId.append( intent.getExtras().getString("orderID"));
-        ArrayAdapter adapter = new ArrayAdapter(OrderPageActivity.this, android.R.layout.simple_list_item_1);
-        ListView list = (ListView) findViewById(R.id.detListOfBooks);
-
-        DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders").child(orderID);
-        order.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                collectStr = dataSnapshot.child("collect").getValue(String.class);
-
-                UserId.append(dataSnapshot.child("userID").getValue(String.class));
-                collect.append(dataSnapshot.child("collect").getValue(String.class));
-                endOfOrder.append(dataSnapshot.child("endOfOrder").getValue(String.class));
-
-                Iterable<DataSnapshot> listOfBook = dataSnapshot.child("listOfBooks").getChildren();
-                Iterator<DataSnapshot> it = listOfBook.iterator();
-                while(it.hasNext()) {
-                    adapter.add(it.next().getValue(String.class));
-                }
-//                for(int i=0; i<listOfBook.iterator(); i++)
-//                {
-//                    adapter.add(listOfBook[i]);
-//                }
-                list.setAdapter(adapter);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
+        fillDetails();
     }
 
-//    @Override
-//    protected void onResume(){
-//        super.onResume();
-//        Toast.makeText(getApplicationContext(),"הספר נוסף למועדפים שלי", Toast.LENGTH_SHORT).show();
-//        this.onCreate(null);
-//    }
     public void onClick(View v) {
         if (v == UserDetails) {
             Intent intent = new Intent(OrderPageActivity.this, UserDetailsActivity.class);
@@ -136,9 +90,10 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders");
-                                order.child(orderID).child("collect").setValue(newType);
-                            recreate();
+                            DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("orders");
+                            orderRef.child(orderID).child("collect").setValue(newType);
+                            dialog.dismiss();
+                            fillDetails();
                         }
                     });
             alertDialog.setNegativeButton("חזור לפרטי ההזמנה",
@@ -149,6 +104,12 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
             alertDialog.show();
+            alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+
+                }
+            });
         }
     }
     @Override
@@ -170,4 +131,37 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void fillDetails(){
+        orderID=getIntent().getExtras().getString("orderID");
+        OrderId.setText(orderID );
+
+        ArrayAdapter adapter = new ArrayAdapter(OrderPageActivity.this, android.R.layout.simple_list_item_1);
+        ListView list = (ListView) findViewById(R.id.detListOfBooks);
+
+        DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders").child(orderID);
+        order.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                collectStr = dataSnapshot.child("collect").getValue(String.class);
+
+                UserId.setText(dataSnapshot.child("userID").getValue(String.class));
+                collect.setText(dataSnapshot.child("collect").getValue(String.class));
+                endOfOrder.setText(dataSnapshot.child("endOfOrder").getValue(String.class));
+
+                Iterable<DataSnapshot> listOfBook = dataSnapshot.child("listOfBooks").getChildren();
+                Iterator<DataSnapshot> it = listOfBook.iterator();
+                while(it.hasNext()) {
+                    adapter.add(it.next().getValue(String.class));
+                }
+                list.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+    }
+
 }
