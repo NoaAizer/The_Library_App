@@ -13,6 +13,7 @@
         <activity android:name=".activities.BookDetailsAdminActivity"></activity>
         <activity android:name=".activities.BorrowListAdminActivity" />
         <activity android:name=".activities.FavBooksActivity" />
+        <activity android:name=".activities.UsersListActivity" />
         <activity android:name=".activities.CreditCardActivity" />
         <activity android:name=".activities.LocationActivity" />
         <activity android:name=".activities.SearchResultActivity" />
@@ -32,7 +33,7 @@
         <activity android:name=".activities.UserDetailsActivity" />
         <activity android:name=".activities.MenuAdminActivity" />
         <activity android:name=".activities.RegisterUserActivity" />
-        <activity android:name=".activities.listOfLateActivity" />
+        <activity android:name=".activities.UserDetailsAdminActivity" />
         <activity
             android:name=".activities.MenuUserActivity"
             android:label="@string/title_activity_menu_user" />

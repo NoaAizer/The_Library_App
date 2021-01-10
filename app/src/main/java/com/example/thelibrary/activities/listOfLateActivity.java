@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -12,6 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.LateListAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,9 +20,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class listOfLateActivity extends AppCompatActivity {
+
+    String orderID;
+    ArrayList<String> lates =new ArrayList<>();
+    LateListAdapter lateListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +41,7 @@ public class listOfLateActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
 
-            ArrayAdapter adapter = new ArrayAdapter(listOfLateActivity.this, android.R.layout.simple_list_item_1);
             ListView list = (ListView) findViewById(R.id.listLate);
-            String orderID, userID, fName, lName, phone;
-            String endDate;
             boolean exist = false;
 
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -47,20 +49,15 @@ public class listOfLateActivity extends AppCompatActivity {
                 try {
                     for (DataSnapshot orderSnapshot : dataSnapshot.child("orders").getChildren()) {
                         if (orderSnapshot.child("arrivedToUser").getValue().equals(true)) {
-                            exist = true;
-                            endDate = orderSnapshot.child("endOfOrder").getValue(String.class);
+                            String endDate = orderSnapshot.child("endOfOrder").getValue(String.class);
                             String today = LocalDate.now().toString();
                             SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
                             Date d1 = sdformat.parse(today);
                             Date d2 = sdformat.parse(endDate);
                             if (d1.compareTo(d2) > 0) {
+                                exist = true;
                                 orderID = orderSnapshot.getKey();
-                                userID = orderSnapshot.child("userID").getValue(String.class);
-                                DataSnapshot userSnapshot = dataSnapshot.child("users").child(userID);
-                                fName = userSnapshot.child("firstName").getValue(String.class);
-                                lName = userSnapshot.child("lastName").getValue(String.class);
-                                phone = userSnapshot.child("phone").getValue(String.class);
-                                adapter.add("order num: " +orderID + "\nname: " + fName + " " + lName + "\nphone: " + phone + "\nend: " + endDate);
+                                lates.add(orderID);
                             }
                         }
                     }
@@ -69,7 +66,8 @@ public class listOfLateActivity extends AppCompatActivity {
                         return;
                     }
 
-                    list.setAdapter(adapter);
+                    lateListAdapter = new LateListAdapter(listOfLateActivity.this, R.layout.single_late_list_row, lates);
+                    list.setAdapter(lateListAdapter);
                 }
                 catch(Exception e) {}
             }
