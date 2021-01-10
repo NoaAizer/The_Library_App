@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,8 +21,11 @@ import java.util.ArrayList;
 public class UsersListActivity extends AppCompatActivity {
 
     String userID;
+    String userTZ;
     ArrayList<String> usersID =new ArrayList<>();
+    ArrayList<String> usersTZ =new ArrayList<>();
     UserListAdapter userListAdapter;
+    SearchView searchUserView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,8 @@ public class UsersListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logolab);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        searchUserView = (SearchView) findViewById(R.id.searchUser);
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -42,9 +48,25 @@ public class UsersListActivity extends AppCompatActivity {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                         userID = userSnapshot.getKey();
                         usersID.add(userID);
+                        userTZ = userSnapshot.child(userID).child("tz").getValue(String.class);
+                        usersTZ.add(userTZ);
                 }
-                userListAdapter = new UserListAdapter(UsersListActivity.this, R.layout.single_user_list_row, usersID);
+                userListAdapter = new UserListAdapter(UsersListActivity.this, R.layout.single_user_list_row, usersID, usersTZ);
                 list.setAdapter(userListAdapter);
+
+                searchUserView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        userListAdapter.getFilter().filter(query);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        userListAdapter.getFilter().filter(newText);
+                        return false;
+                    }
+                });
             }
 
 

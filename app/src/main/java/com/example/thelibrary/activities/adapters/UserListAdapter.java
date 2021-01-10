@@ -3,10 +3,12 @@ package com.example.thelibrary.activities.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -25,12 +27,17 @@ public class UserListAdapter extends BaseAdapter {
     Context context;
     int layoutResourceId;
     ArrayList<String> users;
+    ArrayList<String> usersTZ;
+    ArrayList<String> filteredData;
+    private ItemFilter mFilter = new ItemFilter();
 
-    public UserListAdapter(Context context, int layoutResourceId, ArrayList<String> users) {
+    public UserListAdapter(Context context, int layoutResourceId, ArrayList<String> users, ArrayList<String> usersTZ) {
         super();
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.users = users;
+        this.usersTZ = usersTZ;
+        this.filteredData = usersTZ;
     }
 
     @Override
@@ -105,5 +112,42 @@ public class UserListAdapter extends BaseAdapter {
 
     static class AppInfoHolder {
         TextView nameText, IDText, subscriptionText;
+    }
+
+    public Filter getFilter() {
+        if(mFilter==null) {
+
+            mFilter=new ItemFilter();
+        }
+
+        return mFilter;
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<String> filterList = new ArrayList<>();
+                for (int i = 0; i < filteredData.size(); i++) {
+                    if ((filteredData.get(i)).contains(constraint.toString())) {
+                        filterList.add(filteredData.get(i));
+                    }
+                }
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = filteredData.size();
+                results.values = filteredData;
+            }
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            usersTZ = (ArrayList<String>) results.values;
+            notifyDataSetChanged();
+        }
     }
 }
