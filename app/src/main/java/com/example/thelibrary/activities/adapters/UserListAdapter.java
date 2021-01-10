@@ -26,27 +26,30 @@ import java.util.ArrayList;
 public class UserListAdapter extends BaseAdapter {
     Context context;
     int layoutResourceId;
-    ArrayList<String> users;
+    ArrayList<Pair<String, String>> users;
     ArrayList<String> usersTZ;
-    ArrayList<String> filteredData;
+    ArrayList<Pair<String, String>> filteredData;
     private ItemFilter mFilter = new ItemFilter();
 
-    public UserListAdapter(Context context, int layoutResourceId, ArrayList<String> users, ArrayList<String> usersTZ) {
+    public UserListAdapter(Context context, int layoutResourceId, ArrayList<Pair<String, String>> users) {
         super();
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.users = users;
-        this.usersTZ = usersTZ;
-        this.filteredData = usersTZ;
+        // this.usersTZ = usersTZ;
+        this.filteredData = users;
+        // this.filteredDataTZ=usersTZ;
     }
 
     @Override
-    public int getCount() { return users.size();   }
+    public int getCount() {
+        return users.size();
+    }
 
     @Override
-    public String getItem(int position) {
-        int c=0;
-        for(String user : users) {
+    public Pair<String, String> getItem(int position) {
+        int c = 0;
+        for (Pair<String, String> user : users) {
             if (c == position) return user;
             c++;
         }
@@ -61,34 +64,38 @@ public class UserListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        UserListAdapter.AppInfoHolder holder = null;
+        AppInfoHolder holder = null;
 
         if (row == null) {
 
             LayoutInflater inflater = ((Activity) context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
-            holder = new UserListAdapter.AppInfoHolder();
+            holder = new AppInfoHolder();
 
-            holder.nameText  = (TextView) row.findViewById(R.id.single_Name);
-            holder.IDText  = (TextView) row.findViewById(R.id.single_ID);
-            holder.subscriptionText  = (TextView) row.findViewById(R.id.single_subscription);
+            holder.nameText = (TextView) row.findViewById(R.id.single_Name);
+            holder.IDText = (TextView) row.findViewById(R.id.single_ID);
+            holder.subscriptionText = (TextView) row.findViewById(R.id.single_subscription);
             row.setTag(holder);
 
         } else {
-            holder = (UserListAdapter.AppInfoHolder) row.getTag();
+            holder = (AppInfoHolder) row.getTag();
         }
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference().child("users");
-        UserListAdapter.AppInfoHolder finalHolder = holder;
+        AppInfoHolder finalHolder = holder;
 
-        String userID = getItem(position);
+        String userID = getItem(position).first;
+        String userTZ = getItem(position).second;
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String fName = dataSnapshot.child(userID).child("firstName").getValue(String.class);
                 String lName = dataSnapshot.child(userID).child("lastName").getValue(String.class);
+                finalHolder.nameText.setText("שם: ");
                 finalHolder.nameText.append("  " + fName + " " + lName);
-                finalHolder.IDText.append("  " + dataSnapshot.child(userID).child("tz").getValue(String.class));
+                finalHolder.IDText.setText("ת.ז: ");
+                finalHolder.IDText.append("  " + userTZ);
+                finalHolder.subscriptionText.setText("סוג מנוי: ");
                 finalHolder.subscriptionText.append("  " + dataSnapshot.child(userID).child("subscription").getValue(String.class) + "\n");
             }
 
@@ -115,11 +122,9 @@ public class UserListAdapter extends BaseAdapter {
     }
 
     public Filter getFilter() {
-        if(mFilter==null) {
-
-            mFilter=new ItemFilter();
+        if (mFilter == null) {
+            mFilter = new ItemFilter();
         }
-
         return mFilter;
     }
 
@@ -128,9 +133,9 @@ public class UserListAdapter extends BaseAdapter {
         protected FilterResults performFiltering(CharSequence constraint) {
             FilterResults results = new FilterResults();
             if (constraint != null && constraint.length() > 0) {
-                ArrayList<String> filterList = new ArrayList<>();
+                ArrayList<Pair<String, String>> filterList = new ArrayList<>();
                 for (int i = 0; i < filteredData.size(); i++) {
-                    if ((filteredData.get(i)).contains(constraint.toString())) {
+                    if ((filteredData.get(i).second).contains(constraint.toString())) {
                         filterList.add(filteredData.get(i));
                     }
                 }
@@ -146,7 +151,7 @@ public class UserListAdapter extends BaseAdapter {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            usersTZ = (ArrayList<String>) results.values;
+            users = (ArrayList<Pair<String, String>>) results.values;
             notifyDataSetChanged();
         }
     }

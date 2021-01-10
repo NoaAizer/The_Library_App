@@ -20,7 +20,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class TreatmentOrdersActivity extends AppCompatActivity implements View.OnClickListener{
+public class TreatmentOrdersActivity extends AppCompatActivity implements View.OnClickListener {
 
     FireBaseDBOrder fbOr = new FireBaseDBOrder();
     private Button listTA, listDeliver;
@@ -36,12 +36,16 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-        listTA = (Button)findViewById(R.id.listTA);
-        listDeliver = (Button)findViewById(R.id.listDeliver);
+        listTA = (Button) findViewById(R.id.listTA);
+        listDeliver = (Button) findViewById(R.id.listDeliver);
 
         listTA.setOnClickListener(this);
         listDeliver.setOnClickListener(this);
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders");
         ref.orderByChild("complete").equalTo(false).addListenerForSingleValueEvent(new ValueEventListener() {
 
@@ -58,9 +62,9 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
                 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String selectedFromList =(String) (list.getItemAtPosition(position));
+                        String selectedFromList = (String) (list.getItemAtPosition(position));
                         Intent intent = new Intent(TreatmentOrdersActivity.this, OrderPageActivity.class);
-                        intent.putExtra("orderID",selectedFromList);
+                        intent.putExtra("orderID", selectedFromList);
                         startActivity(intent);
                     }
                 });
@@ -72,8 +76,10 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
                 throw databaseError.toException();
             }
         });
+
     }
-    public void onClick(View v){
+
+    public void onClick(View v) {
         if (v == listTA) {
             Intent intent = new Intent(TreatmentOrdersActivity.this, TAListActivity.class);
             startActivity(intent);
@@ -101,7 +107,7 @@ public class TreatmentOrdersActivity extends AppCompatActivity implements View.O
             finish();
         }
         if (id == R.id.menuBackToHome) {
-            Intent home = new Intent (TreatmentOrdersActivity.this, MenuAdminActivity.class);
+            Intent home = new Intent(TreatmentOrdersActivity.this, MenuAdminActivity.class);
             startActivity(home);
         }
         return super.onOptionsItemSelected(item);

@@ -30,7 +30,8 @@
         <SearchView
             android:id="@+id/searchUser"
             android:layout_width="404dp"
-            android:layout_height="31dp">
+            android:layout_height="31dp"
+            android:queryHint="חפש לפי תז">
 
         </SearchView>
 

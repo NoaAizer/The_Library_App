@@ -18,12 +18,24 @@
 
     <TextView
         android:id="@+id/myorder"
-        android:layout_width="307dp"
+        android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:text="ההזמנה שלי"
-        android:textSize="24sp"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/orderAmountRemains"
+        android:layout_width="wrap_content"
+        android:layout_height="41dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="180dp"
+        android:text="כמות הספרים שנותרו לך: "
+        android:textSize="14dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

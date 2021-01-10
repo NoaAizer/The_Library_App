@@ -1,6 +1,7 @@
 package com.example.thelibrary.activities;
 
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -10,10 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.activities.adapters.UserListAdapter;
+import com.example.thelibrary.fireBase.model.FireBaseDBUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -22,8 +22,8 @@ public class UsersListActivity extends AppCompatActivity {
 
     String userID;
     String userTZ;
-    ArrayList<String> usersID =new ArrayList<>();
-    ArrayList<String> usersTZ =new ArrayList<>();
+    ArrayList<Pair<String, String>> usersID = new ArrayList<>();
+    ArrayList<String> usersTZ = new ArrayList<>();
     UserListAdapter userListAdapter;
     SearchView searchUserView;
 
@@ -37,21 +37,18 @@ public class UsersListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         searchUserView = (SearchView) findViewById(R.id.searchUser);
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("users");
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+        new FireBaseDBUser().getUsersListRef().addListenerForSingleValueEvent(new ValueEventListener() {
 
             ListView list = (ListView) findViewById(R.id.usersList);
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                        userID = userSnapshot.getKey();
-                        usersID.add(userID);
-                        userTZ = userSnapshot.child(userID).child("tz").getValue(String.class);
-                        usersTZ.add(userTZ);
+                    userID = userSnapshot.getKey();
+                    userTZ = userSnapshot.child("tz").getValue(String.class);
+                    usersID.add(new Pair(userID, userTZ));
                 }
-                userListAdapter = new UserListAdapter(UsersListActivity.this, R.layout.single_user_list_row, usersID, usersTZ);
+                userListAdapter = new UserListAdapter(UsersListActivity.this, R.layout.single_user_list_row, usersID);
                 list.setAdapter(userListAdapter);
 
                 searchUserView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -76,6 +73,7 @@ public class UsersListActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

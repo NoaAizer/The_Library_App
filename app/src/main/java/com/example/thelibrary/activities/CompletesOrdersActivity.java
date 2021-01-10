@@ -33,7 +33,6 @@ public class CompletesOrdersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
 
-
         DatabaseReference ordersRef = new FireBaseDBOrder().getOrdersListFromDB();
         ordersRef.orderByChild("arrivedToUser").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -54,8 +53,9 @@ public class CompletesOrdersActivity extends AppCompatActivity {
         // Initialize adapter and set adapter to list view
         CompleteOrdersAdapter ordersAd = new CompleteOrdersAdapter(this, orders);
         lvOrder.setAdapter(ordersAd);
-        //bookAd.notifyDataSetChanged();
+
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -74,7 +74,7 @@ public class CompletesOrdersActivity extends AppCompatActivity {
             finish();
         }
         if (id == R.id.menuBackToHome) {
-           Intent home = new Intent (CompletesOrdersActivity.this, MenuAdminActivity.class);
+            Intent home = new Intent(CompletesOrdersActivity.this, MenuAdminActivity.class);
             startActivity(home);
         }
         return super.onOptionsItemSelected(item);

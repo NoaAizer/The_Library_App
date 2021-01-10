@@ -22,30 +22,31 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class BorrowListAdminAdapter extends BaseAdapter  implements Filterable {
+public class BorrowListAdminAdapter extends BaseAdapter implements Filterable {
     Context context;
-    ArrayList<Pair<Pair<String,String>,String>> books;
+    ArrayList<Pair<Pair<String, String>, String>> books;
     int layoutResourceId;
-    protected  ArrayList<Pair<Pair<String,String>,String>> filteredData;
+    protected ArrayList<Pair<Pair<String, String>, String>> filteredData;
     private ItemFilter mFilter = new ItemFilter();
 
-    public BorrowListAdminAdapter(Context context, int layoutResourceId,  ArrayList<Pair<Pair<String,String>,String>> books) {
+    public BorrowListAdminAdapter(Context context, int layoutResourceId, ArrayList<Pair<Pair<String, String>, String>> books) {
         super();
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.books = books;
-        filteredData=books;
-      //  getFilter();
+        this.filteredData = books;
     }
 
 
     @Override
-    public int getCount() { return books.size(); }
+    public int getCount() {
+        return books.size();
+    }
 
     @Override
-    public Pair<Pair<String,String>,String> getItem(int position) {
-        int c=0;
-        for(Pair<Pair<String,String>,String> book : books) {
+    public Pair<Pair<String, String>, String> getItem(int position) {
+        int c = 0;
+        for (Pair<Pair<String, String>, String> book : books) {
             if (c == position) return book;
             c++;
         }
@@ -72,9 +73,9 @@ public class BorrowListAdminAdapter extends BaseAdapter  implements Filterable {
 
             holder.nameText = (TextView) row.findViewById(R.id.singleBorrowName);
             holder.authorText = (TextView) row.findViewById(R.id.singleBorrowAuthor);
-            holder.bookIDText  = (TextView) row.findViewById(R.id.singleBorrowID);
-            holder.endOfOrderText  = (TextView) row.findViewById(R.id.singleBorrowDate);
-            holder.amountText  = (TextView) row.findViewById(R.id.singleBorrowAmount);
+            holder.bookIDText = (TextView) row.findViewById(R.id.singleBorrowID);
+            holder.endOfOrderText = (TextView) row.findViewById(R.id.singleBorrowDate);
+            holder.amountText = (TextView) row.findViewById(R.id.singleBorrowAmount);
             row.setTag(holder);
 
         } else {
@@ -104,48 +105,45 @@ public class BorrowListAdminAdapter extends BaseAdapter  implements Filterable {
         return row;
     }
 
-
     static class AppInfoHolder {
-    TextView nameText, authorText ,bookIDText, endOfOrderText , amountText;
-}
+        TextView nameText, authorText, bookIDText, endOfOrderText, amountText;
+    }
 
     public Filter getFilter() {
-        if(mFilter==null) {
-
-            mFilter=new ItemFilter();
+        if (mFilter == null) {
+            mFilter = new ItemFilter();
         }
-
         return mFilter;
     }
 
-private class ItemFilter extends Filter {
-    @Override
-    protected FilterResults performFiltering(CharSequence constraint) {
-        FilterResults results=new FilterResults();
-        if(constraint!=null && constraint.length()>0){
-            ArrayList<Pair<Pair<String,String>,String>> filterList=new ArrayList<Pair<Pair<String,String>,String>>();
-            for(int i=0;i<filteredData.size();i++){
-                if((filteredData.get(i).second)
-                        .contains(constraint.toString())) {
-                    filterList.add(filteredData.get(i));
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            if (constraint != null && constraint.length() > 0) {
+                ArrayList<Pair<Pair<String, String>, String>> filterList = new ArrayList<Pair<Pair<String, String>, String>>();
+                for (int i = 0; i < filteredData.size(); i++) {
+                    if ((filteredData.get(i).second).contains(constraint.toString())) {
+                        filterList.add(filteredData.get(i));
+                    }
                 }
+                results.count = filterList.size();
+                results.values = filterList;
+            } else {
+                results.count = filteredData.size();
+                results.values = filteredData;
             }
-            results.count=filterList.size();
-            results.values=filterList;
-        }else{
-            results.count=filteredData.size();
-            results.values=filteredData;
+            return results;
         }
-        return results;
-    }
-    @SuppressWarnings("unchecked")
-    @Override
-    protected void publishResults(CharSequence constraint, FilterResults results) {
-        books = (ArrayList<Pair<Pair<String,String>,String>>) results.values;
-        notifyDataSetChanged();
-    }
 
-}
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            books = (ArrayList<Pair<Pair<String, String>, String>>) results.values;
+            notifyDataSetChanged();
+        }
+
+    }
 }
 
 

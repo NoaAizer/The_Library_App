@@ -12,6 +12,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,7 @@ import java.util.ArrayList;
 
 public class MyOrderActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private Button save_order, cancel_order;
+    private TextView amountTxt;
     private RadioButton TA, deliver;
 
 
@@ -56,6 +58,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
 
         orderListView = (ListView) findViewById(R.id.listBooks);
 
+        amountTxt = findViewById(R.id.orderAmountRemains);
         save_order = findViewById(R.id.finish);
         cancel_order = findViewById(R.id.cancelOrder);
         TA = findViewById(R.id.listTA);
@@ -77,6 +80,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 shopID = dataSnapshot.child("users").child(userID).child("shoppingID").getValue(String.class);
                 amountOfBooksRemains = dataSnapshot.child("users").child(userID).child("amountOfBooksRemains").getValue(Long.class).intValue();
                 bookList = (ArrayList<String>) dataSnapshot.child("shoppingList").child(shopID).child("bookList").getValue();
+                amountTxt.append(amountOfBooksRemains+"");
 
 
                 if (bookList == null || bookList.isEmpty()) {

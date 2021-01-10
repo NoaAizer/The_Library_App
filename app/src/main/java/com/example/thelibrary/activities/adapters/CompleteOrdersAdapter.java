@@ -17,7 +17,6 @@ public class CompleteOrdersAdapter extends BaseAdapter {
     ArrayList<OrderObj> orders;
 
 
-
     public CompleteOrdersAdapter(Context context, ArrayList<OrderObj> orders) {
         super();
         this.context = context;

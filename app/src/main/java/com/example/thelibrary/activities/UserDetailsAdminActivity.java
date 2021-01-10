@@ -35,7 +35,7 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
         sub = (TextView) findViewById(R.id.detSub);
     }
 
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         Intent intent = getIntent();
         String userID = intent.getExtras().getString("userID");
@@ -76,7 +76,7 @@ public class UserDetailsAdminActivity extends AppCompatActivity {
             finish();
         }
         if (id == R.id.menuBackToHome) {
-            Intent menu = new Intent (UserDetailsAdminActivity.this, MenuAdminActivity.class);
+            Intent menu = new Intent(UserDetailsAdminActivity.this, MenuAdminActivity.class);
             startActivity(menu);
         }
         return super.onOptionsItemSelected(item);

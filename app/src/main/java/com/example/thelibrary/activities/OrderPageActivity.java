@@ -29,7 +29,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
 
     private TextView OrderId, UserId, collect, endOfOrder;
     private Button OrderComplete, UserDetails, changeOrderTypeBtn;
-    String orderID;
+    String orderID, userId;
     String collectStr;
 
     @Override
@@ -59,8 +59,8 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
 
     public void onClick(View v) {
         if (v == UserDetails) {
-            Intent intent = new Intent(OrderPageActivity.this, UserDetailsActivity.class);
-            startActivity(intent.putExtra("userID", UserId.toString()));
+            Intent intent = new Intent(OrderPageActivity.this, UserDetailsAdminActivity.class);
+            startActivity(intent.putExtra("userID", userId));
         }
         else if(v == OrderComplete)
         {
@@ -74,6 +74,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
             else {
                 order.child(orderID).child("statusDeliver").setValue("ההזמנה ממתינה למשלוח");
             }
+            finish();
         }
         if(v == changeOrderTypeBtn){
             String newType;
@@ -104,12 +105,6 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
                         }
                     });
             alertDialog.show();
-            alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
-                @Override
-                public void onDismiss(DialogInterface dialog) {
-
-                }
-            });
         }
     }
     @Override
@@ -144,8 +139,8 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 collectStr = dataSnapshot.child("collect").getValue(String.class);
-
-                UserId.setText(dataSnapshot.child("userID").getValue(String.class));
+                userId=dataSnapshot.child("userID").getValue(String.class);
+                UserId.setText(userId);
                 collect.setText(dataSnapshot.child("collect").getValue(String.class));
                 endOfOrder.setText(dataSnapshot.child("endOfOrder").getValue(String.class));
 
