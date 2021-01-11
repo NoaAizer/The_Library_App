@@ -27,9 +27,9 @@ import java.util.Iterator;
 
 public class OrderPageActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private TextView OrderId, UserId, collect, endOfOrder;
+    private TextView OrderId, UserTz, collect, endOfOrder;
     private Button OrderComplete, UserDetails, changeOrderTypeBtn;
-    String orderID, userId;
+    String orderID, userTz;
     String collectStr;
 
     @Override
@@ -42,7 +42,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
         getSupportActionBar().setDisplayUseLogoEnabled(true);
 
         OrderId = (TextView) findViewById(R.id.detOrderID);
-        UserId = (TextView) findViewById(R.id.detUserID);
+        UserTz = (TextView) findViewById(R.id.detUserTZ);
         collect = (TextView) findViewById(R.id.detDeliver);
         endOfOrder = (TextView) findViewById(R.id.detEndOfOrder);
 
@@ -60,7 +60,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (v == UserDetails) {
             Intent intent = new Intent(OrderPageActivity.this, UserDetailsAdminActivity.class);
-            startActivity(intent.putExtra("userID", userId));
+            startActivity(intent.putExtra("userID", userTz));
         }
         else if(v == OrderComplete)
         {
@@ -134,20 +134,22 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
         ArrayAdapter adapter = new ArrayAdapter(OrderPageActivity.this, android.R.layout.simple_list_item_1);
         ListView list = (ListView) findViewById(R.id.detListOfBooks);
 
-        DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders").child(orderID);
-        order.addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                collectStr = dataSnapshot.child("collect").getValue(String.class);
-                userId=dataSnapshot.child("userID").getValue(String.class);
-                UserId.setText(userId);
-                collect.setText(dataSnapshot.child("collect").getValue(String.class));
-                endOfOrder.setText(dataSnapshot.child("endOfOrder").getValue(String.class));
+                collectStr = dataSnapshot.child("orders").child(orderID).child("collect").getValue(String.class);
 
-                Iterable<DataSnapshot> listOfBook = dataSnapshot.child("listOfBooks").getChildren();
+                userTz = dataSnapshot.child("orders").child(orderID).child("userTZ").getValue(String.class);
+                UserTz.setText(userTz);
+                collect.setText(dataSnapshot.child("orders").child(orderID).child("collect").getValue(String.class));
+                endOfOrder.setText(dataSnapshot.child("orders").child(orderID).child("endOfOrder").getValue(String.class));
+
+                Iterable<DataSnapshot> listOfBook = dataSnapshot.child("orders").child(orderID).child("listOfBooks").getChildren();
                 Iterator<DataSnapshot> it = listOfBook.iterator();
                 while(it.hasNext()) {
-                    adapter.add(it.next().getValue(String.class));
+                    String bookId = it.next().getValue(String.class);
+                    adapter.add(dataSnapshot.child("books").child(bookId).child("name").getValue(String.class));
                 }
                 list.setAdapter(adapter);
             }
