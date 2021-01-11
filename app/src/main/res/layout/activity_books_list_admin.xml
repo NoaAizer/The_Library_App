@@ -23,8 +23,9 @@
         android:id="@+id/lvBookAdmin"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:divider="#0000CC"
-        android:dividerHeight="0.1dp"></ListView>
+        android:divider="@color/purple_500"
+        android:dividerHeight="0.5dp"
+        android:footerDividersEnabled="true"></ListView>
 
 
 </LinearLayout>
