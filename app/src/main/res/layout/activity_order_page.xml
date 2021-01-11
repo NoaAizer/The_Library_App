@@ -15,7 +15,9 @@
         android:layout_marginTop="48dp"
         android:gravity="right|center_vertical"
         android:text="דף הזמנה "
-        android:textSize="30sp"
+        android:fontFamily="@font/choco"
+        android:textColor="@color/blue2"
+        android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -164,6 +166,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="28dp"
         android:text="איזור אישי של המנוי"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -174,6 +177,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginBottom="28dp"
         android:text="אשר השלמת הזמנה"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -184,6 +188,7 @@
         android:layout_marginEnd="4dp"
         android:layout_marginBottom="3dp"
         android:text="שינוי צורת משלוח"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/detEndOfOrder"
         app:layout_constraintEnd_toStartOf="@+id/hedUserTZ" />
 </androidx.constraintlayout.widget.ConstraintLayout>

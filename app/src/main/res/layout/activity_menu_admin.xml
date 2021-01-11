@@ -42,6 +42,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת מנויים"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/booksList" />
 
@@ -52,6 +53,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת מאחרים"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clientsList" />
 
@@ -62,6 +64,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת הזמנות לטיפול"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/laterList" />
 
@@ -72,6 +75,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginEnd="56dp"
         android:text="רשימת הספרים"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helloAdmin" />
 
@@ -82,6 +86,7 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="56dp"
         android:text="ספרים מושאלים"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/returnBook" />
 
@@ -92,6 +97,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="56dp"
         android:text="הזמנות שהושלמו"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loansList" />
 
@@ -102,6 +108,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="56dp"
         android:text="החזרת ספרים"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ordersCompletes" />
 
@@ -114,6 +121,7 @@
         android:layout_marginEnd="290dp"
         android:layout_marginBottom="78dp"
         android:text="+"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/loansList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

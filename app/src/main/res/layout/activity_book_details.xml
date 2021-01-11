@@ -14,7 +14,9 @@
         android:layout_marginTop="43dp"
         android:gravity="right|center_vertical"
         android:text="פרטי הספר"
-        android:textSize="30sp"
+        android:fontFamily="@font/choco"
+        android:textColor="@color/blue2"
+        android:textSize="38sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -257,6 +259,7 @@
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="88dp"
         android:text="דרג"
+        android:textColor="#EFF2F3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/ratingBar" />
 

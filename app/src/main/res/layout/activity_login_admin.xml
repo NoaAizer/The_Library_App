@@ -55,7 +55,7 @@
         android:background="@color/white"
         android:backgroundTint="#FFFFFF"
         android:enabled="true"
-        android:text="@string/action_sign_in"
+        android:text="כניסה"
         android:textColor="#FFFFFF"
         android:textColorHighlight="#FFFFFF"
         android:textColorLink="#9C27B0"

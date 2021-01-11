@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="מספר הזמנה: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 
     <TextView
@@ -19,6 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="שם: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 
     <TextView
@@ -27,6 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="טלפון: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 
     <TextView
@@ -35,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="תאריך סיום השאלה: "
+        android:textColor="#00838F"
         android:textSize="15dp"/>
 
     <TextView
@@ -43,5 +47,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="רשימת ספרים: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 </LinearLayout>

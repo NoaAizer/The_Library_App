@@ -14,6 +14,8 @@
         android:layout_marginTop="16dp"
         android:gravity="right|center_vertical"
         android:text="הזמנות במשלוח "
+        android:fontFamily="@font/choco"
+        android:textColor="@color/blue2"
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

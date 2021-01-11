@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="מספר הזמנה: "
+        android:textColor="#00838F"
         android:textSize="15dp"/>
 
     <TextView
@@ -20,12 +21,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="מצב הזמנה: "
+        android:textColor="#00838F"
         android:textSize="15dp"/>
 
     <TextView
         android:id="@+id/bookList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="רשימת ספרים: " />
+        android:text="רשימת ספרים: "
+        android:textColor="#00838F"/>
 
 </LinearLayout>

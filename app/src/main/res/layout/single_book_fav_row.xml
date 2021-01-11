@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:text="         "
-            android:textColor="#00838F"
+            android:textColor="#006064"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text=""
-            android:textColor="#00838F"
+            android:textColor="#006064"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -47,6 +47,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="27dp"
             android:text="הסר מהמועדפים"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="ז'אנר: "
+                android:textColor="#00838F"
                 android:textSize="15dp" />
 
             <TextView
@@ -70,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="דירוג: "
+                android:textColor="#00838F"
                 android:textSize="15dp" />
 
             <TextView
@@ -78,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:text="במלאי?"
+                android:textColor="#00838F"
                 android:textSize="15dp" />
 
 

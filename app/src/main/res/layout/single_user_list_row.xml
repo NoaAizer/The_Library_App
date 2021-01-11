@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="שם: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 
     <TextView
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="ת.ז: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 
     <TextView
@@ -28,5 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:text="סוג מנוי: "
+        android:textColor="#00838F"
         android:textSize="15dp" />
 </LinearLayout>

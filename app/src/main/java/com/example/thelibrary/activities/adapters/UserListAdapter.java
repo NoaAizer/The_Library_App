@@ -27,7 +27,6 @@ public class UserListAdapter extends BaseAdapter {
     Context context;
     int layoutResourceId;
     ArrayList<Pair<String, String>> users;
-    ArrayList<String> usersTZ;
     ArrayList<Pair<String, String>> filteredData;
     private ItemFilter mFilter = new ItemFilter();
 
@@ -36,9 +35,7 @@ public class UserListAdapter extends BaseAdapter {
         this.layoutResourceId = layoutResourceId;
         this.context = context;
         this.users = users;
-        // this.usersTZ = usersTZ;
         this.filteredData = users;
-        // this.filteredDataTZ=usersTZ;
     }
 
     @Override

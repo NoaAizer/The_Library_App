@@ -23,7 +23,6 @@ public class UsersListActivity extends AppCompatActivity {
     String userID;
     String userTZ;
     ArrayList<Pair<String, String>> usersID = new ArrayList<>();
-    ArrayList<String> usersTZ = new ArrayList<>();
     UserListAdapter userListAdapter;
     SearchView searchUserView;
 

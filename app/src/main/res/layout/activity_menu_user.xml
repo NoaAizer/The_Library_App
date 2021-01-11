@@ -55,6 +55,7 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:text="חיפוש ספר"
+        android:textColor="@color/white"
         android:drawableLeft="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toTopOf="@+id/checkALoan"
         app:layout_constraintStart_toStartOf="parent" />
@@ -64,8 +65,8 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:drawableLeft="@drawable/bt_ic_cardholder_name_dark"
-
         android:text="איזור אישי"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/myBooks"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -75,6 +76,7 @@
         android:layout_height="100dp"
         android:drawableLeft="@drawable/icon_book"
         android:text="ההשאלות שלי"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -83,6 +85,7 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:text="מעקב אחר הזמנה"
+        android:textColor="@color/white"
         android:drawableLeft="@drawable/icon_orders"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

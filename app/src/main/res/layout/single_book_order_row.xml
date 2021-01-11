@@ -24,6 +24,7 @@
             android:gravity="end|center_vertical"
             android:padding="2dp"
             android:text=""
+            android:textColor="#006064"
             android:textSize="20dp" />
 
         <TextView
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="מחבר: "
+            android:textColor="#00838F"
             android:textSize="15sp" />
 
     </LinearLayout>

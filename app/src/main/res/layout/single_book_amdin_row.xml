@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/singleAdminName"
             android:text=""
+            android:textColor="#006064"
             android:textSize="22sp"
             android:layout_gravity="end"/>
 
@@ -36,12 +37,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:text="מחבר: "
+            android:textColor="#00838F"
             android:textSize="20sp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/singleAdminGenre"
             android:text="ז'אנר: "
+            android:textColor="#00838F"
             android:textSize="20sp"
             android:layout_gravity="end"/>
         <TextView
@@ -49,6 +52,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/singleAdminAmount"
             android:text="כמות במלאי: "
+            android:textColor="#00838F"
             android:textSize="20sp"
             android:layout_gravity="end"/>
 
