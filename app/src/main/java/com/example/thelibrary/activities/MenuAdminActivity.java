@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.Menu;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBOrder;
@@ -52,6 +55,24 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         clientsList_btn.setOnClickListener(this);
         add_btn.setOnClickListener(this);
         laterList_btn.setOnClickListener(this);
+
+        Drawable drawable_book = ContextCompat.getDrawable(MenuAdminActivity.this,R.drawable.icon_books);
+        drawable_book.setBounds(0, 0, (int)(drawable_book.getIntrinsicWidth()*0.2),
+                (int)(drawable_book.getIntrinsicHeight()*0.2));
+        ScaleDrawable sd_book = new ScaleDrawable(drawable_book, 0, 1, 1);
+        booksList_btn.setCompoundDrawables(sd_book.getDrawable(), null, null, null);
+
+        Drawable drawable_cart = ContextCompat.getDrawable(MenuAdminActivity.this,R.drawable.icon_cart);
+        drawable_cart.setBounds(0, 0, (int)(drawable_cart.getIntrinsicWidth()*0.2),
+                (int)(drawable_cart.getIntrinsicHeight()*0.2));
+        ScaleDrawable sd_cart = new ScaleDrawable(drawable_cart, 0, 1, 1);
+        loansList_btn.setCompoundDrawables(sd_cart.getDrawable(), null, null, null);
+
+        Drawable drawable_hurry = ContextCompat.getDrawable(MenuAdminActivity.this,R.drawable.icon_hurry);
+        drawable_hurry.setBounds(0, 0, (int)(drawable_hurry.getIntrinsicWidth()*0.6),
+                (int)(drawable_cart.getIntrinsicHeight()*0.2));
+        ScaleDrawable sd_hurry = new ScaleDrawable(drawable_hurry, 0, 1, 1);
+        laterList_btn.setCompoundDrawables(sd_hurry.getDrawable(), null, null, null);
 
     }
 

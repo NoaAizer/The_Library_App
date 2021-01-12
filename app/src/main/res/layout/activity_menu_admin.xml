@@ -27,12 +27,12 @@
 
     <Button
         android:id="@+id/clientsList"
-        android:layout_width="156dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="167dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="28dp"
-        android:text="רשימת מנויים"
         android:drawableLeft="@drawable/bt_ic_cardholder_name_dark"
+        android:text="רשימת מנויים"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/booksList" />
@@ -40,60 +40,60 @@
 
     <Button
         android:id="@+id/laterList"
-        android:layout_width="156dp"
-        android:layout_height="93dp"
+        android:layout_width="167dp"
+        android:layout_height="109dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="40dp"
-        android:text="רשימת מאחרים"
+        android:layout_marginEnd="30dp"
         android:drawableLeft="@drawable/icon_hurry"
+        android:text="רשימת מאחרים"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loansList" />
 
     <Button
         android:id="@+id/loansList"
-        android:layout_width="156dp"
-        android:layout_height="93dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="40dp"
-        android:text="מרכז ההזמנות"
+        android:layout_width="167dp"
+        android:layout_height="109dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="28dp"
         android:drawableLeft="@drawable/icon_cart"
+        android:text="מרכז ההזמנות"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helloAdmin" />
 
     <Button
         android:id="@+id/booksList"
-        android:layout_width="156dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="100dp"
-        android:text="מאגר הספרים"
+        android:layout_width="167dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="52dp"
         android:drawableLeft="@drawable/icon_books"
+        android:text="מאגר הספרים"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/helloAdmin" />
 
     <Button
         android:id="@+id/returnBook"
-        android:layout_width="156dp"
-        android:layout_height="93dp"
+        android:layout_width="167dp"
+        android:layout_height="109dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="40dp"
-        android:text="החזרת ספרים"
+        android:layout_marginEnd="30dp"
         android:drawableLeft="@drawable/icon_book"
+        android:text="החזרת ספרים"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/laterList" />
 
     <Button
         android:id="@+id/adding"
-        android:layout_width="156dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="40dp"
+        android:layout_width="167dp"
+        android:layout_height="109dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="28dp"
-        android:text="הוספת ספר"
         android:drawableLeft="@drawable/icon_plus"
+        android:text="הוספת ספר"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clientsList" />
