@@ -79,7 +79,10 @@ public class orderTrackingAdapter extends BaseAdapter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 finalHolder.orderIDText.append("  " + orderID);
-                finalHolder.statusText.append(dataSnapshot.child("orders").child(orderID).child("statusDeliver").getValue(String.class));
+                if(dataSnapshot.child("orders").child(orderID).child("statusDeliver").getValue(String.class)==null)
+                finalHolder.statusText.setText("ההזמנה הועברה לטיפול הספרייה");
+                else
+                    finalHolder.statusText.setText(dataSnapshot.child("orders").child(orderID).child("statusDeliver").getValue(String.class));
                 ArrayList<String> bookList = (ArrayList<String>) dataSnapshot.child("orders").child(orderID).child("listOfBooks").getValue();
                 String ListOfNames = "";
                 for(int i=0; i<bookList.size(); i++)
