@@ -1,47 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="right"
-    android:orientation="vertical"
-    >
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:paddingTop="10dp"
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/singleCOrderID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="#006064"
-        android:textSize="20dp"
-        android:textStyle="bold" />
-
-
-    <TextView
-        android:id="@+id/singleCType"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="סוג הזמנה: "
-        android:textColor="#00838F"
-        android:textSize="15dp" />
+        android:paddingBottom="2dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/singleCDate"
+        <TextView
+            android:id="@+id/singleCOrderID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text=""
+            android:textColor="@color/purple_500"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:id="@+id/single_orderIdHed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="מספר הזמנה: "
+            android:textColor="#00838F"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="תאריך סיום השאלה: "
-        android:textColor="#00838F"
-        android:textSize="15dp" />
+        android:paddingBottom="2dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/singleCUserID"
+
+        <TextView
+            android:id="@+id/singleCType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15dp"/>
+
+
+        <TextView
+            android:id="@+id/singleCTypeHed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="סוג הזמנה: "
+            android:textColor="#00838F"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="תז המנוי: "
-        android:textColor="#00838F"
-        android:textSize="15dp" />
+        android:paddingBottom="2dp"
+        android:orientation="horizontal">
 
+
+        <TextView
+            android:id="@+id/singleCDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15dp"/>
+
+
+        <TextView
+            android:id="@+id/single_dateHed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="תאריך סיום השאלה: "
+            android:textColor="#00838F"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:paddingBottom="2dp"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/singleCUserID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black"
+            android:textSize="15dp"/>
+
+
+        <TextView
+            android:id="@+id/single_tzHed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ת.ז מנוי: "
+            android:textColor="#00838F"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
 </LinearLayout>
+
+
+
+
+
+
+
+

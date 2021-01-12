@@ -62,7 +62,7 @@ public class listOfLateActivity extends AppCompatActivity {
                         }
                     }
                     if (!exist) {
-                        Toast.makeText(getApplicationContext(), "אין הזמנות ברשימה", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "אין מנויים ברשימה", Toast.LENGTH_LONG).show();
                         return;
                     }
 

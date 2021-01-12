@@ -34,6 +34,8 @@
         <activity android:name=".activities.MenuAdminActivity" />
         <activity android:name=".activities.RegisterUserActivity" />
         <activity android:name=".activities.UserDetailsAdminActivity" />
+        <activity android:name=".activities.SearchResAdminActivity"/>
+
         <activity
             android:name=".activities.MenuUserActivity"
             android:label="@string/title_activity_menu_user" />

@@ -97,6 +97,7 @@ public class LateListAdapter extends BaseAdapter {
 
             }
         });
+
         return row;
     }
 

@@ -88,12 +88,9 @@ public class UserListAdapter extends BaseAdapter {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String fName = dataSnapshot.child(userID).child("firstName").getValue(String.class);
                 String lName = dataSnapshot.child(userID).child("lastName").getValue(String.class);
-                finalHolder.nameText.setText("שם: ");
-                finalHolder.nameText.append("  " + fName + " " + lName);
-                finalHolder.IDText.setText("ת.ז: ");
-                finalHolder.IDText.append("  " + userTZ);
-                finalHolder.subscriptionText.setText("סוג מנוי: ");
-                finalHolder.subscriptionText.append("  " + dataSnapshot.child(userID).child("subscription").getValue(String.class) + "\n");
+                finalHolder.nameText.setText("  " + fName + " " + lName);
+                finalHolder.IDText.setText("  " + userTZ);
+                finalHolder.subscriptionText.setText("  " + dataSnapshot.child(userID).child("subscription").getValue(String.class) + "\n");
             }
 
             @Override

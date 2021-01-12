@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MenuAdminActivity extends AppCompatActivity implements View.OnClickListener {
     private Button loansList_btn, booksList_btn, returnBook_btn,
-            clientsList_btn, add_btn, finishOrder_btn, laterList_btn, borrows_btn;
+            clientsList_btn, add_btn, laterList_btn;
     private boolean hasOrder = false;
 
     @Override
@@ -44,19 +44,14 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         returnBook_btn = (Button) findViewById(R.id.returnBook);
         clientsList_btn = (Button) findViewById(R.id.clientsList);
         add_btn = (Button) findViewById(R.id.adding);
-        finishOrder_btn = (Button) findViewById(R.id.ordersCompletes);
         laterList_btn = (Button) findViewById(R.id.laterList);
-        borrows_btn = (Button) findViewById(R.id.labBorrowBooks);
-
 
         loansList_btn.setOnClickListener(this);
         booksList_btn.setOnClickListener(this);
         returnBook_btn.setOnClickListener(this);
         clientsList_btn.setOnClickListener(this);
         add_btn.setOnClickListener(this);
-        finishOrder_btn.setOnClickListener(this);
         laterList_btn.setOnClickListener(this);
-        borrows_btn.setOnClickListener(this);
 
     }
 
@@ -65,10 +60,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
             createOrderDialog();
         }
         if (v == booksList_btn) {
-            Intent intent = new Intent(MenuAdminActivity.this, SearchBookActivity.class);
-            intent.putExtra("type","admin");
-            startActivity(intent);
-
+            createBooksDialog();
         }
         if (v == laterList_btn) {
             Intent intent = new Intent(MenuAdminActivity.this, listOfLateActivity.class);
@@ -109,8 +101,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
                                 if (!hasOrder) {
                                     Toast.makeText(getApplicationContext(), "למנוי זה אין הזמנות להחזרה במערכת. נסה שוב!", Toast.LENGTH_LONG).show();
                                     return;
-                                }
-                                else {
+                                } else {
                                     Intent intent = new Intent(MenuAdminActivity.this, ReturnBookActivity.class);
                                     intent.putExtra("userTZ", userTZ);
                                     startActivity(intent);
@@ -147,15 +138,6 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
             startActivity(intent);
         }
 
-        if(v == finishOrder_btn){
-            Intent intent = new Intent(MenuAdminActivity.this, CompletesOrdersActivity.class);
-            startActivity(intent);
-        }
-
-        if(v == borrows_btn){
-            Intent intent = new Intent(MenuAdminActivity.this, BorrowListAdminActivity.class);
-            startActivity(intent);
-        }
     }
 
     public void createOrderDialog() {
@@ -185,6 +167,35 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         d.show();
 
     }
+    public void createBooksDialog() {
+        final Dialog d = new Dialog(this);
+        Button stockBtn, borrowedBtn;
+        d.setContentView(R.layout.admin_book_dialog);
+        d.setTitle("מאגר הספרים:");
+        d.setCancelable(true);
+
+        stockBtn = d.findViewById(R.id.stockBooks);
+        stockBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuAdminActivity.this, SearchBookActivity.class);
+                intent.putExtra("type","admin");
+                startActivity(intent);
+            }
+        });
+        borrowedBtn = (Button) d.findViewById(R.id.borrowedBooks);
+        borrowedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuAdminActivity.this, BorrowListAdminActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        d.show();
+
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -201,7 +212,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         int id = item.getItemId();
         if (id == R.id.menuLogOut) {
             finish();
-            Intent login = new Intent (MenuAdminActivity.this, LoginAdminActivity.class);
+            Intent login = new Intent(MenuAdminActivity.this, LoginAdminActivity.class);
             startActivity(login);
         }
         return super.onOptionsItemSelected(item);

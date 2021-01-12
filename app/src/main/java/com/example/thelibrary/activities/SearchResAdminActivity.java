@@ -96,7 +96,7 @@ public class SearchResAdminActivity extends AppCompatActivity implements Compoun
                     }
                 }
                 if (books == null || books.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "אין ספרים להצגה", Toast.LENGTH_LONG).show();
+                    Toast .makeText(getApplicationContext(), "אין ספרים להצגה", Toast.LENGTH_LONG).show();
                     return;
                 }
                 initializeAdapter(books);
@@ -114,18 +114,21 @@ public class SearchResAdminActivity extends AppCompatActivity implements Compoun
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         ArrayList<BookObj> filtered = new ArrayList<>();
-        if (inStock.isChecked()) {
+        if (inStock.isChecked() && !notInStock.isChecked()) {
             for (BookObj b : books)
                 if (b.getAmount() != 0)
                     filtered.add(b);
             initializeAdapter(filtered);
 
         }
-        else if (inStock.isChecked()){
+         else if (notInStock.isChecked() && !inStock.isChecked()){
             for (BookObj b : books)
                 if (b.getAmount() == 0)
                     filtered.add(b);
             initializeAdapter(filtered);
+        }
+         else if(notInStock.isChecked() && inStock.isChecked()){
+            Toast .makeText(getApplicationContext(), "ניתן לסמן רק אפשרות אחת", Toast.LENGTH_LONG).show();
         }
         else {
             initializeAdapter(books);
