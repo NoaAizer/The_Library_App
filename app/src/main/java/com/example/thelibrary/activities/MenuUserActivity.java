@@ -101,7 +101,7 @@ public class MenuUserActivity extends AppCompatActivity implements View.OnClickL
         myBooks_btn.setOnClickListener(this);
         searchBook_btn.setOnClickListener(this);
         ratingBooksImg.setOnClickListener(this);
-        Drawable drawable = ContextCompat.getDrawable(MenuUserActivity.this,R.drawable.icon_book);
+        Drawable drawable = ContextCompat.getDrawable(MenuUserActivity.this,R.drawable.icon_books);
         drawable.setBounds(0, 0, (int)(drawable.getIntrinsicWidth()*0.2),
                 (int)(drawable.getIntrinsicHeight()*0.2));
         ScaleDrawable sd = new ScaleDrawable(drawable, 0, 1, 1);
