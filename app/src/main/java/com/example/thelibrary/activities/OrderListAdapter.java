@@ -67,11 +67,8 @@ public class OrderListAdapter extends ArrayAdapter<String> implements CompoundBu
         myRef.child("books").child(bookID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-//                bookName[0] = ;
-//                authorName[0] = ;
-                finalHolder.txtTitle1.append( dataSnapshot.child("name").getValue(String.class));
-                finalHolder.txtTitle2.append("  " + dataSnapshot.child("author").getValue(String.class));
-                // holder.chkSelect.setChecked(true);
+                finalHolder.txtTitle1.setText( dataSnapshot.child("name").getValue(String.class));
+                finalHolder.txtTitle2.setText("  " + dataSnapshot.child("author").getValue(String.class));
                 finalHolder.chkSelect.setTag(position);
                 finalHolder.chkSelect.setChecked(mCheckStates.get(position, false));
                 finalHolder.chkSelect.setOnCheckedChangeListener(OrderListAdapter.this);

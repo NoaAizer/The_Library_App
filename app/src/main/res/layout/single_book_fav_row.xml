@@ -4,21 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:paddingTop="10dp"
     >
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/singleFavAuthor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="right"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
             android:text="         "
-            android:textColor="#006064"
+            android:textColor="@color/purple_500"
             android:textSize="15dp"
             android:textStyle="bold" />
 
@@ -27,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text=""
-            android:textColor="#006064"
+            android:textColor="@color/purple_500"
             android:textSize="20dp"
             android:textStyle="bold" />
 
@@ -38,13 +45,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:orientation="horizontal">
+        android:layout_margin="5dp"
+    android:orientation="horizontal">
 
         <Button
             android:id="@+id/singleFavRemoveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="27dp"
             android:text="הסר מהמועדפים"
             android:textColor="@color/white"
@@ -54,35 +61,102 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:rotationX="0">
+            android:fadingEdge="vertical"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/singleFavGenre"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="ז'אנר: "
-                android:textColor="#00838F"
-                android:textSize="15dp" />
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/singleFavRate"
+                =
+
+                <TextView
+                    android:id="@+id/singleFavGenre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+
+                <TextView
+                    android:id="@+id/singleFavGenreHed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="ז'אנר: "
+                    android:textColor="@color/purple_500"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="דירוג: "
-                android:textColor="#00838F"
-                android:textSize="15dp" />
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/singleFavStock"
+
+                <TextView
+                    android:id="@+id/singleFavRate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+
+                <TextView
+                    android:id="@+id/singleFavRateHed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="דירוג: "
+                    android:textColor="#00838F"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="במלאי?"
-                android:textColor="#00838F"
-                android:textSize="15dp" />
+                android:layout_marginTop="2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/singleFavStock"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text=""
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
+
+
+                <TextView
+                    android:id="@+id/singleFavStockHed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="במלאי? "
+                    android:textColor="#00838F"
+                    android:textSize="15dp"
+                    android:textStyle="bold"/>
+
+
+            </LinearLayout>
 
 
         </LinearLayout>

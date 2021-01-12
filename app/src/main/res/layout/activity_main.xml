@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/b"
+    android:id="@+id/bb"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/blue"
+    android:background="@drawable/bb"
     tools:context=".activities.MainActivity">
 
     <TextView
@@ -31,13 +31,12 @@
 
     <Button
         android:id="@+id/user"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="227dp"
         android:layout_height="69dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="45dp"
-        android:background="@color/white"
+        android:background="@drawable/button_background"
         android:backgroundTint="#FFFFFF"
         android:foregroundTint="#FFFFFF"
         android:text="@string/Client"
@@ -54,20 +53,16 @@
 
     <Button
         android:id="@+id/admin"
-        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
         android:layout_width="227dp"
         android:layout_height="69dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="92dp"
         android:layout_marginBottom="5dp"
-        android:background="@color/button"
-        android:backgroundTint="@color/button"
         android:text="@string/Worker"
         android:textColor="#FFFFFF"
-        android:textColorHighlight="#FFFFFF"
-        android:textColorLink="@color/button"
         android:textSize="25sp"
         android:textStyle="bold"
+        android:background="@drawable/button_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcome"
@@ -77,8 +72,8 @@
         android:id="@+id/imageView3"
         android:layout_width="385dp"
         android:layout_height="337dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logolab" />

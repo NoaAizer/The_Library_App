@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b3"
     tools:context=".activities.orderTrackingActivity">
+
+    <ImageView
+        android:id="@+id/faveImage"
+        android:layout_width="60dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="false"
+        android:foregroundTint="#0097A7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_orders" />
 
     <TextView
         android:id="@+id/track"
@@ -15,7 +28,7 @@
         android:text="מעקב אחר הזמנה"
         android:fontFamily="@font/choco"
         android:textColor="@color/blue2"
-        android:textSize="30sp"
+        android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,10 +37,12 @@
         android:id="@+id/trackList"
         android:layout_width="317dp"
         android:layout_height="565dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="28dp"
-        android:divider="#0000CC"
-        android:dividerHeight="0.1dp"
+        android:layout_marginEnd="30dp"
+        android:divider="#0097A7"
+        android:dividerHeight="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/track"></ListView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/track"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

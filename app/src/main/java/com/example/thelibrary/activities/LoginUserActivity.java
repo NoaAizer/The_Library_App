@@ -61,11 +61,11 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
             if (TextUtils.isEmpty(email)) {
-                emailEditText.setError("Email is required");
+                emailEditText.setError("חובה להכניס אימייל");
 
             }
             if (TextUtils.isEmpty(password)) {
-                passwordEditText.setError("Password is required");
+                passwordEditText.setError("חובה להכניס סיסמה");
             } else {
                 auth.validationUser(email, password,LoginUserActivity.this);
                 loading.setVisibility(View.VISIBLE);
@@ -79,8 +79,8 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
             }
         if (v == reset_pass_btn) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginUserActivity.this);
-            alertDialog.setTitle("Reset Password");
-            alertDialog.setMessage("Enter your email:");
+            alertDialog.setTitle("שחזור סיסמה");
+            alertDialog.setMessage("הכנב את האימייל שלך:");
 
             final EditText input = new EditText(LoginUserActivity.this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -88,7 +88,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
                     LinearLayout.LayoutParams.MATCH_PARENT);
             input.setLayoutParams(lp);
             alertDialog.setView(input);
-            alertDialog.setPositiveButton("RESET",
+            alertDialog.setPositiveButton("שחזור",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             String email = input.getText().toString();
@@ -99,7 +99,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
                                 auth.resetPassword(email,LoginUserActivity.this);
 
                                 }});
-            alertDialog.setNegativeButton("CANCEL",
+            alertDialog.setNegativeButton("ביטול",
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.cancel();

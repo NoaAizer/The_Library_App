@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingBottom="7.5dp"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
-    android:paddingTop="7.5dp">
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="20dp"
+    android:paddingTop="10dp"
+>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -30,6 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,24 +38,67 @@
             android:text=""
             android:textColor="#006064"
             android:textSize="22sp"
+            android:paddingBottom="2dp"
             android:layout_gravity="end"/>
 
-        <TextView
-            android:id="@+id/singleAuthor"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="מחבר: "
-            android:textColor="#00838F"
-            android:textSize="20sp" />
-        <TextView
+            android:layout_gravity="right"
+            android:paddingBottom="2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/singleAuthor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/singleAuthorHed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="מחבר: "
+                android:textColor="#00838F"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/singleGenre"
-            android:text="ז'אנר: "
-            android:textColor="#00838F"
-            android:textSize="20sp"
-            android:layout_gravity="end"/>
+            android:layout_gravity="right"
+            android:paddingBottom="2dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/singleGenre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:id="@+id/singleGenreHed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="ז'אנר: "
+                android:textColor="#00838F"
+                android:textSize="15dp"
+                android:textStyle="bold"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

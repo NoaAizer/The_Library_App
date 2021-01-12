@@ -79,12 +79,12 @@ public class orderTrackingAdapter extends BaseAdapter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 finalHolder.orderIDText.append("  " + orderID);
-                finalHolder.statusText.append("  " + dataSnapshot.child("orders").child(orderID).child("statusDeliver").getValue(String.class));
+                finalHolder.statusText.append(dataSnapshot.child("orders").child(orderID).child("statusDeliver").getValue(String.class));
                 ArrayList<String> bookList = (ArrayList<String>) dataSnapshot.child("orders").child(orderID).child("listOfBooks").getValue();
                 String ListOfNames = "";
                 for(int i=0; i<bookList.size(); i++)
                 {
-                    ListOfNames += dataSnapshot.child("books").child(bookList.get(i)).child("name").getValue(String.class) + "\n";
+                    ListOfNames += "- "+dataSnapshot.child("books").child(bookList.get(i)).child("name").getValue(String.class) + "\n";
                 }
                 finalHolder.bookListText.append("  " + ListOfNames);
             }

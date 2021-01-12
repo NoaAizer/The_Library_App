@@ -9,6 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@drawable/b3"
     tools:context=".activities.MenuUserActivity">
 
 
@@ -17,10 +18,13 @@
         android:layout_width="260dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="35dp"
+        android:fontFamily="@font/abraham"
         android:gravity="right|center_vertical"
         android:text="שלום "
-        android:textSize="24sp"
+        android:textAppearance="@style/DDialogTitle"
+        android:textColor="@color/blue2"
+        android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/menuRatingBooks"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -32,6 +36,7 @@
         android:layout_marginEnd="64dp"
         android:layout_marginBottom="10dp"
         android:text="המומלצים "
+        android:textColor="@color/purple_700"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/menuImageRating"
@@ -45,6 +50,7 @@
         android:layout_marginBottom="10dp"
         android:gravity="right|center_vertical"
         android:text="החדשים "
+        android:textColor="@color/purple_500"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/menuImageNew"
@@ -55,6 +61,7 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:text="חיפוש ספר"
+        android:textSize="16dp"
         android:textColor="@color/white"
         android:drawableLeft="@android:drawable/ic_menu_search"
         app:layout_constraintBottom_toTopOf="@+id/checkALoan"
@@ -66,6 +73,7 @@
         android:layout_height="100dp"
         android:drawableLeft="@drawable/bt_ic_cardholder_name_dark"
         android:text="איזור אישי"
+        android:textSize="16dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/myBooks"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -76,6 +84,7 @@
         android:layout_height="100dp"
         android:drawableLeft="@drawable/icon_book"
         android:text="ההשאלות שלי"
+        android:textSize="16dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -85,6 +94,7 @@
         android:layout_width="188dp"
         android:layout_height="100dp"
         android:text="מעקב אחר הזמנה"
+        android:textSize="16dp"
         android:textColor="@color/white"
         android:drawableLeft="@drawable/icon_orders"
         app:layout_constraintBottom_toBottomOf="parent"

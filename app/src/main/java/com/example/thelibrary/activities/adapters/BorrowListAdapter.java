@@ -82,10 +82,10 @@ public class BorrowListAdapter extends BaseAdapter {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 finalHolder.nameText.setText(dataSnapshot.child("books").child(bookID).child("name").getValue(String.class));
-                finalHolder.authorText.append("  " + dataSnapshot.child("books").child(bookID).child("author").getValue(String.class));
-                finalHolder.orderIDText.append("  " + orderID);
-                finalHolder.endOfOrderText.append("  " + dataSnapshot.child("orders").child(orderID).child("endOfOrder").getValue(String.class));
-                finalHolder.statusOrderText.append("  " + dataSnapshot.child("orders").child(orderID).child("collect").getValue(String.class));
+                finalHolder.authorText.setText("  " + dataSnapshot.child("books").child(bookID).child("author").getValue(String.class));
+                finalHolder.orderIDText.setText(" " + orderID);
+                finalHolder.endOfOrderText.setText(" " + dataSnapshot.child("orders").child(orderID).child("endOfOrder").getValue(String.class));
+                finalHolder.statusOrderText.setText(" " + dataSnapshot.child("orders").child(orderID).child("collect").getValue(String.class));
             }
 
             @Override

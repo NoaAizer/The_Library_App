@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b3"
     tools:context=".activities.FavBooksActivity">
+
+    <ImageView
+        android:id="@+id/faveImage"
+        android:layout_width="60dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="false"
+        android:foregroundTint="#FFFFFF"
+        android:rotation="340"
+        app:layout_constraintBottom_toTopOf="@+id/favList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/icon_fav_book" />
 
     <TextView
         android:id="@+id/MyFavoritesBooks"
@@ -24,10 +38,12 @@
         android:id="@+id/favList"
         android:layout_width="317dp"
         android:layout_height="565dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="25dp"
-        android:layout_marginEnd="28dp"
-        android:divider="#0000CC"
-        android:dividerHeight="0.1dp"
+        android:layout_marginEnd="30dp"
+        android:divider="#0097A7"
+        android:dividerHeight="1dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MyFavoritesBooks"></ListView>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/MyFavoritesBooks"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,6 @@ package com.example.thelibrary.activities;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.Menu;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.example.thelibrary.R;
 import com.example.thelibrary.fireBase.model.FireBaseDBUser;
@@ -30,10 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 public class UserDetailsActivity extends AppCompatActivity implements View.OnClickListener {
     FireBaseDBUser fu = new FireBaseDBUser();
     private TextView fname, lname, address, phone, email, sub;
-    private Button update , favorites;
-    FirebaseUser user  = FirebaseAuth.getInstance().getCurrentUser();
+    private Button update, favorites;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     DatabaseReference userRef = fu.getUserFromDB(user.getUid());
     UserObj userObj;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,19 +52,14 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
         favorites = (Button) findViewById(R.id.myFavorits);
         favorites.setOnClickListener(this);
 
-        Drawable drawable = ContextCompat.getDrawable(UserDetailsActivity.this,R.drawable.icon_fav_book);
-        drawable.setBounds(0, 0, (int)(drawable.getIntrinsicWidth()*0.2),
-                (int)(drawable.getIntrinsicHeight()*0.2));
-        ScaleDrawable sd = new ScaleDrawable(drawable, 0, 1, 1);
-        favorites.setCompoundDrawables(sd.getDrawable(), null, null, null);
     }
 
-        protected void onResume(){
-            super.onResume();
-            userRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    userObj = dataSnapshot.getValue(UserObj.class);
+    protected void onResume() {
+        super.onResume();
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userObj = dataSnapshot.getValue(UserObj.class);
                 fname.setText(dataSnapshot.child("firstName").getValue(String.class));
                 lname.setText(dataSnapshot.child("lastName").getValue(String.class));
                 address.setText(dataSnapshot.child("address").getValue(String.class));
@@ -79,41 +72,40 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
 //                    phone.append(userObj.getPhone());
 //                    email.append(userObj.getEmail());
 //                    sub.append(userObj.getSubscription());
-                }
+            }
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                }
-            });
-        }
-
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+    }
 
 
     public void onClick(View v) {
-        if( v == update){
+        if (v == update) {
             createUpdateDialog();
         }
-        if(v == favorites){
-            Intent favIntent = new Intent(UserDetailsActivity.this , FavBooksActivity.class);
+        if (v == favorites) {
+            Intent favIntent = new Intent(UserDetailsActivity.this, FavBooksActivity.class);
             startActivity(favIntent);
         }
     }
 
-    public void createUpdateDialog(){
-        final Dialog d= new Dialog(this);
-        EditText nameEdit , lnameEdit, addressEdit, phoneEdit, oldPassEdit, newPassEdit;
+    public void createUpdateDialog() {
+        final Dialog d = new Dialog(this);
+        EditText nameEdit, lnameEdit, addressEdit, phoneEdit, oldPassEdit, newPassEdit;
         Button updateBtn, cancelBtn;
         d.setContentView(R.layout.edit_profile_dialog);
         d.setTitle("עדכון פרטים:");
         d.setCancelable(true);
 
-        nameEdit= d.findViewById(R.id.editName);
-        lnameEdit= d.findViewById(R.id.editLName);
-        addressEdit= d.findViewById(R.id.editAdd);
-        phoneEdit= d.findViewById(R.id.editPhone);
-        oldPassEdit= d.findViewById(R.id.editPassOld);
-        newPassEdit= d.findViewById(R.id.editPassNew);
-        updateBtn= d.findViewById(R.id.updateBtn);
+        nameEdit = d.findViewById(R.id.editName);
+        lnameEdit = d.findViewById(R.id.editLName);
+        addressEdit = d.findViewById(R.id.editAdd);
+        phoneEdit = d.findViewById(R.id.editPhone);
+        oldPassEdit = d.findViewById(R.id.editPassOld);
+        newPassEdit = d.findViewById(R.id.editPassNew);
+        updateBtn = d.findViewById(R.id.updateBtn);
         updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,11 +140,11 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
                     userRef.child("lastName").setValue(newLName);
                     lname.setText(newLName);
                 }
-                if (!newAddress.isEmpty()){
+                if (!newAddress.isEmpty()) {
                     userRef.child("address").setValue(newAddress);
                     address.setText(newAddress);
                 }
-                if (!newPhone.isEmpty()){
+                if (!newPhone.isEmpty()) {
                     userRef.child("phone").setValue(newPhone);
                     phone.setText(newPhone);
                 }
@@ -175,6 +167,7 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
         d.show();
 
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -193,8 +186,8 @@ public class UserDetailsActivity extends AppCompatActivity implements View.OnCli
             finish();
         }
 
-        if(id == R.id.menuCart){
-            Intent order = new Intent (UserDetailsActivity.this, MyOrderActivity.class);
+        if (id == R.id.menuCart) {
+            Intent order = new Intent(UserDetailsActivity.this, MyOrderActivity.class);
             startActivity(order);
         }
         return super.onOptionsItemSelected(item);

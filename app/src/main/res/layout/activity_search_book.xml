@@ -4,7 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@drawable/b3">
+
+    <ImageView
+        android:id="@+id/faveImage"
+        android:layout_width="60dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="false"
+        android:foregroundTint="#0097A7"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_search" />
 
     <TextView
         android:id="@+id/search"
@@ -92,13 +104,16 @@
 
     <Button
         android:id="@+id/all_books"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="235dp"
         android:text="הצגת כל הספרים"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/purple_500"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
