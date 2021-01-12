@@ -30,6 +30,7 @@
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintVertical_bias="0.055" />
+
      <EditText
          android:id="@+id/email"
          android:layout_width="0dp"
@@ -37,8 +38,8 @@
          android:layout_marginStart="24dp"
          android:layout_marginTop="96dp"
          android:layout_marginEnd="24dp"
-         android:hint='דוא"ל'
          android:gravity="center"
+         android:hint="אימייל"
          android:inputType="textEmailAddress"
          android:selectAllOnFocus="true"
          app:layout_constraintEnd_toEndOf="parent"
