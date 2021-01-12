@@ -6,18 +6,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.adapters.TAOrderAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class deliveryListActivity extends AppCompatActivity {
 
@@ -33,26 +35,26 @@ public class deliveryListActivity extends AppCompatActivity {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("orders");
         ref.orderByChild("complete").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
 
-            ArrayAdapter adapter = new ArrayAdapter(deliveryListActivity.this, android.R.layout.simple_list_item_1);
+
             ListView list = (ListView) findViewById(R.id.deliverOrders);
             String orderID;
-            String status;
+            ArrayList<String> ordersID = new ArrayList<>();
 
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot orderSnapshot : dataSnapshot.getChildren()) {
                     if (orderSnapshot.child("collect").getValue().equals("משלוח") && orderSnapshot.child("arrivedToUser").getValue().equals(false)) {
                         orderID = orderSnapshot.getKey();
-                        status = orderSnapshot.child("statusDeliver").getValue(String.class);
-                        adapter.add(orderID + "\n" + status);
+                        ordersID.add(orderID);
                     }
                 }
-                list.setAdapter(adapter);
+                TAOrderAdapter deliverAd = new TAOrderAdapter(deliveryListActivity.this, R.layout.single_ta_order_row, ordersID);
+                list.setAdapter(deliverAd);
                 list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Toast.makeText(getApplicationContext(), "הזמנה מספר: " + orderID + " הושלמה והגיעה ליעדה", Toast.LENGTH_SHORT).show();
                         ref.child(orderID).child("arrivedToUser").setValue(true);
-                        adapter.notifyDataSetChanged();
+                        deliverAd.notifyDataSetChanged();
                     }
 
                 });

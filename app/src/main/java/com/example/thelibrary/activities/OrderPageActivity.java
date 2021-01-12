@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +28,7 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
 
     private TextView OrderId, UserTz, collect, endOfOrder;
     private Button OrderComplete, UserDetails, changeOrderTypeBtn;
-    String orderID, userTz;
+    String orderID, userID;
     String collectStr;
 
     @Override
@@ -60,11 +59,10 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (v == UserDetails) {
             Intent intent = new Intent(OrderPageActivity.this, UserDetailsAdminActivity.class);
-            startActivity(intent.putExtra("userID", userTz));
+            startActivity(intent.putExtra("userID", userID));
         }
         else if(v == OrderComplete)
         {
-            Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה", Toast.LENGTH_LONG).show();
             DatabaseReference order = FirebaseDatabase.getInstance().getReference("orders");
             order.child(orderID).child("complete").setValue(true);
             if(collectStr.equals("איסוף עצמי"))
@@ -139,8 +137,8 @@ public class OrderPageActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 collectStr = dataSnapshot.child("orders").child(orderID).child("collect").getValue(String.class);
-
-                userTz = dataSnapshot.child("orders").child(orderID).child("userTZ").getValue(String.class);
+                userID= dataSnapshot.child("orders").child(orderID).child("userID").getValue(String.class);
+                String userTz = dataSnapshot.child("orders").child(orderID).child("userTZ").getValue(String.class);
                 UserTz.setText(userTz);
                 collect.setText(dataSnapshot.child("orders").child(orderID).child("collect").getValue(String.class));
                 endOfOrder.setText(dataSnapshot.child("orders").child(orderID).child("endOfOrder").getValue(String.class));

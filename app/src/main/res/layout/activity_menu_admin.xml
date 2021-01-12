@@ -22,19 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.134" />
 
-    <ProgressBar
-        android:id="@+id/loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="64dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
-
     <Button
         android:id="@+id/clientsList"
         android:layout_width="253dp"
@@ -63,7 +50,7 @@
         android:layout_height="42dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="56dp"
-        android:text="רשימת הזמנות לטיפול"
+        android:text="מרכז ההזמנות"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/laterList" />
@@ -90,16 +77,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/returnBook" />
 
-    <Button
-        android:id="@+id/ordersCompletes"
-        android:layout_width="253dp"
-        android:layout_height="42dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="56dp"
-        android:text="הזמנות שהושלמו"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loansList" />
 
     <Button
         android:id="@+id/returnBook"
@@ -110,7 +87,7 @@
         android:text="החזרת ספרים"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ordersCompletes" />
+        app:layout_constraintTop_toBottomOf="@+id/loansList" />
 
     <Button
         android:id="@+id/adding"
@@ -128,6 +105,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

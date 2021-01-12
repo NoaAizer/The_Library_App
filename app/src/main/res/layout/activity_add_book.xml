@@ -5,38 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fadingEdge="horizontal"
-    tools:context=".activities.AddBookActivity">
-
+    android:background="@drawable/b3">
 
     <EditText
-        android:id="@+id/Publishing_year"
+        android:id="@+id/publishing_year"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="353dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="24dp"
         android:hint="שנת הוצאה"
-        android:inputType="textShortMessage|number|numberDecimal"
+        android:gravity="right"
+        android:inputType="number|numberDecimal"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Language" />
+        app:layout_constraintTop_toBottomOf="@+id/language" />
+
 
     <Spinner
-        android:id="@+id/Language"
+        android:id="@+id/language"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="17dp"
         android:layout_marginEnd="24dp"
         android:hint="שפה"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Genre" />
+        app:layout_constraintTop_toBottomOf="@+id/genre" />
 
     <EditText
-        android:id="@+id/Author"
+        android:id="@+id/author"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -49,10 +47,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/BookName" />
+        app:layout_constraintTop_toBottomOf="@+id/bookName" />
 
     <EditText
-        android:id="@+id/BookName"
+        android:id="@+id/bookName"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -68,7 +66,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <EditText
-        android:id="@+id/Brief"
+        android:id="@+id/brief"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -81,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Author" />
+        app:layout_constraintTop_toBottomOf="@+id/author" />
 
     <TextView
         android:id="@+id/amount"
@@ -90,8 +88,9 @@
         android:layout_marginTop="17dp"
         android:layout_marginEnd="24dp"
         android:text="כמות"
+        android:textSize="16dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Publishing_year" />
+        app:layout_constraintTop_toBottomOf="@+id/publishing_year" />
 
     <NumberPicker
         android:id="@+id/amountPicker"
@@ -101,46 +100,40 @@
         android:layout_marginEnd="80dp"
         android:background="#F5F6F6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Publishing_year" />
+        app:layout_constraintTop_toBottomOf="@+id/publishing_year" />
 
     <Spinner
-        android:id="@+id/Genre"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:id="@+id/genre"
+        android:layout_width="62dp"
+        android:layout_height="86dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="24dp"
         android:prompt="@string/genre"
         android:selectAllOnFocus="true"
         android:spinnerMode="dropdown"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Brief" />
+        app:layout_constraintTop_toBottomOf="@+id/brief" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="234dp"
         android:layout_height="57dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="16dp"
-        android:text="הוספת ספר"
+        android:layout_marginEnd="23dp"
         android:fontFamily="@font/choco"
+        android:text="הוספת ספר"
         android:textColor="@color/blue2"
-        android:textSize="34sp"
+        android:textSize="34dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.703"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:text="הוסף"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:text="הוספה"
         android:textColor="@color/white"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,21 +144,26 @@
         android:id="@+id/bookImage"
         android:layout_width="125dp"
         android:layout_height="168dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/addImage"
-        app:layout_constraintTop_toBottomOf="@+id/Publishing_year" />
+        android:layout_marginTop="23dp"
+        android:layout_marginEnd="3dp"
+        android:background="@color/white"
+        android:padding="1dp"
+        app:layout_constraintEnd_toStartOf="@+id/addBookImage"
+        app:layout_constraintTop_toBottomOf="@+id/publishing_year" />
 
     <Button
-        android:id="@+id/addImage"
+        android:id="@+id/addBookImage"
+        style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="24dp"
-        android:text="בחר תמונה"
-        android:textColor="@color/white"
+        android:layout_marginStart="156dp"
+        android:layout_marginTop="20dp"
+        android:text="לבחירת תמונה\n לחץ כאן"
+        android:textColor="@color/purple_500"
+        android:textStyle="bold"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Publishing_year"
+        app:layout_constraintTop_toBottomOf="@+id/publishing_year"
         tools:visibility="visible" />
 
 

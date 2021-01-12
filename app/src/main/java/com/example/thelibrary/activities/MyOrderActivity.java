@@ -27,7 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.LocalDate;
 
 import java.util.ArrayList;
 
@@ -43,7 +43,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
     static int amountOfBooksRemains;
     static String userTZ, userID, shopID,type = "";
     static OrderListAdapter orderAdapter;
-    static LocalDateTime endOfOrder;
+    static LocalDate endOfOrder;
     ListView orderListView;
 
 
@@ -130,7 +130,7 @@ public class MyOrderActivity extends AppCompatActivity implements View.OnClickLi
                 return;
             } else {
                 if (!type.equals("")) {
-                    endOfOrder= LocalDateTime.now().plusDays(30);
+                    endOfOrder= LocalDate.now().plusDays(30);
                     if(type.equals("איסוף עצמי")) {
                         finishOrder();
                         Toast.makeText(getApplicationContext(), "ההזמנה הושלמה בהצלחה ונמצאת בטיפול", Toast.LENGTH_LONG).show();

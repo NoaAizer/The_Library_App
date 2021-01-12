@@ -24,7 +24,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="30dp"
         android:text="כתובת: "
         android:textColor="#00838F"
@@ -37,7 +37,7 @@
         android:id="@+id/textView10"
         android:layout_width="214dp"
         android:layout_height="23dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="33dp"
         android:text="רח' העצמאות 3,אריאל"
         android:textColor="@color/black"
         android:textSize="16dp"
@@ -135,12 +135,12 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"
         android:text="שעות פתיחה:"
+        android:textColor="#00838F"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:textColor="#00838F"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -176,7 +176,7 @@
         android:layout_marginBottom="10dp"
         android:text="*המשלוחים בתוך אריאל בלבד"
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -185,10 +185,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="25dp"
-        android:layout_marginBottom="55dp"
-        android:text='*במידה ויש סגר לא יתאפשר איסוף עצמי וכל ההזמנות יעבור לצורת משלוח (בתוספת תשלום 20 ש"ח)'
+        android:layout_marginBottom="20dp"
+        android:text='*במידה ויש סגר לא יתאפשר איסוף עצמי \nוכל ההזמנות יעבור לצורת משלוח\n (בתוספת תשלום 20 ש"ח)'
         android:textColor="@color/black"
-        android:textSize="16dp"
+        android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

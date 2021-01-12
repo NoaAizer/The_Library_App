@@ -57,14 +57,14 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
 
 
         mStorageRef = FirebaseStorage.getInstance().getReference();
-        nameEditText = (EditText) findViewById(R.id.BookName);
-        authorEditText = (EditText) findViewById(R.id.Author);
-        briefEditText = (EditText) findViewById(R.id.Brief);
-        genreSpinner = findViewById(R.id.Genre);
+        nameEditText = (EditText) findViewById(R.id.bookName);
+        authorEditText = (EditText) findViewById(R.id.author);
+        briefEditText = (EditText) findViewById(R.id.brief);
+        genreSpinner = findViewById(R.id.genre);
         genreSpinner.setAdapter(new ArrayAdapter<BookObj.Genre>(this, android.R.layout.simple_spinner_item, BookObj.Genre.values()));;
-        languageSpinner = findViewById(R.id.Language);
+        languageSpinner = findViewById(R.id.language);
         languageSpinner.setAdapter(new ArrayAdapter<BookObj.Lang>(this, android.R.layout.simple_spinner_item, BookObj.Lang.values()));;
-        publishing_yearEditText = (EditText) findViewById(R.id.Publishing_year);
+        publishing_yearEditText = (EditText) findViewById(R.id.publishing_year);
         //amountEditText = (EditText) findViewById(R.id.amount);
         amountPicker = (NumberPicker) findViewById(R.id.amountPicker);
         amountPicker.setMinValue(1);
@@ -74,7 +74,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
         bookImage =findViewById(R.id.bookImage);
         add_btn = (Button) findViewById(R.id.add);
         add_btn.setOnClickListener(this);
-        addImage_btn = (Button) findViewById(R.id.addImage);
+        addImage_btn = (Button) findViewById(R.id.addBookImage);
         addImage_btn.setOnClickListener(this);
 
     }//onCreate
@@ -145,10 +145,10 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private String getExtension(Uri uri){
-     ContentResolver cr = getContentResolver();
-     MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
-     return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
- }
+        ContentResolver cr = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(cr.getType(uri));
+    }
 
 
 
@@ -170,7 +170,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
                         Toast.makeText(getApplicationContext(), "Upload imageFailed", Toast.LENGTH_LONG).show();
                     }
                 });
-        }
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -178,7 +178,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
         if(requestCode==1 && resultCode ==RESULT_OK&& data!=null && data.getData()!=null){
             imguri=data.getData();
             Glide.with(AddBookActivity.this).load(imguri).into(bookImage);
-    }
+        }
     }
 
     private class MyListener implements NumberPicker.OnValueChangeListener {
@@ -187,7 +187,7 @@ public class AddBookActivity extends AppCompatActivity implements View.OnClickLi
             //get new value and convert it to String
             //if you want to use variable value elsewhere, declare it as a field
             //of your main function
-          amount= newVal;
+            amount= newVal;
         }
     }
     @Override

@@ -43,7 +43,12 @@ public class SearchBookActivity extends AppCompatActivity implements View.OnClic
         all_books.setOnClickListener(this);
         search_btn = (Button) findViewById(R.id.but_search);
         search_btn.setOnClickListener(this);
-        searchIntent = new Intent(SearchBookActivity.this, SearchResultActivity.class);
+        if( getIntent().getExtras().getString("type").equals("user")) {
+            searchIntent = new Intent(SearchBookActivity.this, SearchResultActivity.class);
+        }
+        else{
+            searchIntent = new Intent(SearchBookActivity.this, SearchResAdminActivity.class);
+        }
 
 
 

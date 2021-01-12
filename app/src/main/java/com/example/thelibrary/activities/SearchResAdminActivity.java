@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.thelibrary.R;
-import com.example.thelibrary.activities.adapters.BookUserAdapter;
+import com.example.thelibrary.activities.adapters.BookAdminAdapter;
 import com.example.thelibrary.fireBase.model.FireBaseDBBook;
 import com.example.thelibrary.fireBase.model.dataObj.BookObj;
 import com.google.firebase.database.DataSnapshot;
@@ -25,17 +25,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SearchResultActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class SearchResAdminActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     ArrayList<BookObj> books = new ArrayList<>();
     private TextView searchInfo;
     private ListView lvBook;
-    private CheckBox inStock;
+    private CheckBox inStock, notInStock;
     private String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
+        setContentView(R.layout.activity_search_res_admin);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logolab);
@@ -43,6 +43,8 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
 
         inStock = (CheckBox) findViewById(R.id.inStockCheck);
         inStock.setOnCheckedChangeListener(this);
+        notInStock = (CheckBox) findViewById(R.id.notInStockCheck);
+        notInStock.setOnCheckedChangeListener(this);
         searchInfo = (TextView) findViewById(R.id.searchInfo);
         lvBook = (ListView) findViewById(R.id.resultList);
         Map<String, String> search = new HashMap<>();
@@ -118,48 +120,42 @@ public class SearchResultActivity extends AppCompatActivity implements CompoundB
                     filtered.add(b);
             initializeAdapter(filtered);
 
-        } else {
+        }
+        else if (inStock.isChecked()){
+            for (BookObj b : books)
+                if (b.getAmount() == 0)
+                    filtered.add(b);
+            initializeAdapter(filtered);
+        }
+        else {
             initializeAdapter(books);
         }
-
     }
 
     private void initializeAdapter(ArrayList<BookObj> books) {
         // Initialize adapter and set adapter to list view
-
-        BookUserAdapter bookAd = new BookUserAdapter(this, SearchResultActivity.this, books);
+        BookAdminAdapter bookAd = new BookAdminAdapter(this, SearchResAdminActivity.this, books);
         lvBook.setAdapter(bookAd);
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_order, menu);
+        getMenuInflater().inflate(R.menu.menu_back_home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
+
         if (id == R.id.menuBack) {
             finish();
         }
         if (id == R.id.menuBackToHome) {
-            Intent menu = new Intent(SearchResultActivity.this, MenuUserActivity.class);
+            Intent menu = new Intent(SearchResAdminActivity.this, MenuAdminActivity.class);
             startActivity(menu);
         }
-
-        if (id == R.id.menuCart) {
-            Intent order = new Intent(SearchResultActivity.this, MyOrderActivity.class);
-            startActivity(order);
-        }
-
 
         return super.onOptionsItemSelected(item);
     }

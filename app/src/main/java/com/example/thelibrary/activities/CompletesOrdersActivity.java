@@ -4,7 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,7 +24,7 @@ import java.util.ArrayList;
 
 public class CompletesOrdersActivity extends AppCompatActivity {
     ListView lvOrder;
-    ArrayList<OrderObj> orders = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class CompletesOrdersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.drawable.logolab);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-
+        ArrayList<OrderObj> orders = new ArrayList<>();
 
         DatabaseReference ordersRef = new FireBaseDBOrder().getOrdersListFromDB();
         ordersRef.orderByChild("arrivedToUser").equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -40,6 +43,23 @@ public class CompletesOrdersActivity extends AppCompatActivity {
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     orders.add(data.getValue(OrderObj.class));
                 }
+                if(orders == null || orders.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "אין הזמנות להצגה", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Initialize adapter and set adapter to list view
+                CompleteOrdersAdapter ordersAd = new CompleteOrdersAdapter(getApplicationContext(), orders);
+                lvOrder.setAdapter(ordersAd);
+                lvOrder.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedFromList = (String) (lvOrder.getItemAtPosition(position));
+                        Intent intent = new Intent(CompletesOrdersActivity.this, OrderPageActivity.class);
+                        intent.putExtra("orderID", selectedFromList);
+                        startActivity(intent);
+                    }
+                });
             }
 
 
@@ -50,9 +70,7 @@ public class CompletesOrdersActivity extends AppCompatActivity {
 
         lvOrder = findViewById(R.id.listOC);
 
-        // Initialize adapter and set adapter to list view
-        CompleteOrdersAdapter ordersAd = new CompleteOrdersAdapter(this, orders);
-        lvOrder.setAdapter(ordersAd);
+
 
     }
 

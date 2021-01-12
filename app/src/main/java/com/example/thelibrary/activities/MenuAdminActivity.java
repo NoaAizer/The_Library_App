@@ -1,6 +1,7 @@
 package com.example.thelibrary.activities;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -61,8 +62,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
 
     public void onClick(View v) {
         if (v == loansList_btn) {
-            Intent intent = new Intent(MenuAdminActivity.this, TreatmentOrdersActivity.class);
-            startActivity(intent);
+            createOrderDialog();
         }
         if (v == booksList_btn) {
             Intent intent = new Intent(MenuAdminActivity.this, SearchBookActivity.class);
@@ -143,7 +143,7 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         }
 
         if (v == add_btn) {
-            Intent intent = new Intent(MenuAdminActivity.this, AddBookActivity.class);
+            Intent intent = new Intent(MenuAdminActivity.this, com.example.thelibrary.activities.AddBookActivity.class);
             startActivity(intent);
         }
 
@@ -156,6 +156,33 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
             Intent intent = new Intent(MenuAdminActivity.this, BorrowListAdminActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void createOrderDialog() {
+        final Dialog d = new Dialog(this);
+        Button treatmentBtn, completeBtn;
+        d.setContentView(R.layout.orders_admin_dialog);
+        d.setTitle("מרכז ההזמנות:");
+        d.setCancelable(true);
+
+        treatmentBtn = d.findViewById(R.id.treatOrders);
+        treatmentBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuAdminActivity.this, TreatmentOrdersActivity.class);
+                startActivity(intent);
+            }
+        });
+        completeBtn = (Button) d.findViewById(R.id.completeOrders);
+        completeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuAdminActivity.this, CompletesOrdersActivity.class);
+                startActivity(intent);
+            }
+
+        });
+        d.show();
 
     }
     @Override
