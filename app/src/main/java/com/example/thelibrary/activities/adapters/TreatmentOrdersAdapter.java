@@ -81,16 +81,13 @@ public class TreatmentOrdersAdapter extends BaseAdapter {
         myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                finalHolder.orderIdText.setText("מספר הזמנה: ");
-                finalHolder.orderIdText.append("  " + orderID);
+                finalHolder.orderIdText.setText("  " + orderID);
 
                 /*String endOrder = dataSnapshot.child(orderID).child("endOfOrder").getValue(String.class);
                 SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
                 Date d = sdformat.parse(endOrder);*/
-                finalHolder.dateText.setText("תאריך סיום השאלה: ");
-                finalHolder.dateText.append("  " + dataSnapshot.child(orderID).child("endOfOrder").getValue(String.class));
-                finalHolder.tzText.setText("ת.ז מנוי: ");
-                finalHolder.tzText.append("  " + dataSnapshot.child(orderID).child("userTZ").getValue(String.class) + "\n");
+                finalHolder.dateText.setText("  " + dataSnapshot.child(orderID).child("endOfOrder").getValue(String.class));
+                finalHolder.tzText.setText("  " + dataSnapshot.child(orderID).child("userTZ").getValue(String.class) + "\n");
             }
 
             @Override

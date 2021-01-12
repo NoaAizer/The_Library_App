@@ -3,13 +3,14 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/b3"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/users"
-        android:layout_width="279dp"
-        android:layout_height="42dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
         android:text="רשימת מנויים"
@@ -40,10 +41,10 @@
         <ListView
             android:id="@+id/usersList"
             android:layout_width="match_parent"
-            android:layout_height="601dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:divider="#0000CC"
-            android:dividerHeight="0.1dp"
+            android:divider="#0097A7"
+            android:dividerHeight="1dp"
             android:textDirection="rtl">
 
         </ListView>

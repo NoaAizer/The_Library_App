@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.BooksListUserActivity"
     android:orientation="vertical"
     android:gravity="center"
     android:padding="16dp">
@@ -24,9 +23,9 @@
     <ListView
         android:id="@+id/lvBookU"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:divider="#0000CC"
-        android:dividerHeight="0.1dp"></ListView>
+        android:layout_height="wrap_content"
+        android:divider="#0097A7"
+        android:dividerHeight="1dp"/>
 
 
 </LinearLayout>

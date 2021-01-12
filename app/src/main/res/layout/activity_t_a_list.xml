@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b3"
     tools:context=".activities.TAListActivity">
 
     <TextView
         android:id="@+id/TAOrderList"
         android:layout_width="346dp"
         android:layout_height="43dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="36dp"
+        android:fontFamily="@font/choco"
         android:gravity="right|center_vertical"
         android:text="הזמנות באיסוף עצמי "
-        android:fontFamily="@font/choco"
         android:textColor="@color/blue2"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -26,7 +27,7 @@
         android:layout_width="346dp"
         android:layout_height="43dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="5dp"
         android:gravity="right|center_vertical"
         android:text="לחץ על הזמנה על מנת לאשר איסופה "
         android:textSize="17sp"
@@ -36,12 +37,12 @@
 
     <ListView
         android:id="@+id/TAorders"
-        android:layout_width="330dp"
-        android:layout_height="496dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="338dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="72dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:divider="#0097A7"
+        android:dividerHeight="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TAOrderListComment" />
 

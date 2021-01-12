@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/b3"
     tools:context=".activities.TreatmentOrdersActivity">
 
     <TextView
@@ -12,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="36dp"
-        android:text="רשימת הזמנות"
+        android:text="רשימת הזמנות לטיפול"
         android:fontFamily="@font/choco"
         android:textColor="@color/blue2"
         android:textSize="30sp"
@@ -24,10 +25,14 @@
         android:id="@+id/TAorders"
         android:layout_width="371dp"
         android:layout_height="534dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="30dp"
         android:clickable="true"
+        android:divider="#0097A7"
+        android:dividerHeight="1dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/listOfOrder" />
 
     <Button

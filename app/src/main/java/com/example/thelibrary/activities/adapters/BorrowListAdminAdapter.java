@@ -2,6 +2,7 @@ package com.example.thelibrary.activities.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.example.thelibrary.R;
+import com.example.thelibrary.activities.BookDetailsAdminActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -100,6 +102,15 @@ public class BorrowListAdminAdapter extends BaseAdapter implements Filterable {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+        row.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Intent bookDetails = new Intent(context, BookDetailsAdminActivity.class);
+                bookDetails.putExtra("bookID", bookID);
+                context.startActivity(bookDetails);
             }
         });
         return row;
