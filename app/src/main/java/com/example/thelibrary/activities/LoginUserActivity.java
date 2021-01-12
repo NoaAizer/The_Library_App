@@ -80,7 +80,7 @@ public class LoginUserActivity extends AppCompatActivity implements View.OnClick
         if (v == reset_pass_btn) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginUserActivity.this);
             alertDialog.setTitle("שחזור סיסמה");
-            alertDialog.setMessage("הכנב את האימייל שלך:");
+            alertDialog.setMessage("הכנס את האימייל שלך:");
 
             final EditText input = new EditText(LoginUserActivity.this);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
