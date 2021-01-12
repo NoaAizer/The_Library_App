@@ -38,7 +38,7 @@
          android:layout_marginTop="96dp"
          android:layout_marginEnd="24dp"
          android:hint='דוא"ל'
-         android:gravity="right"
+         android:gravity="center"
          android:inputType="textEmailAddress"
          android:selectAllOnFocus="true"
          app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
          android:layout_marginTop="8dp"
          android:layout_marginEnd="24dp"
          android:hint="סיסמא"
-         android:gravity="right"
+         android:gravity="center"
          android:imeActionLabel="@string/action_sign_in_short"
          android:imeOptions="actionDone"
          android:inputType="textPassword"

@@ -44,7 +44,6 @@ public class MenuAdminActivity extends AppCompatActivity implements View.OnClick
         returnBook_btn = (Button) findViewById(R.id.returnBook);
         clientsList_btn = (Button) findViewById(R.id.clientsList);
         add_btn = (Button) findViewById(R.id.adding);
-        finishOrder_btn = (Button) findViewById(R.id.ordersCompletes);
         laterList_btn = (Button) findViewById(R.id.laterList);
         borrows_btn = (Button) findViewById(R.id.labBorrowBooks);
 
